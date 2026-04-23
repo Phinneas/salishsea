@@ -1,31 +1,20 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  basePath: process.env.BASEPATH,
-  redirects: async () => {
-    return [
-      {
-        source: '/',
-        destination: '/theme-generator',
-        permanent: true
-      },
-      {
-        source: '/theme-editor',
-        destination: '/theme-generator',
-        permanent: true
-      },
-      {
-        source: '/docs',
-        destination: '/docs/getting-started/introduction',
-        permanent: true
-      }
-    ]
-  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com'
+      },
+      // SonicJS media — update with your Cloudflare R2/Workers URL
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.workers.dev'
       }
     ]
   }
