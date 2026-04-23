@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { ThemeToggle } from '@/components/site/ThemeToggle'
 
 const nav = [
   { label: 'Home', href: '/' },
@@ -45,16 +46,20 @@ export function Header() {
           ))}
         </nav>
 
-        <div className='hidden md:flex'>
+        <div className='hidden md:flex items-center gap-2'>
+          <ThemeToggle />
           <Button asChild size='sm' className='bg-teal-600 hover:bg-teal-700'>
             <Link href='/contact'>Get in Touch</Link>
           </Button>
         </div>
 
         {/* Mobile menu toggle */}
-        <button className='md:hidden' onClick={() => setOpen(!open)} aria-label='Toggle menu'>
+        <div className='flex items-center gap-2 md:hidden'>
+          <ThemeToggle />
+          <button onClick={() => setOpen(!open)} aria-label='Toggle menu'>
           {open ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
-        </button>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
