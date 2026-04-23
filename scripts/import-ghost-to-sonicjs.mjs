@@ -24,9 +24,11 @@ const GHOST_EXPORT = process.env.GHOST_EXPORT ?? ''
 const GHOST_URL    = process.env.GHOST_URL ?? ''
 const GHOST_KEY    = process.env.GHOST_KEY ?? ''
 
-const SONICJS_URL   = 'https://sonicjscms.buzzuw2.workers.dev'
-const COLLECTION_ID = 'col-blog-posts-94b7858e'
-const SITE_CATEGORY = 'salishsea'
+const SONICJS_URL    = 'https://sonicjscms.buzzuw2.workers.dev'
+const SONICJS_EMAIL  = process.env.SONICJS_EMAIL ?? 'admin@sonicjs.com'
+const SONICJS_PASS   = process.env.SONICJS_PASS  ?? 'sonicjs!'
+const COLLECTION_ID  = 'col-blog-posts-94b7858e'
+const SITE_CATEGORY  = 'salishsea'
 
 // ── 1. Load Ghost posts ───────────────────────────────────────────────────
 
@@ -138,7 +140,7 @@ async function insertPost(post) {
 
   const res = await fetch(`${SONICJS_URL}/api/content`, {
     method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${insertPost._token}` },
     body:    JSON.stringify(body),
   })
 
@@ -156,6 +158,17 @@ async function main() {
   console.log('\n🌊  Ghost → SonicJS  |  Salish Sea Consulting')
   console.log(`   SonicJS: ${SONICJS_URL}`)
   console.log(`   Category filter: ${SITE_CATEGORY}\n`)
+
+  // Authenticate with SonicJS
+  const loginRes = await fetch(`${SONICJS_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: SONICJS_EMAIL, password: SONICJS_PASS })
+  })
+  if (!loginRes.ok) throw new Error(`SonicJS login failed: ${loginRes.status}`)
+  const { token } = await loginRes.json()
+  insertPost._token = token
+  console.log('🔑  Authenticated to SonicJS\n')
 
   // Load posts
   let posts
