@@ -17,6 +17,75 @@ const BLOG_COLLECTION = 'col-blog-posts-94b7858e'
 // Category value used to scope content to this site
 const SITE_CATEGORY = 'salishsea'
 
+// ── Migration shortlist ────────────────────────────────────────────────────
+// Only these slugs appear on the site. Source: migration_shortlist.xlsx
+// ✅ Migrate = confirmed keeps. Add ⚠️ Consider slugs here if approved.
+const ALLOWED_SLUGS = new Set([
+  // Grant Writing
+  'sample-letter-of-support',
+  'grant-writing-vs-proposal-writing',
+  'sustainable-grant-proposal',
+  'grant-funding-letter-of-inquiry',
+  'grants-for-restoring-historic-buildings',
+  'how-to-pay-a-grant-writer',
+  'theory-of-change-vs-logic-models',
+  'grant-funding-logic-models',
+  'ai-in-grant-writing',
+  'grant-writing-challenges',
+  'nsf-sbir-grants',
+  'startup-funding-grants',
+  'grant-research-tools',
+  'common-nonprofit-grants-in-2025',
+  // Nonprofit
+  'the-collective-impact-model',
+  'nonprofit-funding-models',
+  'developing-logic-models',
+  'starting-an-oregon-nonprofit',
+  'nonprofit-registration-guide',
+  'nonprofit-copywriter',
+  'nonprofit-copywriting',
+  'artificial-intelligence-for-nonprofits',
+  // Sustainability
+  'sustainability-content-writer',
+  '10-sustainability-trends-2025',
+  'sustainability-certifications',
+  '3-pillars-of-sustainability',
+  'environmental-consulting',
+  'green-living',
+  'esg-certification',
+  'the-four-pillars-of-sustainability',
+  'green-cloud',
+  'strategy-pillars',
+  // Copywriting
+  'opposite-of-evergreen-content',
+  'storytelling-copywriter',
+  'benefits-vs-features-copywriting',
+  'golden-thread-copywriting',
+  'conscious-copywriting',
+  'sales-funnel-copywriter',
+  'storytelling-for-copywriting',
+  'author-pr-campaign',
+  'copywriter-job-description',
+  'business-letter-format',
+  // Tech/Tools (⚠️ Consider — high traffic, approved)
+  'pikapods',
+  'jenni-ai-review',
+  'firecrawl',
+  'carrd-website-builder',
+  'walling-app-review',
+  'ghost-website',
+  'best-ai-note-taking-apps',
+  'showit-websites',
+  'snovio-email-tracker-review',
+  'artificial-narrow-intelligence',
+  'folk-crm',
+  'attio-crm',
+  'seranking-seo-tool',
+  'entity-based-semantic-seo-keywords',
+  'n8n-alternatives',
+  'dubsado-crm-for-creatives',
+])
+
 // ── Types ──────────────────────────────────────────────────────────────────
 
 /** Shape of the nested `data` field inside each SonicJS item */
@@ -105,7 +174,7 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
     url.searchParams.set(k, String(v))
   )
 
-  const res = await fetch(url.toString(), { cache: 'no-store' })
+  const res = await fetch(url.toString(), { cache: 'force-cache' })
 
   if (!res.ok) {
     throw new Error(`SonicJS ${res.status} — ${url}`)
@@ -117,10 +186,13 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
 
 // ── Public API ─────────────────────────────────────────────────────────────
 
-/** Filter to only SSC posts and sort newest first */
+/** Filter to only approved SSC posts and sort newest first */
 function sscOnly(items: SonicItem[]): SonicItem[] {
   return items
-    .filter(i => i.data?.category === SITE_CATEGORY && i.status === 'published')
+    .filter(i => {
+      const slug = i.slug ?? i.data?.slug
+      return i.data?.category === SITE_CATEGORY && i.status === 'published' && ALLOWED_SLUGS.has(slug)
+    })
     .sort((a, b) => {
       const dateA = new Date(a.data?.publishedAt ?? a.created_at ?? 0).getTime()
       const dateB = new Date(b.data?.publishedAt ?? b.created_at ?? 0).getTime()

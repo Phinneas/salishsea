@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Montserrat, Merriweather } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import './globals.css'
 
-const fontSans = Geist({ subsets: ['latin'], variable: '--font-sans' })
-const fontMono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono' })
+const fontSans = Montserrat({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700'] })
+const fontSerif = Merriweather({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'] })
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.salishseaconsulting.com'
 
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     default: 'Salish Sea Consulting',
   },
   description:
-    'Environmental and sustainability consulting for the Pacific Northwest. Helping organizations navigate complex ecological challenges.',
-  keywords: ['environmental consulting', 'sustainability', 'Pacific Northwest', 'Salish Sea', 'ecology'],
+    'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools for mission-driven organizations.',
+  keywords: ['sustainable marketing', 'conversion copywriter', 'grant writing', 'sustainability consulting', 'Pacific Northwest', 'Salish Sea', 'environmental marketing'],
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: 'Salish Sea Consulting',
-    description: 'Environmental and sustainability consulting for the Pacific Northwest.',
+    description: 'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools.',
     type: 'website',
     siteName: 'Salish Sea Consulting',
     url: siteUrl,
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Salish Sea Consulting',
-    description: 'Environmental and sustainability consulting for the Pacific Northwest.',
+    description: 'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools.',
   },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' className={cn(fontSans.variable, fontMono.variable, 'scroll-smooth')}>
+    <html lang='en' className={cn(fontSans.variable, fontSerif.variable, 'scroll-smooth')}>
       <body className='flex min-h-full w-full flex-auto flex-col bg-background text-foreground antialiased'>
         <ThemeProvider attribute='class' defaultTheme='light' disableTransitionOnChange>
           {children}

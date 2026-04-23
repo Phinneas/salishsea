@@ -10,8 +10,8 @@ export function Footer() {
               Salish Sea <span className='text-teal-600'>Consulting</span>
             </p>
             <p className='mt-2 max-w-xs text-sm text-muted-foreground'>
-              Environmental and sustainability consulting for the Pacific Northwest. Guiding organizations toward
-              responsible, ecologically sound decisions.
+              Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom
+              marketing tools for mission-driven organizations.
             </p>
           </div>
 
