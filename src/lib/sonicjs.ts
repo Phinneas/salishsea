@@ -57,7 +57,9 @@ export interface Post {
   slug: string
   title: string
   excerpt?: string
+  /** HTML body from Ghost — rendered via dangerouslySetInnerHTML */
   content?: string
+  html?: string
   feature_image?: string
   published_at: string
   updated_at?: string
@@ -88,11 +90,12 @@ function normalize(item: SonicItem): Post {
 async function fetchSonic(params: Record<string, string | number> = {}): Promise<SonicItem[]> {
   const url = new URL(`${SONICJS_URL}/api/content`)
 
+  // NOTE: SonicJS ignores nested data.* filters in query params —
+  // we over-fetch and filter client-side by data.category === SITE_CATEGORY
   const defaults: Record<string, string | number> = {
     collectionId: BLOG_COLLECTION,
     status: 'published',
-    category: SITE_CATEGORY,
-    limit: 50,
+    limit: 300, // fetch all, then filter
     offset: 0,
   }
 
@@ -114,11 +117,24 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
 
 // ── Public API ─────────────────────────────────────────────────────────────
 
+/** Filter to only SSC posts and sort newest first */
+function sscOnly(items: SonicItem[]): SonicItem[] {
+  return items
+    .filter(i => i.data?.category === SITE_CATEGORY && i.status === 'published')
+    .sort((a, b) => {
+      const dateA = new Date(a.data?.publishedAt ?? a.created_at ?? 0).getTime()
+      const dateB = new Date(b.data?.publishedAt ?? b.created_at ?? 0).getTime()
+      return dateB - dateA // newest first
+    })
+}
+
 /** List published SSC blog posts, newest first */
 export async function getPosts(opts: { limit?: number; offset?: number } = {}): Promise<Post[]> {
   try {
-    const items = await fetchSonic({ limit: opts.limit ?? 20, offset: opts.offset ?? 0 })
-    return items.map(normalize)
+    const all = await fetchSonic()
+    const filtered = sscOnly(all)
+    const { limit = 20, offset = 0 } = opts
+    return filtered.slice(offset, offset + limit).map(normalize)
   } catch (e) {
     console.error('[sonicjs] getPosts:', e)
     return []
@@ -128,8 +144,9 @@ export async function getPosts(opts: { limit?: number; offset?: number } = {}): 
 /** Get a single post by slug */
 export async function getPost(slug: string): Promise<Post | null> {
   try {
-    const items = await fetchSonic({ slug, limit: 1 })
-    return items[0] ? normalize(items[0]) : null
+    const all = await fetchSonic()
+    const item = sscOnly(all).find(i => (i.slug ?? i.data?.slug) === slug)
+    return item ? normalize(item) : null
   } catch (e) {
     console.error('[sonicjs] getPost:', e)
     return null
@@ -139,8 +156,8 @@ export async function getPost(slug: string): Promise<Post | null> {
 /** Get all published slugs — used by generateStaticParams */
 export async function getAllPostSlugs(): Promise<string[]> {
   try {
-    const items = await fetchSonic({ limit: 500 })
-    return items.map(i => i.slug ?? i.data?.slug).filter(Boolean)
+    const all = await fetchSonic()
+    return sscOnly(all).map(i => i.slug ?? i.data?.slug).filter(Boolean)
   } catch (e) {
     console.error('[sonicjs] getAllPostSlugs:', e)
     return []

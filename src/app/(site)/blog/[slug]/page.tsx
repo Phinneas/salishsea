@@ -79,18 +79,20 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Content */}
       <article className='mx-auto max-w-3xl px-4 pb-20 sm:px-6'>
-        {post.html ? (
-          <div
-            className='prose prose-neutral max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-teal-600 prose-img:rounded-lg'
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
-        ) : post.content ? (
-          <div className='prose prose-neutral max-w-none dark:prose-invert'>
-            {post.content.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
-        ) : null}
+        <div
+          className={[
+            'prose prose-neutral max-w-none',
+            'dark:prose-invert',
+            'prose-headings:font-bold prose-headings:tracking-tight',
+            'prose-h2:text-2xl prose-h3:text-xl',
+            'prose-a:text-teal-600 prose-a:no-underline hover:prose-a:underline',
+            'prose-img:rounded-lg prose-img:shadow-sm',
+            'prose-blockquote:border-teal-500 prose-blockquote:text-muted-foreground',
+            'prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none',
+            'prose-pre:bg-muted prose-pre:rounded-lg',
+          ].join(' ')}
+          dangerouslySetInnerHTML={{ __html: post.content ?? post.html ?? '' }}
+        />
       </article>
     </div>
   )
