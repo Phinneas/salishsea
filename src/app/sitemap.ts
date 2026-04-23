@@ -1,18 +1,30 @@
-// Next Imports
 import type { MetadataRoute } from 'next'
+import { getAllPostSlugs } from '@/lib/sonicjs'
 
-// Config Imports
-import { categories } from '@/config/components'
+const BASE = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.salishseaconsulting.com'
+
+export const dynamic = 'force-static'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = [
-    '/theme-generator',
-    '/components',
-    '/docs/getting-started/introduction',
-    ...categories.filter(category => !category.isComingSoon).map(category => `/docs/components/${category.slug}`)
-  ].map(route => ({
-    url: `${process.env.NEXT_PUBLIC_APP_URL}${route}`
-  }))
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: BASE, priority: 1.0, changeFrequency: 'monthly' },
+    { url: `${BASE}/services`, priority: 0.9, changeFrequency: 'monthly' },
+    { url: `${BASE}/about`, priority: 0.8, changeFrequency: 'monthly' },
+    { url: `${BASE}/blog`, priority: 0.8, changeFrequency: 'weekly' },
+    { url: `${BASE}/contact`, priority: 0.7, changeFrequency: 'yearly' },
+  ]
 
-  return routes
+  let postRoutes: MetadataRoute.Sitemap = []
+  try {
+    const slugs = await getAllPostSlugs()
+    postRoutes = slugs.map(slug => ({
+      url: `${BASE}/blog/${slug}/`,
+      priority: 0.6,
+      changeFrequency: 'monthly' as const,
+    }))
+  } catch {
+    // SonicJS unavailable at build time — sitemap will lack post URLs
+  }
+
+  return [...staticRoutes, ...postRoutes]
 }

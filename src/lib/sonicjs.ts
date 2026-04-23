@@ -66,6 +66,7 @@ export interface Post {
   author?: string
   reading_time?: number
   featured?: boolean
+  tags?: string[]
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -84,6 +85,7 @@ function normalize(item: SonicItem): Post {
     author: d.author ?? undefined,
     reading_time: d.readTime ?? undefined,
     featured: d.featured ?? false,
+    tags: d.tags ? String(d.tags).split(',').map(t => t.trim()).filter(Boolean) : [],
   }
 }
 
@@ -103,9 +105,7 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
     url.searchParams.set(k, String(v))
   )
 
-  const res = await fetch(url.toString(), {
-    next: { revalidate: 60 },
-  })
+  const res = await fetch(url.toString(), { cache: 'no-store' })
 
   if (!res.ok) {
     throw new Error(`SonicJS ${res.status} — ${url}`)
