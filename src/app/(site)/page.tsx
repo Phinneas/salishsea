@@ -86,7 +86,7 @@ export default async function HomePage() {
           </p>
           <div className='mt-10 flex flex-wrap justify-center gap-4'>
             <Button asChild size='lg' className='bg-teal-500 hover:bg-teal-400 text-white'>
-              <Link href='/contact'>
+              <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
                 Schedule a Free 30-Min Call <ArrowRight className='ml-2 h-4 w-4' />
               </Link>
             </Button>
@@ -140,7 +140,18 @@ export default async function HomePage() {
                 </Link>
               </Button>
             </div>
-            <div className='space-y-4'>
+            <div className='flex flex-col gap-6'>
+              {/* Headshot */}
+              <div className='flex justify-center lg:justify-start'>
+                <div className='relative h-64 w-56 overflow-hidden rounded-2xl shadow-lg sm:h-72 sm:w-64'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src='/chester-beard.jpg'
+                    alt='Chester Beard — Salish Sea Consulting'
+                    className='h-full w-full object-cover object-top'
+                  />
+                </div>
+              </div>
               {valueProp.map(item => (
                 <div key={item.title} className='flex gap-4 rounded-lg border border-border/50 p-5'>
                   <CheckCircle className='mt-0.5 h-5 w-5 flex-shrink-0 text-teal-500' />
@@ -248,7 +259,7 @@ export default async function HomePage() {
             no pitch — just an honest conversation about what would move the needle for your brand.
           </p>
           <Button asChild size='lg' className='mt-8 bg-teal-500 hover:bg-teal-400 text-white'>
-            <Link href='/contact'>
+            <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
               Schedule Your Free Call <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
           </Button>

@@ -115,7 +115,7 @@ export default function AboutPage() {
             you. Schedule a call to discuss how we can create a system that amplifies your impact.
           </p>
           <Button asChild size='lg' className='mt-8 bg-teal-600 hover:bg-teal-700'>
-            <Link href='/contact'>
+            <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
               Schedule a Call <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
           </Button>

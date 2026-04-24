@@ -1,25 +1,48 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { CheckCircle } from 'lucide-react'
-
-// Note: metadata can't be exported from a 'use client' component.
-// Move to a server wrapper if you need custom OG tags on /contact.
+import { CheckCircle, Calendar, Mail } from 'lucide-react'
+import Link from 'next/link'
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [calReady, setCalReady] = useState(false)
+
+  // Load Cal.com embed
+  useEffect(() => {
+    if (document.getElementById('cal-embed-script')) {
+      setCalReady(true)
+      return
+    }
+    const script = document.createElement('script')
+    script.id = 'cal-embed-script'
+    script.src = 'https://app.cal.com/embed/embed.js'
+    script.async = true
+    script.onload = () => {
+      const w = window as any
+      if (!w.Cal) return
+      w.Cal('init', { origin: 'https://cal.com' })
+      w.Cal('inline', {
+        elementOrSelector: '#cal-inline',
+        calLink: 'chester-beard/30min',
+        layout: 'month_view',
+      })
+      w.Cal('ui', { hideEventTypeDetails: false, layout: 'month_view' })
+      setCalReady(true)
+    }
+    document.head.appendChild(script)
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
-    // TODO: wire to your preferred email service (Resend, Mailgun, etc.)
-    // For now, simulate a submission
+    // TODO: wire to Resend, Mailgun, or a Cloudflare Worker email endpoint
     await new Promise(r => setTimeout(r, 1000))
     setSent(true)
     setLoading(false)
@@ -30,69 +53,120 @@ export default function ContactPage() {
       {/* Header */}
       <section className='bg-gradient-to-br from-teal-950 to-slate-900 px-4 py-20 text-white sm:px-6'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Get in Touch</h1>
+          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Let&apos;s Talk</h1>
           <p className='mt-4 text-lg text-teal-100/80'>
-            Tell us about your project. We respond within one business day.
+            Pick a time that works for you, or send a message and I&apos;ll reply within one business day.
           </p>
         </div>
       </section>
 
-      {/* Form */}
-      <section className='px-4 py-20 sm:px-6'>
-        <div className='mx-auto max-w-lg'>
-          {sent ? (
-            <div className='flex flex-col items-center gap-4 py-16 text-center'>
-              <CheckCircle className='h-12 w-12 text-teal-600' />
-              <h2 className='text-2xl font-bold'>Message sent!</h2>
-              <p className='text-muted-foreground'>
-                Thank you for reaching out. We&apos;ll be in touch within one business day.
+      <section className='px-4 py-16 sm:px-6'>
+        <div className='mx-auto max-w-6xl'>
+          {/* Direct email fallback */}
+          <p className='mb-8 text-center text-sm text-muted-foreground'>
+            Prefer email?{' '}
+            <a href='mailto:chesterbeard@salishseaconsulting.com' className='text-teal-600 hover:underline'>
+              chesterbeard@salishseaconsulting.com
+            </a>
+          </p>
+          <div className='grid gap-12 lg:grid-cols-[1fr_420px]'>
+
+            {/* Cal.com inline embed */}
+            <div>
+              <div className='mb-6 flex items-center gap-2'>
+                <Calendar className='h-5 w-5 text-teal-600' />
+                <h2 className='text-xl font-semibold'>Book a free 30-minute call</h2>
+              </div>
+              <p className='mb-6 text-sm text-muted-foreground'>
+                Pick a time directly from my calendar. No back-and-forth needed.
+              </p>
+              {/* Cal.com embed target */}
+              <div
+                id='cal-inline'
+                className='min-h-[600px] w-full rounded-lg border border-border overflow-hidden bg-background'
+                style={{ minHeight: 600 }}
+              />
+              {!calReady && (
+                <div className='flex min-h-[600px] items-center justify-center rounded-lg border border-border text-muted-foreground text-sm'>
+                  Loading calendar…
+                </div>
+              )}
+              {/* Fallback direct link */}
+              <p className='mt-3 text-center text-xs text-muted-foreground'>
+                Or{' '}
+                <Link
+                  href='https://cal.com/chester-beard/30min'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-teal-600 hover:underline'
+                >
+                  open the scheduling page directly →
+                </Link>
               </p>
             </div>
-          ) : (
-            <Card>
-              <CardHeader>
-                <CardTitle>Send a message</CardTitle>
-                <CardDescription>
-                  Describe your project or question and we&apos;ll get back to you shortly.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className='space-y-5'>
-                  <div className='grid gap-5 sm:grid-cols-2'>
-                    <div className='space-y-2'>
-                      <Label htmlFor='name'>Name</Label>
-                      <Input id='name' name='name' required placeholder='Your name' />
-                    </div>
-                    <div className='space-y-2'>
-                      <Label htmlFor='email'>Email</Label>
-                      <Input id='email' name='email' type='email' required placeholder='you@example.com' />
-                    </div>
-                  </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='organization'>Organization (optional)</Label>
-                    <Input id='organization' name='organization' placeholder='Company or organization' />
-                  </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='message'>Message</Label>
-                    <Textarea
-                      id='message'
-                      name='message'
-                      required
-                      rows={5}
-                      placeholder="Tell us about your project — what you're working on, your timeline, and any specific questions..."
-                    />
-                  </div>
-                  <Button
-                    type='submit'
-                    className='w-full bg-teal-600 hover:bg-teal-700'
-                    disabled={loading}
-                  >
-                    {loading ? 'Sending…' : 'Send Message'}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          )}
+
+            {/* Contact form */}
+            <div>
+              <div className='mb-6 flex items-center gap-2'>
+                <Mail className='h-5 w-5 text-teal-600' />
+                <h2 className='text-xl font-semibold'>Or send a message</h2>
+              </div>
+              {sent ? (
+                <div className='flex flex-col items-center gap-4 py-12 text-center'>
+                  <CheckCircle className='h-12 w-12 text-teal-600' />
+                  <h3 className='text-xl font-bold'>Message sent!</h3>
+                  <p className='text-muted-foreground text-sm'>
+                    I&apos;ll get back to you within one business day.
+                  </p>
+                </div>
+              ) : (
+                <Card className='border-border/50'>
+                  <CardHeader className='pb-4'>
+                    <CardTitle className='text-base'>Quick message</CardTitle>
+                    <CardDescription>
+                      Prefer to write first? Describe your project and I&apos;ll follow up.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className='space-y-4'>
+                      <div className='grid gap-4 sm:grid-cols-2'>
+                        <div className='space-y-2'>
+                          <Label htmlFor='name'>Name</Label>
+                          <Input id='name' name='name' required placeholder='Your name' />
+                        </div>
+                        <div className='space-y-2'>
+                          <Label htmlFor='email'>Email</Label>
+                          <Input id='email' name='email' type='email' required placeholder='you@example.com' />
+                        </div>
+                      </div>
+                      <div className='space-y-2'>
+                        <Label htmlFor='organization'>Organization (optional)</Label>
+                        <Input id='organization' name='organization' placeholder='Company or organization' />
+                      </div>
+                      <div className='space-y-2'>
+                        <Label htmlFor='message'>Message</Label>
+                        <Textarea
+                          id='message'
+                          name='message'
+                          required
+                          rows={6}
+                          placeholder="Tell me about your project — what you're working on, your goals, and any specific questions..."
+                        />
+                      </div>
+                      <Button
+                        type='submit'
+                        className='w-full bg-teal-600 hover:bg-teal-700'
+                        disabled={loading}
+                      >
+                        {loading ? 'Sending…' : 'Send Message'}
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+          </div>
         </div>
       </section>
     </div>

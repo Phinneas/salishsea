@@ -25,7 +25,19 @@ export function Header() {
       <div className='mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6'>
         {/* Logo */}
         <Link href='/' className='flex items-center gap-2'>
-          <span className='text-lg font-semibold tracking-tight text-foreground'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src='/ssc-logo.png'
+            alt='Salish Sea Consulting'
+            className='h-9 w-auto'
+            onError={(e) => {
+              // Fallback to text if image not found
+              const el = e.currentTarget
+              el.style.display = 'none'
+              el.nextElementSibling?.removeAttribute('hidden')
+            }}
+          />
+          <span hidden className='text-lg font-semibold tracking-tight text-foreground'>
             Salish Sea <span className='text-teal-600'>Consulting</span>
           </span>
         </Link>
