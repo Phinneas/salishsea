@@ -140,15 +140,31 @@ export interface Post {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+/** Replace Ghost's __GHOST_URL__ export placeholder with an empty string.
+ *  - Internal links become relative paths (e.g. /blog/some-post/) ✓
+ *  - Embedded image srcs become relative /content/images/... paths (broken, but silently)
+ */
+function resolveGhostUrl(str: string | undefined): string | undefined {
+  if (!str) return undefined
+  return str.replace(/__GHOST_URL__/g, '')
+}
+
 function normalize(item: SonicItem): Post {
   const d = item.data ?? {}
+
+  const rawImage = d.featuredImage
+  // Only use the image if it isn't a still-unresolved __GHOST_URL__ placeholder
+  const featureImage = rawImage && !rawImage.startsWith('__GHOST_URL__')
+    ? rawImage
+    : undefined
+
   return {
     id: item.id,
     slug: item.slug ?? d.slug,
     title: item.title ?? d.title,
     excerpt: d.excerpt ?? undefined,
-    content: d.content ?? undefined,
-    feature_image: d.featuredImage ?? undefined,
+    content: resolveGhostUrl(d.content),
+    feature_image: featureImage,
     published_at: d.publishedAt ?? item.created_at,
     updated_at: item.updated_at ?? undefined,
     author: d.author ?? undefined,

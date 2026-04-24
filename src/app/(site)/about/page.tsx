@@ -42,7 +42,21 @@ export default function AboutPage() {
 
       {/* Bio */}
       <section className='px-4 py-20 sm:px-6'>
-        <div className='mx-auto max-w-3xl space-y-6 text-base leading-relaxed text-muted-foreground'>
+        <div className='mx-auto max-w-5xl'>
+          <div className='grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start'>
+            {/* Headshot */}
+            <div className='flex justify-center lg:justify-start'>
+              <div className='h-80 w-64 overflow-hidden rounded-2xl shadow-lg lg:h-96 lg:w-72'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src='/chester-beard.jpg'
+                  alt='Chester Beard — Salish Sea Consulting'
+                  className='h-full w-full object-cover object-top'
+                />
+              </div>
+            </div>
+            {/* Text */}
+            <div className='space-y-6 text-base leading-relaxed text-muted-foreground'>
           <p className='text-lg text-foreground font-medium leading-relaxed'>
             I&apos;m Chester Beard — a conversion copywriter and marketing strategist with a passion for
             sustainability. For over 20 years, I&apos;ve helped mission-driven brands turn their values into
@@ -82,6 +96,8 @@ export default function AboutPage() {
             I don&apos;t just talk about sustainability — I live it, and I bring that commitment to every project I
             take on.
           </p>
+            </div>
+          </div>
         </div>
       </section>
 

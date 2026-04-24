@@ -141,17 +141,6 @@ export default async function HomePage() {
               </Button>
             </div>
             <div className='flex flex-col gap-6'>
-              {/* Headshot */}
-              <div className='flex justify-center lg:justify-start'>
-                <div className='relative h-64 w-56 overflow-hidden rounded-2xl shadow-lg sm:h-72 sm:w-64'>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src='/chester-beard.jpg'
-                    alt='Chester Beard — Salish Sea Consulting'
-                    className='h-full w-full object-cover object-top'
-                  />
-                </div>
-              </div>
               {valueProp.map(item => (
                 <div key={item.title} className='flex gap-4 rounded-lg border border-border/50 p-5'>
                   <CheckCircle className='mt-0.5 h-5 w-5 flex-shrink-0 text-teal-500' />
