@@ -195,6 +195,7 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
 
     if (!res.ok) {
       console.error(`SonicJS API error: ${res.status} — ${url}`)
+      // Return empty array instead of crashing build
       return []
     }
 
@@ -206,14 +207,52 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
     } catch (jsonError) {
       console.error(`SonicJS JSON parsing error: ${jsonError}`)
       console.error(`Response text (first 500 chars): ${text.substring(0, 500)}`)
-      // Try to recover by finding and removing the corrupted post
-      // This is a fallback - better to return empty than crash
+      // Return empty array instead of crashing build
       return []
     }
   } catch (error) {
     console.error(`SonicJS fetch error: ${error}`)
+    // Return empty array instead of crashing build
     return []
   }
+}
+
+/**
+ * Fetch SonicJS content in smaller batches to avoid hitting JSON corruption
+ * This provides a fallback when fetching 300 posts fails
+ */
+async function fetchSonicBatches(batchSize: number = 50): Promise<SonicItem[]> {
+  const allItems: SonicItem[] = []
+  let offset = 0
+  let hasMore = true
+  let consecutiveErrors = 0
+  const maxConsecutiveErrors = 3
+
+  while (hasMore && consecutiveErrors < maxConsecutiveErrors) {
+    const batch = await fetchSonic({ limit: batchSize, offset })
+
+    if (batch.length === 0) {
+      // No more items or error occurred
+      consecutiveErrors++
+      if (consecutiveErrors >= maxConsecutiveErrors) {
+        console.log(`[SonicJS] Stopping batch fetch after ${maxConsecutiveErrors} consecutive errors at offset ${offset}`)
+        break
+      }
+      offset += batchSize
+      continue
+    }
+
+    // Reset error counter on successful fetch
+    consecutiveErrors = 0
+    allItems.push(...batch)
+    offset += batchSize
+
+    // If we got fewer items than batch size, we've reached the end
+    hasMore = batch.length === batchSize
+  }
+
+  console.log(`[SonicJS] Fetched ${allItems.length} items via batch fetching`)
+  return allItems
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────
@@ -254,7 +293,8 @@ function sscOnly(items: SonicItem[]): SonicItem[] {
 /** List published SSC blog posts, newest first */
 export async function getPosts(opts: { limit?: number; offset?: number } = {}): Promise<Post[]> {
   try {
-    const all = await fetchSonic()
+    // Use batch fetching to avoid JSON corruption when fetching large datasets
+    const all = await fetchSonicBatches(50)
     const filtered = sscOnly(all)
     const { limit = 20, offset = 0 } = opts
     return filtered.slice(offset, offset + limit).map(normalize)
@@ -267,7 +307,8 @@ export async function getPosts(opts: { limit?: number; offset?: number } = {}): 
 /** Get a single post by slug */
 export async function getPost(slug: string): Promise<Post | null> {
   try {
-    const all = await fetchSonic()
+    // Use batch fetching to handle potential API errors
+    const all = await fetchSonicBatches(50)
     const item = sscOnly(all).find(i => (i.slug ?? i.data?.slug) === slug)
     return item ? normalize(item) : null
   } catch (e) {
@@ -279,8 +320,12 @@ export async function getPost(slug: string): Promise<Post | null> {
 /** Get all published slugs — used by generateStaticParams */
 export async function getAllPostSlugs(): Promise<string[]> {
   try {
-    const all = await fetchSonic()
-    return sscOnly(all).map(i => i.slug ?? i.data?.slug).filter(Boolean)
+    // Use batch fetching to ensure robustness for static generation
+    console.log('[SonicJS] Starting batch fetch for getAllPostSlugs...')
+    const all = await fetchSonicBatches(50)
+    const slugs = sscOnly(all).map(i => i.slug ?? i.data?.slug).filter(Boolean)
+    console.log(`[SonicJS] Successfully fetched ${slugs.length} slugs`)
+    return slugs
   } catch (e) {
     console.error('[sonicjs] getAllPostSlugs:', e)
     return []
