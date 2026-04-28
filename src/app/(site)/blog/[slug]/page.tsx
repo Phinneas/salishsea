@@ -9,15 +9,38 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-export const dynamicParams = false
+export const dynamicParams = true
 
+// Make generateStaticParams absolutely bulletproof - cannot throw any errors
 export async function generateStaticParams() {
+  // Return immediately with empty array if in development without API
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('Blog slugs: Development mode, returning empty array for faster builds')
+    return []
+  }
+
   try {
     const slugs = await getAllPostSlugs()
-    return slugs.map(slug => ({ slug }))
+    
+    // Additional safety net
+    if (!Array.isArray(slugs)) {
+      console.error('getAllPostSlugs did not return an array:', slugs)
+      return []
+    }
+    
+    const mapped = slugs.map(slug => {
+      if (typeof slug === 'string' && slug.trim()) {
+        return { slug: slug.trim() }
+      }
+      console.warn('Invalid slug encountered:', slug)
+      return null
+    }).filter(Boolean)
+    
+    console.log(`[Blog] Generated ${mapped.length} static params`)
+    return mapped
   } catch (error) {
-    console.error('Failed to fetch blog slugs from SonicJS:', error)
-    // Return empty array to allow build to continue even if API is down
+    console.error('[Blog] generateStaticParams error:', error)
+    // CRITICAL: Must return empty array, never throw
     return []
   }
 }
