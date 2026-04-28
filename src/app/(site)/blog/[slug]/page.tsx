@@ -9,38 +9,46 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-export const dynamicParams = true
+export const dynamicParams = false
 
 // Make generateStaticParams absolutely bulletproof - cannot throw any errors
+// Critical for static export: this function must always return an array
 export async function generateStaticParams() {
-  // Return immediately with empty array if in development without API
-  if (process.env.NODE_ENV === 'development') {
-    console.warn('Blog slugs: Development mode, returning empty array for faster builds')
+  // Layer 1: Immediate return with empty array if API is unreachable
+  // This prevents any async operations that might throw
+  if (!SONICJS_URL || SONICJS_URL.includes('YOUR_ACCOUNT')) {
+    console.warn('[Blog] SonicJS URL not configured, returning empty static params')
     return []
   }
 
   try {
+    // Layer 2: Wrap the async call in its own try-catch
     const slugs = await getAllPostSlugs()
     
-    // Additional safety net
+    // Layer 3: Validate result type
     if (!Array.isArray(slugs)) {
-      console.error('getAllPostSlugs did not return an array:', slugs)
+      console.error('[Blog] getAllPostSlugs did not return an array:', typeof slugs, slugs)
       return []
     }
     
-    const mapped = slugs.map(slug => {
-      if (typeof slug === 'string' && slug.trim()) {
-        return { slug: slug.trim() }
-      }
-      console.warn('Invalid slug encountered:', slug)
-      return null
-    }).filter(Boolean)
+    // Layer 4: Map and filter safely
+    const mapped = slugs
+      .map(slug => {
+        // Validate each slug
+        if (typeof slug === 'string' && slug.trim()) {
+          return { slug: slug.trim() }
+        }
+        console.warn('[Blog] Invalid slug encountered:', slug, 'type:', typeof slug)
+        return null
+      })
+      .filter(Boolean)
     
     console.log(`[Blog] Generated ${mapped.length} static params`)
     return mapped
+    
   } catch (error) {
+    // Layer 5: Catch absolutely everything
     console.error('[Blog] generateStaticParams error:', error)
-    // CRITICAL: Must return empty array, never throw
     return []
   }
 }
