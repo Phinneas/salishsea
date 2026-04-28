@@ -12,8 +12,14 @@ interface Props {
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs()
-  return slugs.map(slug => ({ slug }))
+  try {
+    const slugs = await getAllPostSlugs()
+    return slugs.map(slug => ({ slug }))
+  } catch (error) {
+    console.error('Failed to fetch blog slugs from SonicJS:', error)
+    // Return empty array to allow build to continue even if API is down
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
