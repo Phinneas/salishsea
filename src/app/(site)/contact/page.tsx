@@ -22,7 +22,7 @@ export default function ContactPage() {
     }
     const script = document.createElement('script')
     script.id = 'cal-embed-script'
-    script.src = 'https://app.cal.com/embed/embed.js'
+    script.src = 'https://cal.com/embed.js'
     script.async = true
     script.onload = () => {
       const w = window as any
