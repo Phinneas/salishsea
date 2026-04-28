@@ -13,31 +13,81 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [calReady, setCalReady] = useState(false)
+  const [calError, setCalError] = useState(false)
 
   // Load Cal.com embed
   useEffect(() => {
+    // Check if script already exists
     if (document.getElementById('cal-embed-script')) {
-      setCalReady(true)
+      // If script exists, try to initialize calendar
+      const w = window as any
+      if (w.Cal) {
+        initializeCal(w.Cal)
+      }
       return
     }
+
+    // Create and load script
     const script = document.createElement('script')
     script.id = 'cal-embed-script'
     script.src = 'https://cal.com/embed.js'
     script.async = true
+
     script.onload = () => {
       const w = window as any
-      if (!w.Cal) return
-      w.Cal('init', { origin: 'https://cal.com' })
-      w.Cal('inline', {
-        elementOrSelector: '#cal-inline',
-        calLink: 'chester-beard/30min',
-        layout: 'month_view',
-      })
-      w.Cal('ui', { hideEventTypeDetails: false, layout: 'month_view' })
-      setCalReady(true)
+      if (w.Cal) {
+        initializeCal(w.Cal)
+      }
     }
+
+    script.onerror = () => {
+      console.error('Failed to load Cal.com embed script')
+      setCalError(true)
+      setCalReady(false)
+    }
+
     document.head.appendChild(script)
+
+    // Cleanup function
+    return () => {
+      // Don't remove script on unmount to avoid reloads
+    }
   }, [])
+
+  // Separate initialization function with retry logic
+  const initializeCal = (Cal: any) => {
+    const maxRetries = 3
+    let attempts = 0
+
+    const tryInit = () => {
+      attempts++
+      try {
+        Cal('init', { origin: 'https://cal.com' })
+        Cal('inline', {
+          elementOrSelector: '#cal-inline',
+          calLink: 'chester-beard/30min',
+          layout: 'month_view',
+        })
+        Cal('ui', { 
+          hideEventTypeDetails: false, 
+          layout: 'month_view',
+          theme: 'light'
+        })
+        setCalReady(true)
+        console.log('Cal.com calendar initialized successfully')
+      } catch (error) {
+        console.error(`Failed to initialize Cal.com calendar (attempt ${attempts}):`, error)
+        if (attempts < maxRetries) {
+          setTimeout(tryInit, 500 * attempts) // Retry with exponential backoff
+        } else {
+          setCalReady(false)
+          setCalError(true)
+        }
+      }
+    }
+
+    tryInit()
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -86,9 +136,19 @@ export default function ContactPage() {
                 className='min-h-[600px] w-full rounded-lg border border-border overflow-hidden bg-background'
                 style={{ minHeight: 600 }}
               />
-              {!calReady && (
+              {!calReady && !calError && (
                 <div className='flex min-h-[600px] items-center justify-center rounded-lg border border-border text-muted-foreground text-sm'>
                   Loading calendar…
+                </div>
+              )}
+              {calError && (
+                <div className='flex min-h-[600px] flex-col items-center justify-center rounded-lg border border-border text-center'>
+                  <p className='text-muted-foreground text-sm mb-4'>
+                    Unable to load the calendar. 
+                  </p>
+                  <p className='text-xs text-muted-foreground'>
+                    You can still book a call using the link below.
+                  </p>
                 </div>
               )}
               {/* Fallback direct link */}
