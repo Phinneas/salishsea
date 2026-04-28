@@ -190,14 +190,30 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
     url.searchParams.set(k, String(v))
   )
 
-  const res = await fetch(url.toString(), { cache: 'force-cache' })
+  try {
+    const res = await fetch(url.toString(), { cache: 'force-cache' })
 
-  if (!res.ok) {
-    throw new Error(`SonicJS ${res.status} — ${url}`)
+    if (!res.ok) {
+      console.error(`SonicJS API error: ${res.status} — ${url}`)
+      return []
+    }
+
+    // Handle potential JSON parsing errors (corrupted data)
+    const text = await res.text()
+    try {
+      const json: SonicResponse = JSON.parse(text)
+      return json.data ?? []
+    } catch (jsonError) {
+      console.error(`SonicJS JSON parsing error: ${jsonError}`)
+      console.error(`Response text (first 500 chars): ${text.substring(0, 500)}`)
+      // Try to recover by finding and removing the corrupted post
+      // This is a fallback - better to return empty than crash
+      return []
+    }
+  } catch (error) {
+    console.error(`SonicJS fetch error: ${error}`)
+    return []
   }
-
-  const json: SonicResponse = await res.json()
-  return json.data ?? []
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────
@@ -206,13 +222,32 @@ async function fetchSonic(params: Record<string, string | number> = {}): Promise
 function sscOnly(items: SonicItem[]): SonicItem[] {
   return items
     .filter(i => {
-      const slug = i.slug ?? i.data?.slug
-      return i.data?.category === SITE_CATEGORY && i.status === 'published' && ALLOWED_SLUGS.has(slug)
+      try {
+        const slug = i.slug ?? i.data?.slug
+        // Skip items with missing required data
+        if (!i.data) {
+          console.warn('Skipping post with missing data:', i.id, i.title)
+          return false
+        }
+        if (!slug) {
+          console.warn('Skipping post with missing slug:', i.id, i.title)
+          return false
+        }
+        return i.data.category === SITE_CATEGORY && i.status === 'published' && ALLOWED_SLUGS.has(slug)
+      } catch (error) {
+        console.error('Error filtering post:', error, i)
+        return false // Skip corrupted items
+      }
     })
     .sort((a, b) => {
-      const dateA = new Date(a.data?.publishedAt ?? a.created_at ?? 0).getTime()
-      const dateB = new Date(b.data?.publishedAt ?? b.created_at ?? 0).getTime()
-      return dateB - dateA // newest first
+      try {
+        const dateA = new Date(a.data?.publishedAt ?? a.created_at ?? 0).getTime()
+        const dateB = new Date(b.data?.publishedAt ?? b.created_at ?? 0).getTime()
+        return dateB - dateA // newest first
+      } catch (error) {
+        console.error('Error sorting posts:', error)
+        return 0
+      }
     })
 }
 
