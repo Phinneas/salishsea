@@ -5,6 +5,9 @@ import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getPost, getAllPostSlugs } from '@/lib/sonicjs'
 
+// Import SONICJS_URL for validation
+const SONICJS_URL = process.env.NEXT_PUBLIC_SONICJS_URL ?? 'https://sonicjscms.buzzuw2.workers.dev'
+
 interface Props {
   params: Promise<{ slug: string }>
 }
