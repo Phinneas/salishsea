@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getPosts } from '@/lib/sonicjs'
+import type { Post } from '@/lib/sonicjs'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -10,7 +11,15 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  const posts = await getPosts({ limit: 50 })
+  let posts: Post[] = []
+  let errorOccurred = false
+
+  try {
+    posts = await getPosts({ limit: 50 })
+  } catch (error) {
+    console.error('[BlogPage] Failed to fetch posts:', error)
+    errorOccurred = true
+  }
 
   return (
     <div>
@@ -27,7 +36,12 @@ export default async function BlogPage() {
       {/* Posts */}
       <section className='px-4 py-20 sm:px-6'>
         <div className='mx-auto max-w-4xl'>
-          {posts.length === 0 ? (
+          {errorOccurred ? (
+            <div className='py-20 text-center text-muted-foreground'>
+              <p className='text-lg'>Unable to load blog posts.</p>
+              <p className='mt-2 text-sm'>We're experiencing technical difficulties. Please try again later.</p>
+            </div>
+          ) : posts.length === 0 ? (
             <div className='py-20 text-center text-muted-foreground'>
               <p className='text-lg'>No posts yet.</p>
               <p className='mt-2 text-sm'>Check back soon — content is on its way.</p>
