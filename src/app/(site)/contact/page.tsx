@@ -1,93 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { CheckCircle, Calendar, Mail } from 'lucide-react'
+import { CheckCircle, Calendar, Mail, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [calReady, setCalReady] = useState(false)
-  const [calError, setCalError] = useState(false)
-
-  // Load Cal.com embed
-  useEffect(() => {
-    // Check if script already exists
-    if (document.getElementById('cal-embed-script')) {
-      // If script exists, try to initialize calendar
-      const w = window as any
-      if (w.Cal) {
-        initializeCal(w.Cal)
-      }
-      return
-    }
-
-    // Create and load script
-    const script = document.createElement('script')
-    script.id = 'cal-embed-script'
-    script.src = 'https://cal.com/embed.js'
-    script.async = true
-
-    script.onload = () => {
-      const w = window as any
-      if (w.Cal) {
-        initializeCal(w.Cal)
-      }
-    }
-
-    script.onerror = () => {
-      console.error('Failed to load Cal.com embed script')
-      setCalError(true)
-      setCalReady(false)
-    }
-
-    document.head.appendChild(script)
-
-    // Cleanup function
-    return () => {
-      // Don't remove script on unmount to avoid reloads
-    }
-  }, [])
-
-  // Separate initialization function with retry logic
-  const initializeCal = (Cal: any) => {
-    const maxRetries = 3
-    let attempts = 0
-
-    const tryInit = () => {
-      attempts++
-      try {
-        Cal('init', { origin: 'https://cal.com' })
-        Cal('inline', {
-          elementOrSelector: '#cal-inline',
-          calLink: 'chester-beard/30min',
-          layout: 'month_view',
-        })
-        Cal('ui', { 
-          hideEventTypeDetails: false, 
-          layout: 'month_view',
-          theme: 'light'
-        })
-        setCalReady(true)
-        console.log('Cal.com calendar initialized successfully')
-      } catch (error) {
-        console.error(`Failed to initialize Cal.com calendar (attempt ${attempts}):`, error)
-        if (attempts < maxRetries) {
-          setTimeout(tryInit, 500 * attempts) // Retry with exponential backoff
-        } else {
-          setCalReady(false)
-          setCalError(true)
-        }
-      }
-    }
-
-    tryInit()
-  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -121,7 +45,7 @@ export default function ContactPage() {
           </p>
           <div className='grid gap-12 lg:grid-cols-[1fr_420px]'>
 
-            {/* Cal.com inline embed */}
+            {/* Cal.com direct booking */}
             <div>
               <div className='mb-6 flex items-center gap-2'>
                 <Calendar className='h-5 w-5 text-teal-600' />
@@ -130,39 +54,38 @@ export default function ContactPage() {
               <p className='mb-6 text-sm text-muted-foreground'>
                 Pick a time directly from my calendar. No back-and-forth needed.
               </p>
-              {/* Cal.com embed target */}
-              <div
-                id='cal-inline'
-                className='min-h-[600px] w-full rounded-lg border border-border overflow-hidden bg-background'
-                style={{ minHeight: 600 }}
-              />
-              {!calReady && !calError && (
-                <div className='flex min-h-[600px] items-center justify-center rounded-lg border border-border text-muted-foreground text-sm'>
-                  Loading calendar…
-                </div>
-              )}
-              {calError && (
-                <div className='flex min-h-[600px] flex-col items-center justify-center rounded-lg border border-border text-center'>
-                  <p className='text-muted-foreground text-sm mb-4'>
-                    Unable to load the calendar. 
-                  </p>
-                  <p className='text-xs text-muted-foreground'>
-                    You can still book a call using the link below.
+              
+              <div className='rounded-lg border border-border/50 bg-background p-6'>
+                <div className='mb-4 text-center'>
+                  <p className='text-sm text-muted-foreground mb-4'>
+                    Click below to open my scheduling calendar:
                   </p>
                 </div>
-              )}
-              {/* Fallback direct link */}
-              <p className='mt-3 text-center text-xs text-muted-foreground'>
-                Or{' '}
-                <Link
-                  href='https://cal.com/chester-beard/30min'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='text-teal-600 hover:underline'
+                
+                <Button 
+                  asChild 
+                  size='lg' 
+                  className='w-full bg-teal-600 hover:bg-teal-700 text-white'
                 >
-                  open the scheduling page directly →
-                </Link>
-              </p>
+                  <Link 
+                    href='https://cal.com/chester-beard/30min' 
+                    target='_blank' 
+                    rel='noopener noreferrer'
+                  >
+                    Schedule a Free 30-Min Call <ArrowRight className='ml-2 h-4 w-4' />
+                  </Link>
+                </Button>
+                
+                <div className='mt-6 rounded-lg bg-muted/50 p-4'>
+                  <p className='text-xs text-muted-foreground text-center'>
+                    <strong className='text-foreground'>What to expect:</strong><br />
+                    • 30-minute no-obligation call<br />
+                    • Discuss your project and goals<br />
+                    • See if we're a good fit to work together<br />
+                    • Clear next steps, whether we work together or not
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Contact form */}
