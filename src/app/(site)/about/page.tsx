@@ -18,7 +18,7 @@ const credentials = [
   {
     label: 'Audience Building',
     detail:
-      'My writing on sustainable business has reached over one million readers. My combined audience across Medium, LinkedIn, YouTube, and email subscribers exceeds 24,000 — proof that I know how to capture the attention of this specific audience.',
+      'My writing has reached over one million readers. Building an audience of 24,000 across Medium, LinkedIn, YouTube, and email from scratch is proof I understand how attention works — and how to build it for you.',
   },
   {
     label: 'Marketing & Business Ownership',
@@ -58,43 +58,31 @@ export default function AboutPage() {
             {/* Text */}
             <div className='space-y-6 text-base leading-relaxed text-muted-foreground'>
           <p className='text-lg text-foreground font-medium leading-relaxed'>
-            I&apos;m Chester Beard — a conversion copywriter and marketing strategist with a passion for
-            sustainability. For over 20 years, I&apos;ve helped mission-driven brands turn their values into
-            conversions, without the chaos of juggling multiple vendors who don&apos;t understand your goals.
+            I&apos;m Chester Beard — a sustainability copywriter and marketing strategist who believes AI replaces the appearance of expertise, not expertise itself. For over 20 years I&apos;ve helped mission-driven brands grow without losing their voice, building systems where the technology serves the mission rather than the other way around.
           </p>
 
           <h2 className='pt-4 text-2xl font-bold text-foreground'>My Background</h2>
           <p>
-            My journey began in environmental leadership, where I served as a former Executive Council member for
-            Sierra Club Washington and contributed as a photographer for The Nature Conservancy. These experiences
-            gave me a deep understanding of the environmental movement and what messaging truly resonates with
-            conscious consumers.
+            My background isn&apos;t typical for a marketing consultant. I came up through environmental leadership — as an Executive Council member for Sierra Club Washington and a photographer for The Nature Conservancy — which means I understand what messaging actually resonates with conscious consumers, not just what tests well.
           </p>
           <p>
-            I didn&apos;t stop there. I&apos;ve spent the last two decades building my own audience, with my
-            writing on sustainable business reaching over one million readers. I&apos;ve also run my own small
-            business for 19 years — giving me firsthand insight into the technical and financial challenges you
-            face every day.
+            I&apos;ve spent two decades building my own audience around sustainable business, reaching over one million readers. And I&apos;ve run my own small business for 19 years, so the technical and financial pressures you face aren&apos;t abstract to me.
           </p>
 
           <h2 className='pt-4 text-2xl font-bold text-foreground'>My Approach</h2>
           <p>
-            Most consultants specialize in either copywriting or technology. I do both. I create custom marketing
-            tools — from search catalogs to CRM automation — designed to reflect your sustainable values and guide
-            your audience toward meaningful action.
+            Most consultants specialize in either copywriting or technology. I work at the intersection of both — with sustainability as the through line. That means the AI-augmented tools I build, from search catalogs to content pipelines and marketing automation, are designed around your values from the start, not bolted on afterward.
           </p>
           <p>
-            My copywriting isn&apos;t just compelling — it&apos;s perfectly synchronized with your technology,
-            ensuring your message resonates at every touchpoint. The result is one seamless system instead of a
-            patchwork of vendors pulling in different directions.
+            The copywriting and the technology inform each other. Your message doesn&apos;t just resonate at one touchpoint — it carries through the entire system. The result is a single coherent operation instead of a patchwork of vendors pulling in different directions.
           </p>
 
           <h2 className='pt-4 text-2xl font-bold text-foreground'>Why Work With Me?</h2>
           <p>
-            Because I understand the unique challenges of sustainable brands. I know what it takes to secure grant
-            funding, build loyal audiences, and create marketing systems that work as seamlessly as your mission.
-            I don&apos;t just talk about sustainability — I live it, and I bring that commitment to every project I
-            take on.
+            Because I understand the unique challenges of sustainable brands from the inside. I&apos;ve secured grant funding, built loyal audiences, and created marketing systems for organizations where the mission isn&apos;t a marketing angle — it&apos;s the whole point.
+          </p>
+          <p>
+            I don&apos;t just talk about sustainability. I&apos;ve lived it for two decades, and I&apos;m skeptical enough about the tools I use — including AI — to make sure they serve your values rather than undermine them.
           </p>
             </div>
           </div>
