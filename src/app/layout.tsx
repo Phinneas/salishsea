@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     title: 'Salish Sea Consulting',
     description: 'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools.',
   },
+  other: {
+    'google-site-verification': 'p02VFLvUK3DMNxL-dHzjEhpdyjl1jzuLC2HhnktqiDA',
+  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
