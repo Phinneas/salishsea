@@ -101,18 +101,27 @@ async def _fetch_reddit_posts(
     client: httpx.AsyncClient, subreddit: str
 ) -> list[dict]:
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    try:
-        r = await client.get(
-            url,
-            headers={"User-Agent": "AuthorContentResearcher/1.0"},
-            params={"limit": 30, "t": "week"},
-            timeout=12.0,
-        )
-        r.raise_for_status()
-        return r.json()["data"]["children"]
-    except Exception as exc:
-        print(f"  Warning: r/{subreddit} fetch failed — {exc}")
-        return []
+    for attempt in range(2):
+        try:
+            r = await client.get(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (compatible; AuthorContentBot/1.0; +https://github.com/phinneas/salishsea)",
+                    "Accept": "application/json",
+                },
+                params={"limit": 30, "t": "week"},
+                timeout=15.0,
+                follow_redirects=True,
+            )
+            r.raise_for_status()
+            return r.json()["data"]["children"]
+        except Exception as exc:
+            if attempt == 0:
+                await asyncio.sleep(2)
+                continue
+            print(f"  Warning: r/{subreddit} fetch failed — {exc}")
+            return []
+    return []
 
 
 async def _fetch_tavily(
