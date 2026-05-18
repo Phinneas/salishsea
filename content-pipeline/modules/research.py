@@ -12,7 +12,7 @@ import httpx
 
 REDDIT_SUBREDDITS = ["writing", "selfpublishing", "authors"]
 
-TAVILY_QUERIES = [
+EXA_QUERIES = [
     "indie author book marketing tips 2025",
     "self publishing trends authors",
     "author platform building social media",
@@ -124,24 +124,25 @@ async def _fetch_reddit_posts(
     return []
 
 
-async def _fetch_tavily(
+async def _fetch_exa(
     client: httpx.AsyncClient, query: str, api_key: str
 ) -> list[dict]:
     try:
         r = await client.post(
-            "https://api.tavily.com/search",
+            "https://api.exa.ai/search",
+            headers={"x-api-key": api_key, "Content-Type": "application/json"},
             json={
-                "api_key": api_key,
                 "query": query,
-                "search_depth": "basic",
-                "max_results": 5,
+                "numResults": 5,
+                "type": "neural",
+                "useAutoprompt": True,
             },
             timeout=15.0,
         )
         r.raise_for_status()
         return r.json().get("results", [])
     except Exception as exc:
-        print(f"  Warning: Tavily query '{query[:40]}' failed — {exc}")
+        print(f"  Warning: Exa query '{query[:40]}' failed — {exc}")
         return []
 
 
@@ -164,34 +165,33 @@ def _reddit_to_topic(post: dict) -> Optional[TopicAngle]:
     )
 
 
-def _tavily_to_topic(result: dict, query: str) -> TopicAngle:
+def _exa_to_topic(result: dict, query: str) -> TopicAngle:
     title = (result.get("title") or query)[:150]
     return TopicAngle(
         title=title,
         angle=f"Web trending: {title}",
-        source="Web (Tavily)",
+        source="Web (Exa)",
         engagement_score=40.0,
-        signals={"query": query},
+        signals={"query": query, "score": result.get("score", 0)},
         url=result.get("url", ""),
     )
 
 
 async def research_topics(n: int = 5) -> list[TopicAngle]:
     """Research and rank the top N trending topics for the author niche."""
-    tavily_key = os.getenv("TAVILY_API_KEY")
+    exa_key = os.getenv("EXA_API_KEY")
     all_topics: list[TopicAngle] = []
 
     async with httpx.AsyncClient() as client:
-        # Build tasks: Reddit (always) + Tavily (if key available)
         reddit_tasks = [_fetch_reddit_posts(client, sub) for sub in REDDIT_SUBREDDITS]
-        tavily_tasks = (
-            [_fetch_tavily(client, q, tavily_key) for q in TAVILY_QUERIES[:3]]
-            if tavily_key
+        exa_tasks = (
+            [_fetch_exa(client, q, exa_key) for q in EXA_QUERIES[:3]]
+            if exa_key
             else []
         )
 
         results = await asyncio.gather(
-            *reddit_tasks, *tavily_tasks, return_exceptions=True
+            *reddit_tasks, *exa_tasks, return_exceptions=True
         )
 
     # Process Reddit results
@@ -203,13 +203,13 @@ async def research_topics(n: int = 5) -> list[TopicAngle]:
             if topic:
                 all_topics.append(topic)
 
-    # Process Tavily results
-    if tavily_key:
+    # Process Exa results
+    if exa_key:
         for i, result in enumerate(results[len(REDDIT_SUBREDDITS) :]):
             if isinstance(result, Exception):
                 continue
             for item in result[:2]:
-                all_topics.append(_tavily_to_topic(item, TAVILY_QUERIES[i]))
+                all_topics.append(_exa_to_topic(item, EXA_QUERIES[i]))
 
     # Deduplicate by title prefix
     seen: set[str] = set()

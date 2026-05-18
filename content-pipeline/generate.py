@@ -34,10 +34,10 @@ def _check_env() -> None:
         )
         sys.exit(1)
 
-    if not os.getenv("TAVILY_API_KEY"):
+    if not os.getenv("EXA_API_KEY"):
         print(
-            "ℹ️   TAVILY_API_KEY not set — using Reddit-only topic research.\n"
-            "    Add it to .env to enable Tavily web search.\n"
+            "ℹ️   EXA_API_KEY not set — using Reddit-only topic research.\n"
+            "    Add it to .env to enable Exa web search.\n"
         )
 
 
