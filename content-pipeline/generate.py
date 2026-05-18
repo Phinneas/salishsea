@@ -27,10 +27,10 @@ from modules.research import research_topics
 
 
 def _check_env() -> None:
-    if not os.getenv("ANTHROPIC_API_KEY"):
+    if not os.getenv("DEEPSEEK_API_KEY"):
         print(
-            "\n❌  ANTHROPIC_API_KEY is required.\n"
-            "    Copy .env.example → .env and add your key.\n"
+            "\n❌  DEEPSEEK_API_KEY is required.\n"
+            "    Copy .env.example → .env and add your key from platform.deepseek.com.\n"
         )
         sys.exit(1)
 
@@ -58,11 +58,7 @@ async def _run(n_topics: int, output_dir: str) -> None:
 
     # ── Step 2: Generate ──────────────────────────────────────────────────
     print(f"[2/3] Generating content for {len(topics)} topic(s)…")
-    print(
-        "       Model: claude-opus-4-7  |  Prompt caching: enabled\n"
-        "       (Cache activates once the system prompt exceeds the model\n"
-        "        4096-token threshold; usage is reported per topic below)\n"
-    )
+    print("       Model: deepseek-chat\n")
 
     content_sets = await generate_all_content(topics)
 

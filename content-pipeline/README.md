@@ -16,9 +16,8 @@ python generate.py --topics 5 --output ./content/
    and `r/authors` (no auth required), plus optional Tavily web search. Ranks
    the top N angles by engagement signal.
 
-2. **Content Generation** — sends each topic to `claude-opus-4-7` in parallel
-   (up to 3 concurrent requests). The brand-voice system prompt is marked for
-   prompt caching to reduce costs on repeat runs.
+2. **Content Generation** — sends each topic to `deepseek-chat` in parallel
+   (up to 3 concurrent requests).
 
 3. **Output** — saves a dated JSON file and a human-readable Markdown file to
    `./content/YYYY-MM-DD/`. Flags the highest-confidence topic angle in both.
@@ -30,7 +29,7 @@ python generate.py --topics 5 --output ./content/
 ### Prerequisites
 
 - Python 3.10+
-- An [Anthropic API key](https://console.anthropic.com/)
+- A [DeepSeek API key](https://platform.deepseek.com/)
 - *(Optional)* A [Tavily API key](https://tavily.com/) for web-search research
 
 ### Install
@@ -46,7 +45,7 @@ pip install -r requirements.txt
 
 ```bash
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+# Edit .env and add your DEEPSEEK_API_KEY
 # Optionally add TAVILY_API_KEY for richer topic research
 ```
 
@@ -117,25 +116,11 @@ content/
 
 ---
 
-## Prompt caching
-
-The system prompt (brand voice, platform guidelines, and examples) is marked
-with `cache_control: ephemeral`. Claude's API caches this prefix so that
-subsequent requests reuse it at ~10 % of the normal input token cost.
-
-**Cache activation threshold for `claude-opus-4-7`:** 4,096 tokens. The
-current system prompt sits near this boundary. You can grow it — by adding
-niche-specific examples, tone samples, or extended style guidelines — to
-reliably cross the threshold and unlock consistent cache hits. Cache reads
-are reported per topic in the terminal output and in `api_usage` in the JSON.
-
----
-
 ## Customisation
 
 | What                     | Where                                          |
 |--------------------------|------------------------------------------------|
-| Brand voice & examples   | `modules/generation.py` → `SYSTEM_PROMPT`      |
+| Brand voice & examples   | `modules/generation.py` → `SYSTEM_PROMPT`       |
 | Reddit subreddits        | `modules/research.py` → `REDDIT_SUBREDDITS`    |
 | Tavily search queries    | `modules/research.py` → `TAVILY_QUERIES`       |
 | Fallback topic ideas     | `modules/research.py` → `FALLBACK_TOPICS`      |

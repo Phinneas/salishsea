@@ -1,16 +1,17 @@
 """
-Content generation module: uses the Claude API (claude-opus-4-7) with
-prompt caching on the system prompt to generate Reel scripts, Threads
-posts, and caption/hashtag sets for each research topic.
+Content generation module: uses the DeepSeek API (deepseek-chat) to
+generate Reel scripts, Threads posts, and caption/hashtag sets for
+each research topic. DeepSeek uses the OpenAI-compatible API.
 """
 
 import asyncio
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from typing import Optional
 
-import anthropic
+from openai import AsyncOpenAI
 
 # ---------------------------------------------------------------------------
 # Data models
@@ -39,10 +40,7 @@ class ContentSet:
 
 
 # ---------------------------------------------------------------------------
-# System prompt (cached) — kept stable across all requests so the cache
-# prefix is never invalidated. Volatile content goes in the user message.
-# Note: claude-opus-4-7 requires ≥4096 tokens for cache activation; the
-# prompt below is comprehensive to maximise cache utility.
+# System prompt — kept stable across all requests.
 # ---------------------------------------------------------------------------
 
 SYSTEM_PROMPT = """\
@@ -266,12 +264,12 @@ def _parse_response(
 
 
 async def _generate_one(
-    client: anthropic.AsyncAnthropic,
+    client: AsyncOpenAI,
     topic,
     semaphore: asyncio.Semaphore,
     topic_num: int,
 ) -> Optional[ContentSet]:
-    """Generate a full ContentSet for one topic with a cached system prompt."""
+    """Generate a full ContentSet for one topic."""
     async with semaphore:
         user_message = _USER_TEMPLATE.format(
             title=topic.title,
@@ -280,36 +278,17 @@ async def _generate_one(
             score=topic.engagement_score,
         )
         try:
-            response = await client.messages.create(
-                model="claude-opus-4-7",
+            response = await client.chat.completions.create(
+                model="deepseek-chat",
                 max_tokens=4096,
-                system=[
-                    {
-                        "type": "text",
-                        "text": SYSTEM_PROMPT,
-                        # cache_control marks the end of the stable prefix.
-                        # Caching activates when this prefix reaches the model
-                        # minimum (4096 tokens for claude-opus-4-7).
-                        "cache_control": {"type": "ephemeral"},
-                    }
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": user_message},
                 ],
-                messages=[{"role": "user", "content": user_message}],
             )
 
-            raw = "".join(
-                block.text for block in response.content if block.type == "text"
-            )
-
-            usage = response.usage
-            cache_read = getattr(usage, "cache_read_input_tokens", 0) or 0
-            cache_write = getattr(usage, "cache_creation_input_tokens", 0) or 0
-
-            if cache_read > 0:
-                print(f"  Topic {topic_num}: generated ✓  (cache hit: {cache_read:,} tokens)")
-            elif cache_write > 0:
-                print(f"  Topic {topic_num}: generated ✓  (cache written: {cache_write:,} tokens)")
-            else:
-                print(f"  Topic {topic_num}: generated ✓")
+            raw = response.choices[0].message.content or ""
+            print(f"  Topic {topic_num}: generated ✓")
 
             return _parse_response(
                 raw,
@@ -317,11 +296,11 @@ async def _generate_one(
                 topic.angle,
                 topic.source,
                 topic.engagement_score,
-                cache_read,
-                cache_write,
+                0,
+                0,
             )
 
-        except anthropic.APIError as exc:
+        except Exception as exc:
             print(f"  Topic {topic_num}: API error — {exc}")
             return None
 
@@ -331,7 +310,10 @@ async def generate_all_content(
     max_concurrent: int = 3,
 ) -> list[ContentSet]:
     """Generate content for all topics in parallel (capped by max_concurrent)."""
-    client = anthropic.AsyncAnthropic()
+    client = AsyncOpenAI(
+        api_key=os.getenv("DEEPSEEK_API_KEY"),
+        base_url="https://api.deepseek.com",
+    )
     semaphore = asyncio.Semaphore(max_concurrent)
 
     tasks = [
