@@ -131,7 +131,7 @@ export default async function BlogPostPage({ params }: Props) {
             'prose-img:rounded-lg prose-img:shadow-sm',
             'prose-blockquote:border-teal-500 prose-blockquote:text-muted-foreground',
             'prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none',
-            'prose-pre:bg-muted prose-pre:rounded-lg',
+            'prose-pre:bg-[#1e1e1e] prose-pre:text-[#d4d4d4] prose-pre:rounded-lg',
           ].join(' ')}
           dangerouslySetInnerHTML={{ __html: post.content ?? post.html ?? '' }}
         />

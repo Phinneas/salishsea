@@ -213,3 +213,121 @@ body {
     scrollbar-color: var(--border) transparent;
   }
 }
+
+/* ── Blog post custom elements (inside .prose) ── */
+.prose .callout {
+  background: var(--accent);
+  border-left: 3px solid var(--primary);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--foreground);
+}
+.prose .callout.warn {
+  background: oklch(0.97 0.04 85);
+  border-color: oklch(0.72 0.16 80);
+}
+.prose .callout .callout-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.prose .callout.warn .callout-label {
+  color: oklch(0.72 0.16 80);
+}
+
+.prose .formula {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.prose .formula .formula-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+.prose .formula .highlight {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.prose .steps {
+  counter-reset: steps;
+  list-style: none;
+  padding: 0;
+}
+.prose .steps li {
+  counter-increment: steps;
+  position: relative;
+  padding: 0 0 2rem 3.5rem;
+  border-left: 2px solid var(--border);
+  margin-left: 1.25rem;
+}
+.prose .steps li:last-child {
+  border-left-color: transparent;
+}
+.prose .steps li::before {
+  content: counter(steps);
+  position: absolute;
+  left: -1.1rem;
+  top: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.prose .toc {
+  background: var(--accent);
+  border-left: 3px solid var(--primary);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.prose .toc .toc-title {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+.prose .toc ol {
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.9;
+}
+.prose .toc a {
+  color: var(--primary);
+  text-decoration: none;
+}
+.prose .toc a:hover {
+  text-decoration: underline;
+}
+
+.prose pre .kw { color: #c792ea; }
+.prose pre .str { color: #c3e88d; }
+.prose pre .cm { color: #546e7a; font-style: italic; }
+.prose pre .fn { color: #82aaff; }
+.prose pre .num { color: #f78c6c; }
+.prose pre .var { color: #eeffff; }
