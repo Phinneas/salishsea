@@ -56,7 +56,7 @@ const ALLOWED_SLUGS = new Set([
   'the-four-pillars-of-sustainability',
   'green-cloud',
   'strategy-pillars',
-  'calculating-ai-emissions-csrd',
+  'calculating-ai-emissions-for-csrd',
   // Copywriting
   'opposite-of-evergreen-content',
   'storytelling-copywriter',
@@ -273,7 +273,7 @@ function sscOnly(items: SonicItem[]): SonicItem[] {
           console.warn('Skipping post with missing slug:', i.id, i.title)
           return false
         }
-        return i.data.category === SITE_CATEGORY && i.status === 'published' && ALLOWED_SLUGS.has(slug)
+        return i.status === 'published' && ALLOWED_SLUGS.has(slug) && (i.data.category === SITE_CATEGORY || !i.data.category)
       } catch (error) {
         console.error('Error filtering post:', error, i)
         return false // Skip corrupted items
