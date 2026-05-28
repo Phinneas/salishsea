@@ -56,6 +56,7 @@ const ALLOWED_SLUGS = new Set([
   'the-four-pillars-of-sustainability',
   'green-cloud',
   'strategy-pillars',
+  'calculating-ai-emissions-csrd',
   // Copywriting
   'opposite-of-evergreen-content',
   'storytelling-copywriter',
