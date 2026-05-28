@@ -10,7 +10,7 @@ export function Footer() {
               Salish Sea <span className='text-teal-600'>Consulting</span>
             </p>
             <p className='mt-2 max-w-xs text-sm text-muted-foreground'>
-              Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom
+              Content and communications for sustainability conscious brands. Conversion copywriting, grant writing, and custom
               marketing tools for mission-driven organizations.
             </p>
           </div>

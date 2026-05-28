@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Globe, PenLine, DollarSign, CheckCircle } from 'lucide-react'
+import { ArrowRight, Globe, PenLine, DollarSign, CheckCircle, AlertTriangle } from 'lucide-react'
 import { getPosts } from '@/lib/sonicjs'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Home',
   description:
-    'Salish Sea Consulting — conscious marketing for sustainable brands. Conversion copywriting, custom marketing tools, and grant writing for mission-driven organizations.'
+    'Salish Sea Consulting — content and communications for sustainability conscious brands. Conversion copywriting, custom marketing tools, and grant writing for mission-driven organizations.'
 }
 
 const stats = [
@@ -73,16 +73,14 @@ export default async function HomePage() {
       <section className='relative bg-gradient-to-br from-teal-950 via-teal-900 to-slate-900 px-4 py-24 text-white sm:px-6 sm:py-32'>
         <div className='mx-auto max-w-4xl text-center'>
           <Badge className='mb-6 border-teal-400/30 bg-teal-400/10 text-teal-300' variant='outline'>
-            Conscious Marketing for Sustainable Brands
+            Content and Communications for Sustainability Conscious Brands
           </Badge>
           <h1 className='text-4xl font-bold tracking-tight sm:text-6xl'>
-            Your Mission Deserves{' '}
-            <span className='text-teal-400'>Marketing That Converts</span>
+            Your sustainable brand deserves communications that match{' '}
+            <span className='text-teal-400'>your impact.</span>
           </h1>
           <p className='mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-teal-100/80'>
-            Stop letting your message get lost between a copywriter who doesn&apos;t get your tech and a developer
-            who doesn&apos;t get your mission. I&apos;m the conversion copywriter who builds your custom marketing
-            tools — one seamless system for sustainable brands.
+            Brand copywriting and sustainability research reports, built to earn trust, drive action, and reflect the depth of your work.
           </p>
           <div className='mt-10 flex flex-wrap justify-center gap-4'>
             <Button asChild size='lg' className='bg-teal-500 hover:bg-teal-400 text-white'>
@@ -111,6 +109,38 @@ export default async function HomePage() {
                 <p className='text-2xl font-bold text-teal-600 sm:text-3xl'>{stat.value}</p>
                 <p className='mt-1 text-xs text-muted-foreground sm:text-sm'>{stat.label}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Problem Block */}
+      <section className='px-4 py-20 sm:px-6'>
+        <div className='mx-auto max-w-6xl'>
+          <div className='grid gap-8 md:grid-cols-3'>
+            {[
+              {
+                headline: "Your website isn't doing the work your brand is.",
+                body: "You've built something worth believing in — but visitors can't feel it. The copy is generic, the story is vague, and the people you most want to reach are leaving without acting.",
+              },
+              {
+                headline: "Your impact is real, but it's not landing.",
+                body: "The work matters. But somewhere between the doing and the telling, the story gets lost — buried in jargon, buried in data, or simply never told with the clarity it deserves.",
+              },
+              {
+                headline: "Your sustainability report exists. But it doesn't build trust.",
+                body: "You've published the numbers. Stakeholders skim it, investors file it, the public doesn't connect. A report that doesn't move people doesn't move the needle.",
+              },
+            ].map(card => (
+              <Card key={card.headline} className='border-border/50 flex flex-col'>
+                <CardHeader>
+                  <AlertTriangle className='mb-3 h-6 w-6 text-teal-600' />
+                  <CardTitle className='text-base leading-snug'>{card.headline}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className='text-sm text-muted-foreground leading-relaxed'>{card.body}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
