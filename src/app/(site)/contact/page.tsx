@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { CheckCircle, Calendar, Mail, ArrowRight } from 'lucide-react'
@@ -29,7 +30,7 @@ export default function ContactPage() {
         <div className='mx-auto max-w-3xl text-center'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Let&apos;s Talk</h1>
           <p className='mt-4 text-lg text-teal-100/80'>
-            Pick a time that works for you, or send a message and I&apos;ll reply within one business day.
+            A 30-minute call to look at your communications honestly — no pitch, no obligation.
           </p>
         </div>
       </section>
@@ -125,6 +126,20 @@ export default function ContactPage() {
                       <div className='space-y-2'>
                         <Label htmlFor='organization'>Organization (optional)</Label>
                         <Input id='organization' name='organization' placeholder='Company or organization' />
+                      </div>
+                      <div className='space-y-2'>
+                        <Label htmlFor='service-type'>What are you interested in?</Label>
+                        <Select name='service-type'>
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select a service' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='website-copy'>Website copy</SelectItem>
+                            <SelectItem value='research-report'>Research report</SelectItem>
+                            <SelectItem value='grant-writing'>Grant writing</SelectItem>
+                            <SelectItem value='not-sure-yet'>Not sure yet</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className='space-y-2'>
                         <Label htmlFor='message'>Message</Label>
