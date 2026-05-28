@@ -2,125 +2,81 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight, Globe, FileText, Users, Briefcase, BookOpen, Scroll } from 'lucide-react'
+import { ArrowRight, Globe, Rocket, Calendar, FileText, BarChart3, BookOpen, Scroll } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'Conversion copywriting, website design, grant writing, and marketing strategy for sustainable brands. See all services and pricing from Salish Sea Consulting.'
+    'Sustainable brand copywriting, sustainability research reports, and grant writing for purpose-driven organizations. See all services and pricing from Salish Sea Consulting.',
 }
 
-const websiteServices = [
+const brandCopywriting = [
   {
     icon: Globe,
-    title: 'Sustainable Entrepreneur Website',
-    tagline: 'Turn visitors into customers in seconds.',
+    title: 'Website Bundle',
+    price: '$3,500',
+    bestFor: 'brands launching, rebranding, or finally getting their story straight online.',
     description:
-      'You have just a few seconds to capture and hold the interest of website visitors. This complete website bundle gives you the words that will do it — written for the conscious consumer and optimized for search.',
-    includes: [
-      '5 pages of website copy',
-      '10 product/service descriptions',
-      'Website audit with SEO analysis and recommendations',
-      'SEO alt text, meta descriptions, and header texts',
-    ],
-    price: 'Starting at $2,000',
+      "Full website copywriting — typically 5–7 pages including Home, About, Services, and Contact. Includes a discovery call, one round of revisions, and a brand voice guide so your copy stays consistent long after we're done working together.",
     badge: 'Most Popular',
   },
   {
-    icon: Briefcase,
-    title: 'New Green Entrepreneur Website',
-    tagline: 'Launch with the right foundation.',
+    icon: Rocket,
+    title: 'Launch Package',
+    price: '$2,800',
+    bestFor: 'product launches, rebrands, and campaign moments that need to land.',
     description:
-      'Launching a new website or product? This package gives you competitive intelligence, a high-converting landing page, and a complete launch email sequence — plus a personal strategy call to review everything.',
-    includes: [
-      'Competition report including SEO recommendations',
-      '1 product landing page (1,000 words)',
-      '1 opt-in landing page',
-      '3 product ads',
-      '3 opt-in website or product emails',
-      '45-minute Zoom call to review results and recommendations',
-    ],
-    price: 'Starting at $1,800',
+      "Copy for a specific launch or campaign: landing pages, launch emails, social captions, and supporting materials. Everything you need to make your moment count — written in a voice that's unmistakably yours.",
     badge: null,
   },
   {
-    icon: BookOpen,
-    title: 'Sustainable Website — Monthly Retainer',
-    tagline: 'Drive organic traffic month after month.',
+    icon: Calendar,
+    title: 'Monthly Retainer',
+    price: '$2,200/month',
+    bestFor: 'brands that need a consistent, sustainability-fluent voice on an ongoing basis.',
     description:
-      'Provide ongoing value and grow your search presence with high-quality, evergreen content built around a clear strategy. Includes regular SEO audits to keep your site competitive as search evolves.',
-    includes: [
-      'Content strategy development',
-      '4 SEO blogs (1,000–1,500 words each)',
-      'Bimonthly email newsletters',
-      'Ongoing website audits with SEO recommendations',
-    ],
-    price: '$1,500 / month',
+      'A monthly partnership for brands that are always communicating — website updates, blog content, email newsletters, campaign copy, and more. Priority scheduling, no project minimums, and a collaborator who knows your brand as well as you do.',
     badge: 'Retainer',
   },
 ]
 
-const grantServices = [
-  {
-    icon: Scroll,
-    title: 'Grant Funding Strategy',
-    tagline: 'Know exactly what to pursue and when.',
-    description:
-      'What change would you make if you knew you had the money? A Funding Strategy gives you a clear road map — specifying which grants to pursue over the next 12–18 months, in what order, and why. The process typically takes three to five weeks and results in a vetted list of 20+ potential funding sources. We interview funders to confirm eligibility, project fit, and competitiveness before you invest time in a full application.',
-    includes: [
-      '20+ vetted funding sources',
-      'Funder interview and eligibility screening',
-      '12–18 month grant calendar',
-      'Positioning recommendations for each opportunity',
-    ],
-    price: 'Starting at $1,500',
-    badge: null,
-  },
+const researchReports = [
   {
     icon: FileText,
-    title: 'Grant Writing',
-    tagline: 'Journalism-quality narrative meets meticulous detail.',
+    title: 'Impact Report',
+    price: '$5,000',
+    bestFor: 'annual or milestone impact reports for organizations ready to account for their progress publicly.',
     description:
-      'Grants are complex, time-consuming projects. My writing technique combines the narrative storytelling of journalism with meticulous attention to detail — clearly and concisely displaying your vision to ensure the highest chance of success. Some grants are complex 100+ hour efforts; others begin with a letter of inquiry before a full proposal is invited. Pricing is determined case-by-case based on the complexity of the application.',
-    includes: [
-      'Full application writing and editing',
-      'Letter of inquiry (where required)',
-      'Budget narrative support',
-      'Funder-specific language and formatting',
-    ],
-    price: 'Priced per project',
+      "Research, narrative development, and full copy for your impact report — structured to tell your sustainability story with honesty and intention. Includes data synthesis, stakeholder-appropriate framing, and a document that you're genuinely proud to put your name on.",
     badge: null,
   },
   {
-    icon: Users,
-    title: 'Power Prospectus / Investor Letter',
-    tagline: 'Hook funders with one powerful page.',
+    icon: BarChart3,
+    title: 'ESG Communications',
+    price: '$3,200',
+    bestFor: 'organizations communicating ESG performance to investors and key stakeholders.',
     description:
-      'A one-page overview of your organization and the project or program you want to fund. The Power Prospectus succinctly describes what you do and why it matters, then summarizes the project and its impact — all in a visually compelling PDF. Used by nonprofits and NGOs for grant funding, and by tech startups as an investor letter.',
-    includes: [
-      'One-page PDF copy and structure',
-      'Impact summary and program overview',
-      'Persuasive organizational narrative',
-      'Suitable for grants and investor outreach',
-    ],
-    price: 'Starting at $500',
-    badge: 'Quick Win',
+      'Copy and communications strategy for ESG-related content: investor letters, sustainability disclosures, stakeholder briefings, and supporting materials. Written to meet the expectations of sophisticated audiences without losing the human behind the data.',
+    badge: null,
   },
   {
     icon: BookOpen,
-    title: 'White Paper — Technical Writing',
-    tagline: 'Educate, persuade, and establish authority.',
+    title: 'White Paper',
+    price: '$2,200',
+    bestFor: 'research-backed thought leadership for organizations with a point of view worth publishing.',
     description:
-      'A white paper is a hybrid of a magazine article and a corporate brochure — it communicates your organization\'s complex message simply, professionally, and compellingly. Readers learn about the solutions to their problems in an educational format, while the persuasive brochure element moves them toward action. Ideal for thought leadership, policy advocacy, and B2B sales.',
-    includes: [
-      'Research and outline development',
-      'Educational narrative section',
-      'Persuasive call-to-action section',
-      'Formatted for digital and print distribution',
-    ],
-    price: 'Starting at $1,200',
+      'A fully researched and written white paper positioned to establish authority in your space. Includes secondary research, argument development, and final copy — ready for download, distribution, or press.',
     badge: null,
+  },
+  {
+    icon: Scroll,
+    title: 'Power Prospectus',
+    price: '$750',
+    bestFor: 'funding conversations, partnership pitches, or stakeholder introductions.',
+    description:
+      "One tight, high-impact document — 4–8 pages — that says everything essential and nothing extra. Perfect for grant applications, investor decks, or first-impression moments.",
+    badge: 'Quick Win',
   },
 ]
 
@@ -130,26 +86,30 @@ export default function ServicesPage() {
       {/* Header */}
       <section className='bg-gradient-to-br from-teal-950 to-slate-900 px-4 py-20 text-white sm:px-6'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Services &amp; Pricing</h1>
+          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Words that move sustainability forward.</h1>
           <p className='mt-4 text-lg text-teal-100/80'>
-            Conversion copywriting, website strategy, grant writing, and marketing tools — built for sustainable
-            brands.
+            Salish Sea Consulting writes the copy, reports, and research that help purpose-driven organizations communicate with clarity — and earn the trust they&apos;ve worked hard to deserve.
+          </p>
+          <p className='mt-4 text-teal-100/60'>
+            Whether you&apos;re a brand building sustainability into your identity from day one, an organization ready to report on your impact, or a mission-driven team seeking funding — the right words make the difference. Here&apos;s how we work together.
           </p>
         </div>
       </section>
 
-      {/* Website Design & Copywriting */}
-      <section id='website' className='px-4 py-20 sm:px-6 scroll-mt-20'>
+      {/* Sustainable Brand Copywriting */}
+      <section id='brand-copywriting' className='px-4 py-20 sm:px-6 scroll-mt-20'>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='text-2xl font-bold tracking-tight'>Website Design &amp; Copywriting</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>Sustainable Brand Copywriting</h2>
             <p className='mt-2 text-muted-foreground'>
-              Copy and content strategy that turns visitors into customers — optimized for search and written for the
-              conscious consumer.
+              For brands that lead with purpose — and need copy that holds up to scrutiny.
             </p>
           </div>
+          <p className='mb-10 max-w-3xl text-muted-foreground leading-relaxed'>
+            Sustainability copywriting isn&apos;t greenwashing patrol. It&apos;s building a voice that&apos;s honest, specific, and genuinely compelling — copy that earns attention because it deserves it. I write for brands who&apos;ve done the work and are ready to say so.
+          </p>
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {websiteServices.map(service => (
+            {brandCopywriting.map(service => (
               <Card key={service.title} className='relative border-border/50 flex flex-col'>
                 {service.badge && (
                   <Badge className='absolute -top-2.5 left-5 bg-teal-600 text-white text-xs'>
@@ -159,27 +119,23 @@ export default function ServicesPage() {
                 <CardHeader>
                   <service.icon className='mb-3 h-7 w-7 text-teal-600' />
                   <CardTitle className='text-base leading-snug'>{service.title}</CardTitle>
-                  <p className='text-sm font-medium text-teal-600'>{service.tagline}</p>
                 </CardHeader>
                 <CardContent className='flex flex-col flex-1 space-y-4'>
+                  <p className='text-sm font-medium text-teal-600'>Best for: {service.bestFor}</p>
                   <p className='text-sm text-muted-foreground leading-relaxed'>{service.description}</p>
-                  <div className='flex-1'>
-                    <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-foreground'>Includes</p>
-                    <ul className='space-y-1.5'>
-                      {service.includes.map(item => (
-                        <li key={item} className='flex items-start gap-2 text-sm text-muted-foreground'>
-                          <span className='mt-1.5 h-1.5 w-1.5 rounded-full bg-teal-500 flex-shrink-0' />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className='border-t border-border pt-4'>
+                  <div className='mt-auto border-t border-border pt-4'>
                     <p className='text-base font-bold text-foreground'>{service.price}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className='mt-10 text-center'>
+            <Button asChild size='lg' className='bg-teal-600 hover:bg-teal-700'>
+              <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
+                Let&apos;s Talk <ArrowRight className='ml-2 h-4 w-4' />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -187,17 +143,20 @@ export default function ServicesPage() {
       {/* Divider */}
       <div className='border-t border-border' />
 
-      {/* Grant Writing & Investor Services */}
-      <section id='grants' className='bg-muted/20 px-4 py-20 sm:px-6 scroll-mt-20'>
+      {/* Sustainability Research Reports */}
+      <section id='research-reports' className='bg-muted/20 px-4 py-20 sm:px-6 scroll-mt-20'>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='text-2xl font-bold tracking-tight'>Grant Writing &amp; Investor Services</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>Sustainability Research Reports</h2>
             <p className='mt-2 text-muted-foreground'>
-              Translate your impact into powerful narratives that secure funding and fuel your mission.
+              Credibility-building documents for organizations with a story backed by data.
             </p>
           </div>
+          <p className='mb-10 max-w-3xl text-muted-foreground leading-relaxed'>
+            Impact doesn&apos;t speak for itself — it needs a translator. I research, write, and shape sustainability reports that meet stakeholders where they are: clear enough for a general audience, rigorous enough for the room that matters.
+          </p>
           <div className='grid gap-8 md:grid-cols-2'>
-            {grantServices.map(service => (
+            {researchReports.map(service => (
               <Card key={service.title} className='relative border-border/50 flex flex-col'>
                 {service.badge && (
                   <Badge className='absolute -top-2.5 left-5 bg-teal-600 text-white text-xs'>
@@ -207,44 +166,63 @@ export default function ServicesPage() {
                 <CardHeader>
                   <service.icon className='mb-3 h-7 w-7 text-teal-600' />
                   <CardTitle className='text-base leading-snug'>{service.title}</CardTitle>
-                  <p className='text-sm font-medium text-teal-600'>{service.tagline}</p>
                 </CardHeader>
                 <CardContent className='flex flex-col flex-1 space-y-4'>
+                  <p className='text-sm font-medium text-teal-600'>Best for: {service.bestFor}</p>
                   <p className='text-sm text-muted-foreground leading-relaxed'>{service.description}</p>
-                  <div className='flex-1'>
-                    <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-foreground'>Includes</p>
-                    <ul className='space-y-1.5'>
-                      {service.includes.map(item => (
-                        <li key={item} className='flex items-start gap-2 text-sm text-muted-foreground'>
-                          <span className='mt-1.5 h-1.5 w-1.5 rounded-full bg-teal-500 flex-shrink-0' />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className='border-t border-border pt-4'>
+                  <div className='mt-auto border-t border-border pt-4'>
                     <p className='text-base font-bold text-foreground'>{service.price}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+          <div className='mt-10 text-center'>
+            <Button asChild size='lg' className='bg-teal-600 hover:bg-teal-700'>
+              <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
+                Start a Project <ArrowRight className='ml-2 h-4 w-4' />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className='px-4 py-16 sm:px-6'>
-        <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-2xl font-bold tracking-tight'>Not sure which service is the right fit?</h2>
-          <p className='mt-3 text-muted-foreground'>
-            Schedule a free 30-minute call. We&apos;ll look at where your marketing system has gaps and figure out
-            the highest-leverage place to start — no obligation.
+      {/* Divider */}
+      <div className='border-t border-border' />
+
+      {/* Grant Writing — Minimal */}
+      <section id='grant-writing' className='px-4 py-20 sm:px-6 scroll-mt-20'>
+        <div className='mx-auto max-w-3xl text-center'>
+          <h2 className='text-2xl font-bold tracking-tight'>Grant Writing</h2>
+          <p className='mt-2 text-muted-foreground'>
+            A retained specialty — for the right partnership.
+          </p>
+          <p className='mt-6 text-muted-foreground leading-relaxed'>
+            Grant writing is among the most specialized work I do, and I approach it selectively. I bring grant writing expertise to long-term client relationships — particularly for sustainability-focused organizations navigating complex funding landscapes. If you&apos;re exploring grant opportunities and looking for a collaborator who already understands your mission deeply, I&apos;d love to hear where you are in the process.
           </p>
           <Button asChild size='lg' className='mt-8 bg-teal-600 hover:bg-teal-700'>
             <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
-              Schedule a Free Call <ArrowRight className='ml-2 h-4 w-4' />
+              Get in Touch <ArrowRight className='ml-2 h-4 w-4' />
             </Link>
           </Button>
+        </div>
+      </section>
+
+      {/* Salish Sea Creatives Callout */}
+      <section className='bg-muted/30 px-4 py-12 sm:px-6'>
+        <div className='mx-auto max-w-2xl text-center'>
+          <h3 className='text-lg font-semibold tracking-tight'>Writing a book? Building an author platform?</h3>
+          <p className='mt-2 text-sm text-muted-foreground leading-relaxed'>
+            Salish Sea Creatives is a sister studio focused exclusively on web design for authors and creative professionals — built for the moment when your writing career needs a home online that&apos;s as intentional as your work.
+          </p>
+          <Link
+            href='https://www.instagram.com/salishseacreatives'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='mt-4 inline-flex items-center text-sm font-medium text-teal-600 hover:text-teal-700'
+          >
+            Explore Salish Sea Creatives <ArrowRight className='ml-1 h-3.5 w-3.5' />
+          </Link>
         </div>
       </section>
     </div>

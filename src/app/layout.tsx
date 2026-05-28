@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     default: 'Salish Sea Consulting',
   },
   description:
-    'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools for mission-driven organizations.',
+    'Content and communications for sustainability conscious brands. Conversion copywriting, grant writing, and custom marketing tools for mission-driven organizations.',
   keywords: ['sustainable marketing', 'conversion copywriter', 'grant writing', 'sustainability consulting', 'Pacific Northwest', 'Salish Sea', 'environmental marketing'],
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: 'Salish Sea Consulting',
-    description: 'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools.',
+    description: 'Content and communications for sustainability conscious brands. Conversion copywriting, grant writing, and custom marketing tools.',
     type: 'website',
     siteName: 'Salish Sea Consulting',
     url: siteUrl,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Salish Sea Consulting',
-    description: 'Conscious marketing for sustainable brands. Conversion copywriting, grant writing, and custom marketing tools.',
+    description: 'Content and communications for sustainability conscious brands. Conversion copywriting, grant writing, and custom marketing tools.',
   },
   other: {
     'google-site-verification': 'p02VFLvUK3DMNxL-dHzjEhpdyjl1jzuLC2HhnktqiDA',
