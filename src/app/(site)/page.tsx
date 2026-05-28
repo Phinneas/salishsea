@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Globe, PenLine, DollarSign, CheckCircle, AlertTriangle } from 'lucide-react'
-import { getPosts } from '@/lib/sonicjs'
+import { getAllPosts } from '@/lib/content'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ const servicesSummary = [
 ]
 
 export default async function HomePage() {
-  const posts = await getPosts({ limit: 3 })
+  const posts = getAllPosts().slice(0, 3)
 
   return (
     <>

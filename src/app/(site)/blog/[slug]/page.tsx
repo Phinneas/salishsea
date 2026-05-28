@@ -3,10 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { getPost, getAllPostSlugs } from '@/lib/sonicjs'
-
-// Import SONICJS_URL for validation
-const SONICJS_URL = process.env.NEXT_PUBLIC_SONICJS_URL ?? 'https://sonicjscms.buzzuw2.workers.dev'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { getPost, getAllPostSlugs } from '@/lib/content'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -14,51 +12,14 @@ interface Props {
 
 export const dynamicParams = false
 
-// Make generateStaticParams absolutely bulletproof - cannot throw any errors
-// Critical for static export: this function must always return an array
-export async function generateStaticParams() {
-  // Layer 1: Immediate return with empty array if API is unreachable
-  // This prevents any async operations that might throw
-  if (!SONICJS_URL || SONICJS_URL.includes('YOUR_ACCOUNT')) {
-    console.warn('[Blog] SonicJS URL not configured, returning empty static params')
-    return []
-  }
-
-  try {
-    // Layer 2: Wrap the async call in its own try-catch
-    const slugs = await getAllPostSlugs()
-    
-    // Layer 3: Validate result type
-    if (!Array.isArray(slugs)) {
-      console.error('[Blog] getAllPostSlugs did not return an array:', typeof slugs, slugs)
-      return []
-    }
-    
-    // Layer 4: Map and filter safely
-    const mapped = slugs
-      .map(slug => {
-        // Validate each slug
-        if (typeof slug === 'string' && slug.trim()) {
-          return { slug: slug.trim() }
-        }
-        console.warn('[Blog] Invalid slug encountered:', slug, 'type:', typeof slug)
-        return null
-      })
-      .filter(Boolean)
-    
-    console.log(`[Blog] Generated ${mapped.length} static params`)
-    return mapped
-    
-  } catch (error) {
-    // Layer 5: Catch absolutely everything
-    console.error('[Blog] generateStaticParams error:', error)
-    return []
-  }
+export function generateStaticParams() {
+  const slugs = getAllPostSlugs()
+  return slugs.map(slug => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = await getPost(slug)
+  const post = getPost(slug)
   if (!post) return { title: 'Post not found' }
 
   return {
@@ -76,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = await getPost(slug)
+  const post = getPost(slug)
 
   if (!post) notFound()
 
@@ -133,8 +94,9 @@ export default async function BlogPostPage({ params }: Props) {
             'prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none',
             'prose-pre:bg-[#1e1e1e] prose-pre:text-[#d4d4d4] prose-pre:rounded-lg',
           ].join(' ')}
-          dangerouslySetInnerHTML={{ __html: post.content ?? post.html ?? '' }}
-        />
+        >
+          <MDXRemote source={post.content} />
+        </div>
       </article>
     </div>
   )

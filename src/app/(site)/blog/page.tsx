@@ -2,24 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { getPosts } from '@/lib/sonicjs'
-import type { Post } from '@/lib/sonicjs'
+import { getAllPosts } from '@/lib/content'
+import type { BlogPost } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Insights on environmental consulting, conservation, and Pacific Northwest ecology.'
 }
 
-export default async function BlogPage() {
-  let posts: Post[] = []
-  let errorOccurred = false
-
-  try {
-    posts = await getPosts({ limit: 50 })
-  } catch (error) {
-    console.error('[BlogPage] Failed to fetch posts:', error)
-    errorOccurred = true
-  }
+export default function BlogPage() {
+  const posts: BlogPost[] = getAllPosts()
 
   return (
     <div>
@@ -36,12 +28,7 @@ export default async function BlogPage() {
       {/* Posts */}
       <section className='px-4 py-20 sm:px-6'>
         <div className='mx-auto max-w-4xl'>
-          {errorOccurred ? (
-            <div className='py-20 text-center text-muted-foreground'>
-              <p className='text-lg'>Unable to load blog posts.</p>
-              <p className='mt-2 text-sm'>We're experiencing technical difficulties. Please try again later.</p>
-            </div>
-          ) : posts.length === 0 ? (
+          {posts.length === 0 ? (
             <div className='py-20 text-center text-muted-foreground'>
               <p className='text-lg'>No posts yet.</p>
               <p className='mt-2 text-sm'>Check back soon — content is on its way.</p>
@@ -49,7 +36,7 @@ export default async function BlogPage() {
           ) : (
             <div className='divide-y divide-border'>
               {posts.map(post => (
-                <article key={post.id} className='py-8 first:pt-0'>
+                <article key={post.slug} className='py-8 first:pt-0'>
                   <Link href={`/blog/${post.slug}`} className='group block space-y-3'>
                     <div className='flex flex-wrap items-center gap-2'>
                       <time className='text-xs text-muted-foreground'>
