@@ -42,7 +42,9 @@ export function getAllPosts(): BlogPost[] {
       content,
       html: content,
       feature_image: data.featuredImage ?? undefined,
-      published_at: data.publishedAt ?? new Date().toISOString(),
+      published_at: data.publishedAt && data.publishedAt !== ''
+        ? String(data.publishedAt)
+        : '1970-01-01T00:00:00.000Z',
       updated_at: data.updatedAt ?? undefined,
       author: data.author ?? undefined,
       reading_time: data.readTime ?? estimateReadTime(content),
