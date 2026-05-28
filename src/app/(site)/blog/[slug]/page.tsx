@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getPost, getAllPostSlugs } from '@/lib/content'
 
 interface Props {
@@ -95,7 +94,7 @@ export default async function BlogPostPage({ params }: Props) {
             'prose-pre:bg-[#1e1e1e] prose-pre:text-[#d4d4d4] prose-pre:rounded-lg',
           ].join(' ')}
         >
-          <MDXRemote source={post.content} />
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </article>
     </div>
