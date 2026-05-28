@@ -325,9 +325,9 @@ body {
   text-decoration: underline;
 }
 
-.prose pre .kw { color: #c792ea; }
-.prose pre .str { color: #c3e88d; }
-.prose pre .cm { color: #546e7a; font-style: italic; }
-.prose pre .fn { color: #82aaff; }
-.prose pre .num { color: #f78c6c; }
-.prose pre .var { color: #eeffff; }
+.prose pre .kw { color: #7c3aed; }
+.prose pre .str { color: #16a34a; }
+.prose pre .cm { color: #6b7280; font-style: italic; }
+.prose pre .fn { color: #2563eb; }
+.prose pre .num { color: #dc2626; }
+.prose pre .var { color: #374151; }
