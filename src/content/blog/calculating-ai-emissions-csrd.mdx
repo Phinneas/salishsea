@@ -1,0 +1,357 @@
+---
+title: "Calculating AI emissions for CSRD"
+excerpt: "A four-step guide to estimating AI-related Scope 3 Category 1 emissions under ESRS E1-6 — from token usage data to auditable disclosure."
+publishedAt: "2026-05-28"
+author: "Salish Sea Consulting"
+tags: "CSRD, ESG, AI emissions, Scope 3, sustainability reporting"
+featured: true
+---
+
+<div class="toc">
+  <div class="toc-title">In this guide</div>
+  <ol>
+    <li><a href="#why-ai-emissions-belong-in-your-csrd-report">Why AI emissions belong in your CSRD report</a></li>
+    <li><a href="#step-1-pull-token-usage-data-from-provider-apis">Step 1 — Pull token usage data from provider APIs</a></li>
+    <li><a href="#step-2-apply-an-emissions-methodology">Step 2 — Apply an emissions methodology</a></li>
+    <li><a href="#step-3-apply-grid-carbon-intensity-by-data-centre-region">Step 3 — Apply grid carbon intensity by data centre region</a></li>
+    <li><a href="#step-4-format-as-a-scope-3-category-1-line-item">Step 4 — Format as a Scope 3 Category 1 line item</a></li>
+    <li><a href="#the-transparency-principle-modelled-not-measured">The transparency principle: modelled, not measured</a></li>
+    <li><a href="#automating-the-pipeline">Automating the pipeline</a></li>
+  </ol>
+</div>
+
+<h2 id="why-ai-emissions-belong-in-your-csrd-report">Why AI emissions belong in your CSRD report</h2>
+
+<p>Under the EU Corporate Sustainability Reporting Directive (CSRD), companies report against the European Sustainability Reporting Standards — specifically ESRS E1 (Climate change), which requires disclosure of gross Scope 1, 2 and 3 greenhouse gas emissions using GHG Protocol methodology.</p>
+
+<p>CSRD creates no separate "AI emissions" category. AI workloads slot into existing scopes:</p>
+
+<ul>
+<li><strong>Scope 2</strong> — electricity purchased to run AI on infrastructure you control (your own data centre, a co-location lease).</li>
+<li><strong>Scope 3, Category 1 — Purchased goods and services</strong> — the most common case for enterprise AI users who consume models via API or SaaS.</li>
+</ul>
+
+<p>This matters now because AI electricity consumption is growing faster than most corporate energy budgets, regulators are beginning to ask pointed questions about it, and third-party assurance providers are starting to require traceable methodology for IT-related Scope 3 estimates. Getting this right in 2025–2026 is early-mover positioning, not compliance theatre.</p>
+
+<div class="callout warn">
+  <span class="callout-label">Important transparency note</span>
+  No major AI provider — including OpenAI, Anthropic, Google, or Microsoft — currently publishes per-query or per-token energy or emissions data. Every number you produce for CSRD reporting is a modelled estimate. Stating this clearly is not a weakness; it is the credibility signal that separates a defensible disclosure from a made-up figure.
+</div>
+
+<h2 id="step-1-pull-token-usage-data-from-provider-apis">Step 1 — Pull token usage data from provider APIs</h2>
+
+<p>Token and request counts are the most granular activity data you can actually obtain. They are the starting point for all downstream calculations.</p>
+
+<h3>What each major provider exposes</h3>
+
+<table>
+<thead>
+<tr><th>Provider</th><th>Where to get usage data</th><th>Granularity</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAI</strong></td>
+<td>/v1/usage endpoint; dashboard export; per-request headers</td>
+<td>Input + output tokens, model, timestamp</td>
+<td>Usage API gives daily aggregates; per-call tokens returned in API response body</td>
+</tr>
+<tr>
+<td><strong>Anthropic</strong></td>
+<td>Console Usage page; x-anthropic-* response headers; Billing API (beta)</td>
+<td>Input + output tokens, model ID, timestamp</td>
+<td>Cache-read tokens reported separately — lower energy cost; account for this</td>
+</tr>
+<tr>
+<td><strong>Azure OpenAI</strong></td>
+<td>Azure Monitor Metrics; Cost Management + Billing; Log Analytics workspace</td>
+<td>Processed Inference Tokens metric; request count</td>
+<td>Model deployment name links to specific model version — important for emissions factors</td>
+</tr>
+<tr>
+<td><strong>Microsoft Copilot</strong></td>
+<td>Microsoft 365 admin centre; Viva Insights; Purview Audit</td>
+<td>Activity counts (not tokens); user-level in some plans</td>
+<td>No token data exposed publicly; use request counts × assumed average token length per product feature</td>
+</tr>
+<tr>
+<td><strong>Google Vertex AI / Gemini</strong></td>
+<td>Cloud Monitoring; BigQuery billing export</td>
+<td>Character count (not tokens); request count</td>
+<td>Divide characters by ~4 to approximate tokens for emission factor application</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Recommended data collection approach</h3>
+
+<p>For a defensible annual CSRD disclosure, collect data at three levels of precision, working down from what you have:</p>
+
+<ul>
+<li><strong>Per-call token logs</strong> — ideal; capture input tokens, output tokens, model name, and Unix timestamp from the API response for every call your application makes. Store in a data warehouse.</li>
+<li><strong>Monthly API billing exports</strong> — acceptable fallback; most providers show token volume in billing breakdowns even when the usage API is not integrated.</li>
+<li><strong>Cost-based back-calculation</strong> — last resort only; divide spend by published pricing per million tokens to estimate token volume. Document clearly as an approximation.</li>
+</ul>
+
+<pre><code><span class="cm"># Example: pull Anthropic monthly token totals via console export</span>
+<span class="cm"># Then aggregate by model for the reporting period</span>
+
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+df = pd.<span class="fn">read_csv</span>(<span class="str">"anthropic_usage_export.csv"</span>)
+
+<span class="cm"># Group by model, sum input and output tokens over fiscal year</span>
+summary = (
+  df
+  .<span class="fn">groupby</span>(<span class="str">"model"</span>)[[<span class="str">"input_tokens"</span>, <span class="str">"output_tokens"</span>]]
+  .<span class="fn">sum</span>()
+  .<span class="fn">reset_index</span>()
+)
+<span class="fn">print</span>(summary)</code></pre>
+
+<p>Record the reporting period, the data source, and any gaps or exclusions. This documentation is what an assurance provider will ask for first.</p>
+
+<h2 id="step-2-apply-an-emissions-methodology">Step 2 — Apply an emissions methodology</h2>
+
+<p>Two credible open methodologies exist for translating token counts into energy and CO₂e estimates. Use them in combination — or choose the one best suited to your provider mix.</p>
+
+<h3>Methodology A: EcoLogits (open-source)</h3>
+
+<p>EcoLogits is an open-source Python library developed by Boavizta that wraps major AI provider clients and returns energy and GHG estimates alongside every API response. It uses a hardware-based model of GPU energy consumption, normalised by model size and utilisation assumptions.</p>
+
+<p>The core inference energy formula it applies:</p>
+
+<div class="formula">
+  <span class="formula-label">EcoLogits core formula</span>
+  E<sub>inference</sub> = (T<sub>output</sub> / S<sub>tokens</sub>) × P<sub>GPU</sub> × n<sub>GPU</sub> × PUE
+</div>
+
+<p>Where:</p>
+<ul>
+<li>T<sub>output</sub> = output tokens generated</li>
+<li>S<sub>tokens</sub> = model throughput (tokens/second) per GPU</li>
+<li>P<sub>GPU</sub> = TDP of GPU type (watts)</li>
+<li>n<sub>GPU</sub> = number of GPUs serving the model</li>
+<li>PUE = data centre Power Usage Effectiveness</li>
+</ul>
+
+<p>EcoLogits ships with default parameter tables for GPT-4, Claude 3, Gemini, Mistral, and Llama variants, derived from published model cards, academic benchmarks, and hardware specs. You can override these for proprietary models.</p>
+
+<pre><code><span class="kw">from</span> ecologits <span class="kw">import</span> EcoLogits
+<span class="kw">from</span> anthropic <span class="kw">import</span> Anthropic
+
+EcoLogits.<span class="fn">init</span>()  <span class="cm"># patches supported clients automatically</span>
+client = <span class="fn">Anthropic</span>()
+
+response = client.messages.<span class="fn">create</span>(
+  model=<span class="str">"claude-3-5-sonnet-20241022"</span>,
+  max_tokens=<span class="num">1024</span>,
+  messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"Summarise our Q3 risk register."</span>}]
+)
+
+<span class="cm"># EcoLogits attaches impacts to the response object</span>
+<span class="fn">print</span>(response.impacts.energy.value)   <span class="cm"># kWh</span>
+<span class="fn">print</span>(response.impacts.gwp.value)      <span class="cm"># kg CO2e</span></code></pre>
+
+<p>For batch CSRD calculations where you have historical token data rather than live API calls, use the functional interface directly:</p>
+
+<pre><code><span class="kw">from</span> ecologits.tracers.utils <span class="kw">import</span> llm_impacts
+
+impacts = <span class="fn">llm_impacts</span>(
+  provider=<span class="str">"anthropic"</span>,
+  model_name=<span class="str">"claude-3-5-sonnet-20241022"</span>,
+  output_token_count=<span class="num">850</span>,       <span class="cm"># average per call</span>
+  request_latency=<span class="num">2.4</span>,            <span class="cm"># seconds</span>
+  electricity_mix_zone=<span class="str">"US"</span>     <span class="cm"># ISO 3166-1 or region code</span>
+)
+
+<span class="cm"># Scale to annual volume</span>
+annual_calls = <span class="num">2_400_000</span>
+total_kwh = impacts.energy.value * annual_calls
+total_co2e_kg = impacts.gwp.value * annual_calls</code></pre>
+
+<h3>Methodology B: Green Software Foundation Software Carbon Intensity (SCI) for AI — 2025 specification</h3>
+
+<p>The Green Software Foundation ratified its SCI for AI specification in 2025. It standardises how to express the carbon intensity of an AI service as a rate — carbon emitted per functional unit — making it consistent with ESRS E1's emphasis on intensity metrics alongside absolute figures.</p>
+
+<p>The SCI equation:</p>
+
+<div class="formula">
+  <span class="formula-label">GSF SCI for AI</span>
+  SCI = (<span class="highlight">E × I</span>) + M<br />
+  ────────────────<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R<br /><br />
+  <strong>E</strong> = energy consumed (kWh) by the AI workload<br />
+  <strong>I</strong> = location-based marginal carbon intensity of electricity (kg CO₂e / kWh)<br />
+  <strong>M</strong> = embodied carbon of hardware, amortised over use share (kg CO₂e)<br />
+  <strong>R</strong> = functional unit — e.g. per 1,000 tokens, per API call, per user per month
+</div>
+
+<p>The SCI's value for CSRD is that it gives you a per-unit intensity figure you can disclose and track over time — useful in the qualitative narrative of your ESRS E1 report to show efficiency improvements even if absolute usage grows.</p>
+
+<p>For absolute Scope 3 totals (what ESRS E1-6 actually mandates), you still need E × I + M summed across all calls in the reporting year. SCI and EcoLogits are complementary, not competing.</p>
+
+<h3>Which to use when</h3>
+
+<table>
+<thead>
+<tr><th>Situation</th><th>Recommended approach</th></tr>
+</thead>
+<tbody>
+<tr><td>Live production system, integrating now</td><td>EcoLogits SDK — attach to every API call, log impacts to data warehouse</td></tr>
+<tr><td>Retrospective annual calculation from token exports</td><td>EcoLogits functional interface (llm_impacts)</td></tr>
+<tr><td>Intensity metric for year-on-year benchmarking</td><td>GSF SCI — report as kg CO₂e per 1,000 output tokens</td></tr>
+<tr><td>Multi-vendor normalisation</td><td>GSF SCI framework with EcoLogits providing E values per vendor</td></tr>
+</tbody>
+</table>
+
+<h2 id="step-3-apply-grid-carbon-intensity-by-data-centre-region">Step 3 — Apply grid carbon intensity by data centre region</h2>
+
+<p>The single biggest variable in AI emissions calculations is where the inference runs. A query routed to a coal-heavy grid emits roughly 8–10× more CO₂e than one running on a predominantly renewables grid. Getting the regional factor right matters.</p>
+
+<h3>Data sources for grid intensity</h3>
+
+<table>
+<thead>
+<tr><th>Source</th><th>Coverage</th><th>Update frequency</th><th>Use for</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Electricity Maps API</strong></td><td>70+ countries, sub-national US/Europe</td><td>Hourly marginal &amp; average</td><td>Live or historical location-based intensity; best accuracy</td></tr>
+<tr><td><strong>IEA World Energy Statistics</strong></td><td>Country-level</td><td>Annual</td><td>Annual average figures; ESRS-acceptable as a recognised source</td></tr>
+<tr><td><strong>EPA eGRID (US)</strong></td><td>US sub-regional (NERC regions)</td><td>Annual (2-year lag)</td><td>US-domiciled workloads on Azure/AWS/GCP US regions</td></tr>
+<tr><td><strong>Cloud provider carbon tools</strong></td><td>Their own region fleet</td><td>Varies (often quarterly)</td><td>Market-based estimates, useful for Scope 2 analogue; less good for Scope 3</td></tr>
+</tbody>
+</table>
+
+<h3>Mapping AI providers to regions</h3>
+
+<p>Most providers do not tell you which physical data centre handled your request. Use these defaults, documented clearly in your methodology:</p>
+
+<table>
+<thead>
+<tr><th>Provider / product</th><th>Primary inference region</th><th>Suggested grid factor (location-based)</th><th>Source</th></tr>
+</thead>
+<tbody>
+<tr><td>OpenAI API (default)</td><td>US-East (Virginia / Iowa)</td><td>~0.35–0.38 kg CO₂e/kWh</td><td>EPA eGRID RFCE / MROW average</td></tr>
+<tr><td>Anthropic API</td><td>US-East (AWS us-east-1)</td><td>~0.35 kg CO₂e/kWh</td><td>EPA eGRID RFCE</td></tr>
+<tr><td>Azure OpenAI (Sweden Central)</td><td>Sweden</td><td>~0.008 kg CO₂e/kWh</td><td>IEA / Electricity Maps SE</td></tr>
+<tr><td>Azure OpenAI (East US)</td><td>US-East</td><td>~0.35 kg CO₂e/kWh</td><td>EPA eGRID RFCE</td></tr>
+<tr><td>Google Vertex AI (us-central1)</td><td>Iowa</td><td>~0.35 kg CO₂e/kWh</td><td>EPA eGRID MROW</td></tr>
+</tbody>
+</table>
+
+<div class="callout">
+  <span class="callout-label">ESRS E1 requirement</span>
+  ESRS E1-6 requires you to disclose both a location-based and a market-based Scope 2 figure. For AI consumed as a Scope 3 service, location-based methodology is the relevant analogue — use the grid intensity of the region where the model physically runs, not a RECs-adjusted figure you do not control.
+</div>
+
+<h3>Handling multi-region workloads</h3>
+
+<p>If your AI usage spans multiple regions or providers, calculate emissions separately per region-model combination, then sum:</p>
+
+<div class="formula">
+  <span class="formula-label">Multi-region sum</span>
+  Total CO₂e = Σ (<span class="highlight">Tokens<sub>i</sub> × EF<sub>model_i</sub> × GridIntensity<sub>region_i</sub></span>)<br /><br />
+  For each provider–model–region combination
+</div>
+
+<h2 id="step-4-format-as-a-scope-3-category-1-line-item">Step 4 — Format as a Scope 3 Category 1 line item</h2>
+
+<p>The output of Steps 1–3 needs to be shaped into something that sits cleanly inside your ESRS E1 disclosure. Here is how to structure it.</p>
+
+<h3>Where it sits in ESRS E1</h3>
+
+<p>For most companies using AI as a purchased service:</p>
+<ul>
+<li><strong>ESRS E1-6, Disclosure Requirement E1-6</strong> — Gross Scope 3 GHG emissions, Category 1 (Purchased goods and services)</li>
+<li>AI emissions are part of Category 1 — they do not need their own ESRS line item, but you may break them out in supplementary disclosures or the narrative sections of ESRS E1</li>
+<li>If AI electricity runs on infrastructure you control, classify as Scope 2 instead</li>
+</ul>
+
+<h3>What to document</h3>
+
+<p>An auditable CSRD disclosure for AI Scope 3 Category 1 emissions should contain:</p>
+<ul>
+<li><strong>Activity data</strong> — total tokens consumed by provider, model, and reporting period</li>
+<li><strong>Emissions methodology</strong> — e.g. "EcoLogits v0.x functional interface, applying hardware-based GPU energy model; GSF SCI specification for intensity metrics"</li>
+<li><strong>Emission factors</strong> — per-query energy factors by model (from EcoLogits parameter tables, cited by version); grid intensity by region (source, year)</li>
+<li><strong>PUE assumption</strong> — the data centre PUE applied (EcoLogits default is 1.2; document if you override it)</li>
+<li><strong>Confidence / uncertainty range</strong> — provide a range (e.g. ±40%) reflecting uncertainty in hardware parameters and region allocation</li>
+<li><strong>Explicit modelled-not-measured statement</strong> — required for credibility; see section below</li>
+</ul>
+
+<h3>Worked example disclosure entry</h3>
+
+<div class="callout">
+  <span class="callout-label">Illustrative ESRS E1-6 supplementary note — AI (Scope 3 Cat. 1)</span>
+  <strong>Reporting period:</strong> FY 2025 (1 Jan – 31 Dec)<br /><br />
+  <strong>Activity data:</strong><br />
+  OpenAI GPT-4o → 1.24 billion tokens (input + output)<br />
+  Anthropic Claude 3.5 → 0.87 billion tokens<br />
+  Azure Copilot → ~14 million requests (no token data; avg assumed 1,200 tokens)<br /><br />
+  <strong>Methodology:</strong> EcoLogits v0.6 hardware-based model<br />
+  <strong>Grid factors:</strong> EPA eGRID RFCE 2024 (0.352 kg CO₂e/kWh)<br />
+  <strong>PUE:</strong> 1.20 (EcoLogits default)<br /><br />
+  <strong>Result:</strong><br />
+  Estimated operational emissions → 18.4 t CO₂e<br />
+  Embodied hardware (amortised) → 2.1 t CO₂e<br />
+  <strong>Total AI — Scope 3, Cat. 1 → 20.5 t CO₂e (range: 12–34 t)</strong><br /><br />
+  <em>Note: All figures are modelled estimates. No provider supplied measured per-query energy data for this reporting period.</em>
+</div>
+
+<h2 id="the-transparency-principle-modelled-not-measured">The transparency principle: modelled, not measured</h2>
+
+<p>This is not a caveat to hide in footnotes. It should be stated plainly in the body of your methodology disclosure.</p>
+
+<p>Here is why this is the right approach — and why experienced assurance providers will respect it:</p>
+<ul>
+<li>Every estimate in corporate GHG accounting involves assumptions. Scope 3 Category 1 for physical goods already relies on spend-based or average emission factors that are rougher than most AI estimates.</li>
+<li>Claiming measured precision you do not have is an audit failure waiting to happen. Stating uncertainty ranges is standard GHG Protocol practice.</li>
+<li>The existence of recognised open methodologies (EcoLogits, GSF SCI) means your estimates are not arbitrary — they are traceable to published, peer-reviewed parameter sets.</li>
+<li>Providers' own sustainability reports (where they exist) use the same modelling approaches for AI workloads. You are doing what the industry does.</li>
+</ul>
+
+<div class="callout">
+  <span class="callout-label">Suggested disclosure language</span>
+  "AI-related greenhouse gas emissions are estimated using modelled methodology (EcoLogits v0.x / GSF SCI AI specification). No AI service provider currently supplies measured per-query energy or emissions data. Estimates carry an uncertainty range of approximately ±40%, primarily driven by assumptions about hardware utilisation rates and data centre location. Methodology details are provided in the Appendix."
+</div>
+
+<p>Regulators and assurance bodies accept methodological uncertainty when it is disclosed honestly, bounded quantitatively, and accompanied by a credible improvement plan — such as committing to integrate live EcoLogits instrumentation into production systems by the following reporting year.</p>
+
+<h2 id="automating-the-pipeline">Automating the pipeline</h2>
+
+<p>The four steps above are entirely automatable. Once the pipeline runs in production, the marginal cost of producing CSRD-ready AI emissions data approaches zero.</p>
+
+<h3>A minimal production architecture</h3>
+
+<ol class="steps">
+<li>
+  <strong>Instrumented API wrapper</strong><br />
+  Wrap all outbound AI API calls (OpenAI, Anthropic, Azure) in a thin middleware layer. On each response, call llm_impacts() and log impact metadata — kWh, kg CO₂e, model, timestamp, region — to a structured log or your data warehouse alongside the business transaction ID.
+</li>
+<li>
+  <strong>Monthly aggregation job</strong><br />
+  A scheduled query (SQL or dbt model) aggregates logged impact data by reporting period, provider, and model. Output: a flat table with columns [period, provider, model, region, total_kwh, total_co2e_kg, input_tokens, output_tokens, call_count].
+</li>
+<li>
+  <strong>Grid intensity refresh</strong><br />
+  An annual (or more frequent) job pulls updated grid intensity factors from Electricity Maps or EPA eGRID for each region in use and writes them to a reference table. Calculation jobs always join to the reference table rather than hard-coding factors.
+</li>
+<li>
+  <strong>CSRD reporting export</strong><br />
+  A parameterised report template (SQL + Python or a BI tool) takes the aggregation table, applies embodied hardware factors, outputs the Scope 3 Category 1 figure with confidence range, and generates the methodology appendix text in structured form ready for the sustainability report.
+</li>
+</ol>
+
+<p>This architecture also produces the data lineage trace that CSRD's assurance requirements are increasingly demanding — a clear, auditable path from raw API response to reported CO₂e figure.</p>
+
+<h3>The tooling landscape</h3>
+
+<p>Several commercial platforms now offer to automate this pipeline with provider integrations, pre-built emission factor libraries, and CSRD/ESRS reporting templates. If you are evaluating tooling, the questions to ask are: does it use a recognised, versioned methodology (EcoLogits or equivalent)? Can you export the underlying calculation for audit? Does it produce both absolute and intensity metrics? And does it handle multi-provider, multi-region workloads in a single view?</p>
+
+<p>The open-source approach described in this guide remains the most transparent option for companies that need full auditability — and the pipeline, once built, requires only modest maintenance as model versions and grid factors change annually.</p>
+
+<h2>Summary</h2>
+
+<p>Calculating AI emissions for CSRD is a four-step process: collect token usage data from provider APIs, convert tokens to energy and CO₂e using a recognised methodology (EcoLogits for hardware-based estimates, GSF SCI for intensity metrics), apply the appropriate grid carbon intensity for each region, and report the result as a Scope 3 Category 1 line item under ESRS E1-6 with an explicit uncertainty range and a clear statement that all figures are modelled, not measured.</p>
+
+<p>The companies that will handle this most effectively in 2026 and beyond are those instrumenting their AI usage now — building the data infrastructure to move from rough retrospective estimates to real-time, per-call accounting, and using that pipeline as the foundation for both compliance and genuine emissions reduction.</p>
