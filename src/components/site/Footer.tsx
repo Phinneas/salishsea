@@ -18,10 +18,10 @@ export function Footer() {
           <div>
             <p className='text-sm font-semibold text-foreground'>Navigation</p>
             <ul className='mt-3 space-y-2'>
-              {['/', '/services', '/about', '/blog', '/contact'].map((href, i) => (
+              {['/', '/services', '/work', '/about', '/blog', '/contact'].map((href, i) => (
                 <li key={href}>
                   <Link href={href} className='text-sm text-muted-foreground hover:text-foreground'>
-                    {['Home', 'Services', 'About', 'Blog', 'Contact'][i]}
+                    {['Home', 'Services', 'Work', 'About', 'Blog', 'Contact'][i]}
                   </Link>
                 </li>
               ))}
