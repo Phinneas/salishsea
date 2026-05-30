@@ -253,7 +253,7 @@ export default function WorkPage() {
             I write about the spaces I build in. I build in the spaces I write about. That&apos;s not a coincidence — it&apos;s how I stay close to what&apos;s actually happening.
           </p>
           <p className='mt-4 text-teal-100/60'>
-            These are projects I&apos;ve built and own: directories, platforms, tools, and networks across sustainability, wellness, food, and the outdoors. They&apos;re the reason my sustainability communications work is grounded in something real — I&apos;m not theorizing about conscious consumer audiences. I&apos;m building for them.
+            These are the platforms, directories, and tools I&apos;ve built — for real audiences, in the spaces I write about. When sustainability, wellness, gardening, or the outdoors is your market, I already know your reader.
           </p>
         </div>
       </section>
