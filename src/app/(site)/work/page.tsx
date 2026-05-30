@@ -250,7 +250,7 @@ export default function WorkPage() {
         <div className='mx-auto max-w-3xl text-center'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Work</h1>
           <p className='mt-4 text-lg text-teal-100/80'>
-            These are the platforms, directories, and tools I&apos;ve built — for real audiences. When sustainability, wellness, gardening, or the outdoors is your market, I already know your reader.
+            These are the platforms, directories, and tools I&apos;ve built for real audiences. When sustainability, wellness, gardening, or the outdoors is your market, I already know your reader.
           </p>
         </div>
       </section>
