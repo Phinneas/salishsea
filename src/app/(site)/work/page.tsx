@@ -29,7 +29,7 @@ const clusters: Cluster[] = [
   {
     label: 'Sustainability & Energy',
     intro:
-      'The projects most directly connected to the consulting work — built to make clean energy and sustainability information more accessible.',
+      'The projects most directly connected to the consulting work, built to make clean energy and sustainability information more accessible.',
     projects: [
       {
         name: 'Solar Currents',
@@ -42,14 +42,14 @@ const clusters: Cluster[] = [
         name: 'Battery Trail',
         url: 'https://www.batterytrail.com',
         descriptor:
-          'Tracking the battery storage and energy transition landscape — products, news, and resources for the emerging home energy ecosystem.',
+          'Tracking the battery storage and energy transition landscape, covering products, news, and resources for the emerging home energy ecosystem.',
         tag: 'Sustainability / Energy',
       },
       {
         name: 'The Juice Index',
         url: 'https://www.thejuiceindex.com',
         descriptor:
-          'A guide to juice bars, cold press, and functional beverages — mapping the wellness beverage landscape for conscious consumers.',
+          'A guide to juice bars, cold press, and functional beverages, mapping the wellness beverage landscape for conscious consumers.',
         tag: 'Directory / Wellness',
       },
     ],
@@ -63,7 +63,7 @@ const clusters: Cluster[] = [
         name: 'Soak Colorado',
         url: 'https://www.soakcolorado.com',
         descriptor:
-          'Hot springs, wild soaks, and thermal pools across Colorado — the most comprehensive guide to soaking in the Rockies.',
+          'Hot springs, wild soaks, and thermal pools across Colorado. The most comprehensive guide to soaking in the Rockies.',
         tag: 'Directory / Outdoors',
       },
       {
@@ -77,7 +77,7 @@ const clusters: Cluster[] = [
         name: 'Washington Hot Springs',
         url: 'https://www.washingtonhotsprings.com',
         descriptor:
-          'The definitive guide to hot springs in Washington State — from roadside soaks to backcountry pools.',
+          'The definitive guide to hot springs in Washington State, from roadside soaks to backcountry pools.',
         tag: 'Directory / Outdoors',
       },
       {
@@ -98,7 +98,7 @@ const clusters: Cluster[] = [
         name: 'Soak Trail',
         url: 'https://www.soaktrail.com',
         descriptor:
-          'A trail-based approach to soaking — linking hot springs to hiking routes and outdoor itineraries across the West.',
+          'A trail-based approach to soaking, linking hot springs to hiking routes and outdoor itineraries across the West.',
         tag: 'Directory / Outdoors',
       },
       {
@@ -106,7 +106,7 @@ const clusters: Cluster[] = [
         url: 'https://www.findfrolf.com',
         comingSoon: true,
         descriptor:
-          'A disc golf course finder and community directory — because not everything has to be serious.',
+          'A disc golf course finder and community directory, because not everything has to be serious.',
         tag: 'Directory / Recreation',
       },
     ],
@@ -120,14 +120,14 @@ const clusters: Cluster[] = [
         name: 'Sound Dip',
         url: 'https://www.sounddip.com',
         descriptor:
-          'Cold water and wild swimming in the Puget Sound region — where outdoor dipping culture meets the Pacific Northwest.',
+          'Cold water and wild swimming in the Puget Sound region, where outdoor dipping culture meets the Pacific Northwest.',
         tag: 'Directory / Outdoors',
       },
       {
         name: 'Nourished Journeys',
         url: 'https://www.nourishedjourneys.com',
         descriptor:
-          'Travel and wellness content for the intentional traveler — where to go, what to eat, and how to move through the world with care.',
+          'Travel and wellness content for the intentional traveler, covering where to go, what to eat, and how to move through the world with care.',
         tag: 'Wellness / Travel',
       },
     ],
@@ -135,13 +135,13 @@ const clusters: Cluster[] = [
   {
     label: 'Local Gardeners Guide',
     intro:
-      'Resources for growing, foraging, and connecting with the land — from native plants to local harvests.',
+      'Resources for growing, foraging, and connecting with the land, from native plants to local harvests.',
     projects: [
       {
         name: 'Keystone Nurseries',
         url: 'https://www.keystonenurseries.com',
         descriptor:
-          'A resource for native plants, keystone species, and ecological gardening — growing landscapes that support biodiversity.',
+          'A resource for native plants, keystone species, and ecological gardening, growing landscapes that support biodiversity.',
         tag: 'Land / Sustainability',
       },
       {
@@ -149,14 +149,14 @@ const clusters: Cluster[] = [
         url: 'https://www.harvestmap.co',
         comingSoon: true,
         descriptor:
-          'A directory mapping local farms, u-picks, and harvest experiences — connecting communities to the land that feeds them.',
+          'A directory mapping local farms, u-picks, and harvest experiences, connecting communities to the land that feeds them.',
         tag: 'Sustainability / Food',
       },
       {
         name: 'Gaia Verity',
         url: 'https://www.gaiaverity.com',
         descriptor:
-          'A platform exploring environmental truth and sustainability accountability — where data and values intersect.',
+          'A platform exploring environmental truth and sustainability accountability, where data and values intersect.',
         tag: 'Sustainability',
       },
     ],
@@ -164,21 +164,21 @@ const clusters: Cluster[] = [
   {
     label: 'Tools & Platforms',
     intro:
-      'Builder range — platforms, tools, and resources that solve specific problems for specific audiences.',
+      'Platforms, tools, and resources that solve specific problems for specific audiences.',
     projects: [
       {
         name: 'Link Canary',
         url: 'https://www.linkcanary.io',
         comingSoon: true,
         descriptor:
-          'A link monitoring and management tool — built for publishers and site owners who need to know when their links break or redirect.',
+          'A link monitoring and management tool, built for publishers and site owners who need to know when their links break or redirect.',
         tag: 'Tool / Publishing',
       },
       {
         name: 'My MCP Shelf',
         url: 'https://www.mymcpshelf.com',
         descriptor:
-          'A resource for Model Context Protocol tools and integrations — built for developers and AI practitioners exploring the MCP ecosystem.',
+          'A resource for Model Context Protocol tools and integrations, built for developers and AI practitioners exploring the MCP ecosystem.',
         tag: 'Tool / AI',
       },
       {
@@ -186,21 +186,21 @@ const clusters: Cluster[] = [
         url: 'https://www.binlocators.com',
         comingSoon: true,
         descriptor:
-          'A directory for finding recycling, composting, and waste diversion resources by location — making responsible disposal easier.',
+          'A directory for finding recycling, composting, and waste diversion resources by location, making responsible disposal easier.',
         tag: 'Tool / Sustainability',
       },
       {
         name: 'Brain Scriblr',
         url: 'https://www.brainscriblr.world',
         descriptor:
-          'A newsletter at the edges of ideas — technology, culture, and the things worth thinking about.',
+          'A newsletter at the edges of ideas, covering technology, culture, and the things worth thinking about.',
         tag: 'Newsletter',
       },
       {
         name: 'Admit Writers',
         url: 'https://www.admitwriters.com',
         descriptor:
-          'A platform connecting college applicants with essay coaches and admissions writers — because the right words open doors.',
+          'A platform connecting college applicants with essay coaches and admissions writers, because the right words open doors.',
         tag: 'Platform / Education',
       },
     ],
@@ -287,7 +287,7 @@ export default function WorkPage() {
             These aren&apos;t client projects. They&apos;re mine.
           </h2>
           <p className='mt-6 text-muted-foreground leading-relaxed'>
-            Every site on this page was built by me, for an audience I wanted to serve. That distinction matters: it means the research, the content strategy, the SEO thinking, and the writing all came from the same place — genuine interest in the subject and genuine commitment to the reader. That&apos;s the same way I approach client work.
+            Every site on this page was built by me, for an audience I wanted to serve. That distinction matters. It means the research, the content strategy, the SEO thinking, and the writing all came from the same place, genuine interest in the subject and genuine commitment to the reader. That&apos;s the same way I approach client work.
           </p>
         </div>
       </section>
