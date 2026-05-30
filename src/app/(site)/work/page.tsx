@@ -46,26 +46,18 @@ const clusters: Cluster[] = [
         tag: 'Sustainability / Energy',
       },
       {
-        name: 'Gaia Verity',
-        url: 'https://www.gaiaverity.com',
+        name: 'The Juice Index',
+        url: 'https://www.thejuiceindex.com',
         descriptor:
-          'A platform exploring environmental truth and sustainability accountability — where data and values intersect.',
-        tag: 'Sustainability',
-      },
-      {
-        name: 'Harvest Map',
-        url: 'https://www.harvestmap.co',
-        comingSoon: true,
-        descriptor:
-          'A directory mapping local farms, u-picks, and harvest experiences — connecting communities to the land that feeds them.',
-        tag: 'Sustainability / Food',
+          'A guide to juice bars, cold press, and functional beverages — mapping the wellness beverage landscape for conscious consumers.',
+        tag: 'Directory / Wellness',
       },
     ],
   },
   {
-    label: 'The Soak Network',
+    label: 'Outdoor Resource Hubs',
     intro:
-      "Seven interconnected hot springs and outdoor soaking directories covering the American West. Built independently, grown organically, and collectively one of the most comprehensive soaking resources on the web. This is what a publishing network looks like when it's built by someone who actually goes to these places.",
+      "Six interconnected hot springs directories covering the American West, plus a disc golf community directory. Built independently, grown organically, and collectively one of the most comprehensive soaking resources on the web. This is what a publishing network looks like when it's built by someone who actually goes to these places.",
     projects: [
       {
         name: 'Soak Colorado',
@@ -103,6 +95,28 @@ const clusters: Cluster[] = [
         tag: 'Directory / Outdoors',
       },
       {
+        name: 'Soak Trail',
+        url: 'https://www.soaktrail.com',
+        descriptor:
+          'A trail-based approach to soaking — linking hot springs to hiking routes and outdoor itineraries across the West.',
+        tag: 'Directory / Outdoors',
+      },
+      {
+        name: 'Find Frolf',
+        url: 'https://www.findfrolf.com',
+        comingSoon: true,
+        descriptor:
+          'A disc golf course finder and community directory — because not everything has to be serious.',
+        tag: 'Directory / Recreation',
+      },
+    ],
+  },
+  {
+    label: 'Wellness',
+    intro:
+      'Projects focused on intentional living, outdoor wellness, and moving through the world with care.',
+    projects: [
+      {
         name: 'Sound Dip',
         url: 'https://www.sounddip.com',
         descriptor:
@@ -110,39 +124,40 @@ const clusters: Cluster[] = [
         tag: 'Directory / Outdoors',
       },
       {
-        name: 'Soak Trail',
-        url: 'https://www.soaktrail.com',
-        descriptor:
-          'A trail-based approach to soaking — linking hot springs to hiking routes and outdoor itineraries across the West.',
-        tag: 'Directory / Outdoors',
-      },
-    ],
-  },
-  {
-    label: 'Food, Wellness & Land',
-    intro:
-      'Projects at the intersection of nourishment, place, and conscious living — the consumer side of sustainability.',
-    projects: [
-      {
         name: 'Nourished Journeys',
         url: 'https://www.nourishedjourneys.com',
         descriptor:
           'Travel and wellness content for the intentional traveler — where to go, what to eat, and how to move through the world with care.',
         tag: 'Wellness / Travel',
       },
-      {
-        name: 'The Juice Index',
-        url: 'https://www.thejuiceindex.com',
-        descriptor:
-          'A guide to juice bars, cold press, and functional beverages — mapping the wellness beverage landscape for conscious consumers.',
-        tag: 'Directory / Wellness',
-      },
+    ],
+  },
+  {
+    label: 'Local Gardeners Guide',
+    intro:
+      'Resources for growing, foraging, and connecting with the land — from native plants to local harvests.',
+    projects: [
       {
         name: 'Keystone Nurseries',
         url: 'https://www.keystonenurseries.com',
         descriptor:
           'A resource for native plants, keystone species, and ecological gardening — growing landscapes that support biodiversity.',
         tag: 'Land / Sustainability',
+      },
+      {
+        name: 'Harvest Map',
+        url: 'https://www.harvestmap.co',
+        comingSoon: true,
+        descriptor:
+          'A directory mapping local farms, u-picks, and harvest experiences — connecting communities to the land that feeds them.',
+        tag: 'Sustainability / Food',
+      },
+      {
+        name: 'Gaia Verity',
+        url: 'https://www.gaiaverity.com',
+        descriptor:
+          'A platform exploring environmental truth and sustainability accountability — where data and values intersect.',
+        tag: 'Sustainability',
       },
     ],
   },
@@ -173,14 +188,6 @@ const clusters: Cluster[] = [
         descriptor:
           'A directory for finding recycling, composting, and waste diversion resources by location — making responsible disposal easier.',
         tag: 'Tool / Sustainability',
-      },
-      {
-        name: 'Find Frolf',
-        url: 'https://www.findfrolf.com',
-        comingSoon: true,
-        descriptor:
-          'A disc golf course finder and community directory — because not everything has to be serious.',
-        tag: 'Directory / Recreation',
       },
       {
         name: 'Brain Scriblr',
