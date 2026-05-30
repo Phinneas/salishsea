@@ -250,10 +250,7 @@ export default function WorkPage() {
         <div className='mx-auto max-w-3xl text-center'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Work</h1>
           <p className='mt-4 text-lg text-teal-100/80'>
-            I write about the spaces I build in. I build in the spaces I write about. That&apos;s not a coincidence — it&apos;s how I stay close to what&apos;s actually happening.
-          </p>
-          <p className='mt-4 text-teal-100/60'>
-            These are the platforms, directories, and tools I&apos;ve built — for real audiences, in the spaces I write about. When sustainability, wellness, gardening, or the outdoors is your market, I already know your reader.
+            These are the platforms, directories, and tools I&apos;ve built — for real audiences. When sustainability, wellness, gardening, or the outdoors is your market, I already know your reader.
           </p>
         </div>
       </section>
