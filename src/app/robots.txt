@@ -3,4 +3,4 @@ Allow: /
 Disallow: /private/
 Disallow: /*?*
 
-Sitemap: https://shadcnstudio.com/sitemap.xml
+Sitemap: https://www.salishseaconsulting.com/sitemap.xml
