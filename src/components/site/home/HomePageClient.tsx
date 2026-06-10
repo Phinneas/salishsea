@@ -153,6 +153,19 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
 
+    // Cache bounding rects on resize, not on every scroll frame
+    let cachedRects: Map<HTMLElement, DOMRect> = new Map()
+    function cacheRects() {
+      cachedRects.clear()
+      ;[quoteBgRef, ctaBgRef].forEach(ref => {
+        if (ref.current?.parentElement) {
+          cachedRects.set(ref.current, ref.current.parentElement.getBoundingClientRect())
+        }
+      })
+    }
+    cacheRects()
+    window.addEventListener('resize', () => { requestAnimationFrame(cacheRects) })
+
     let ticking = false
     function parallax() {
       const y = window.scrollY
@@ -161,7 +174,8 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
       }
       ;[quoteBgRef, ctaBgRef].forEach(ref => {
         if (!ref.current) return
-        const r = ref.current.parentElement!.getBoundingClientRect()
+        const r = cachedRects.get(ref.current)
+        if (!r) return
         const offset = r.top + r.height / 2 - window.innerHeight / 2
         ref.current.style.transform = `translate3d(0,${offset * -0.12}px,0) scale(1.12)`
       })
@@ -174,7 +188,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
 
     window.addEventListener('scroll', onScroll, { passive: true })
     parallax()
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', cacheRects as EventListener) }
   }, [])
 
   return (
@@ -194,8 +208,11 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
           <img
             className='ssc-hero-img w-full object-cover object-[center_42%]'
             style={{ height: '126%' }}
-            src='https://images.unsplash.com/photo-1659951231548-9aa2de9c20cc?fm=jpg&q=82&w=2400&fit=crop'
+            src='https://images.unsplash.com/photo-1659951231548-9aa2de9c20cc?fm=webp&q=80&w=1600&fit=crop'
             alt='Aerial view of the forested islands of the Salish Sea with Mount Baker on the horizon'
+            fetchPriority='high'
+            width={1600}
+            height={1067}
           />
         </div>
 
@@ -370,9 +387,12 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src='https://images.unsplash.com/photo-1750660154268-6ecab87ba4ef?fm=jpg&q=80&w=1200&fit=crop'
+                src='https://images.unsplash.com/photo-1750660154268-6ecab87ba4ef?fm=webp&q=75&w=900&fit=crop'
                 alt='Fog rolling over a calm, open sea'
                 className='h-full w-full object-cover transition-transform duration-[1200ms]'
+                loading='lazy'
+                width={900}
+                height={675}
               />
               <div
                 className='absolute inset-0'
@@ -440,9 +460,12 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='https://images.unsplash.com/photo-1760840083757-6df908736937?fm=jpg&q=82&w=1300&fit=crop'
+              src='https://images.unsplash.com/photo-1760840083757-6df908736937?fm=webp&q=75&w=900&fit=crop'
               alt='Evergreen headland meeting deep blue Pacific Northwest surf'
               className='h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.06]'
+              loading='lazy'
+              width={900}
+              height={1080}
             />
             <span
               className='absolute bottom-5 left-5 rounded-full border px-[1.1em] py-[0.5em] font-space-mono text-[0.7rem] uppercase tracking-[0.16em] backdrop-blur-[8px]'
@@ -552,7 +575,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
           className='absolute inset-0 z-[-2] bg-cover bg-center will-change-transform'
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1625628748830-639e59adbcfc?fm=jpg&q=82&w=2200&fit=crop')",
+              "url('https://images.unsplash.com/photo-1625628748830-639e59adbcfc?fm=webp&q=75&w=1200&fit=crop')",
           }}
         />
         <div
@@ -783,7 +806,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
           className='absolute inset-0 z-[-2] bg-cover bg-center will-change-transform'
           style={{
             backgroundImage:
-              "url('https://images.pexels.com/photos/34155535/pexels-photo-34155535.jpeg?auto=compress&cs=tinysrgb&w=2000')",
+              "url('https://images.pexels.com/photos/34155535/pexels-photo-34155535.jpeg?auto=compress&cs=tinysrgb&w=1200')",
           }}
         />
         <div

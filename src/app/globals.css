@@ -375,13 +375,17 @@ body {
 .font-space-grotesk { font-family: var(--font-space-grotesk), sans-serif; }
 .font-space-mono { font-family: var(--font-space-mono), monospace; }
 
-/* Hero image drift */
+/* Hero image drift — paused until visible */
 @keyframes ssc-drift {
   from { transform: scale(1.02); }
   to   { transform: scale(1.12); }
 }
 .ssc-hero-img {
   animation: ssc-drift 26s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.ssc-hero-loaded .ssc-hero-img {
+  animation-play-state: running;
 }
 
 /* Wave divider */

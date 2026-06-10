@@ -6,11 +6,11 @@ import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import './globals.css'
 
-const fontSans = Montserrat({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700'] })
-const fontSerif = Merriweather({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'] })
-const fontSpaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk', weight: ['400', '500', '600', '700'] })
-const fontSpaceMono = Space_Mono({ subsets: ['latin'], variable: '--font-space-mono', weight: ['400', '700'] })
-const fontKalam = Kalam({ subsets: ['latin'], variable: '--font-kalam', weight: ['400', '700'] })
+const fontSans = Montserrat({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700'], display: 'swap', preload: false })
+const fontSerif = Merriweather({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'], display: 'swap', preload: false })
+const fontSpaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk', weight: ['400', '500', '600', '700'], display: 'swap' })
+const fontSpaceMono = Space_Mono({ subsets: ['latin'], variable: '--font-space-mono', weight: ['400', '700'], display: 'swap' })
+const fontKalam = Kalam({ subsets: ['latin'], variable: '--font-kalam', weight: ['400', '700'], display: 'swap', preload: false })
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.salishseaconsulting.com'
 
