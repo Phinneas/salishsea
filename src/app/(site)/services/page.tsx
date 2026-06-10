@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ArrowRight, Globe, Rocket, Calendar, FileText, BarChart3, BookOpen, Scroll } from 'lucide-react'
 import type { Metadata } from 'next'
+import { SectionHero } from '@/components/site/SectionHero'
+import { SectionCTA } from '@/components/site/SectionCTA'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -80,146 +80,166 @@ const researchReports = [
   },
 ]
 
+function ServiceCard({ service }: { service: typeof brandCopywriting[number] | typeof researchReports[number] }) {
+  const Icon = service.icon
+  return (
+    <article
+      className='group relative flex flex-col overflow-hidden rounded-[var(--ssc-r)] border bg-white p-[38px_32px_34px] transition-all duration-[450ms] hover:-translate-y-[8px] hover:shadow-[0_40px_70px_-38px_rgba(10,30,41,.4)] hover:border-transparent'
+      style={{ borderColor: 'var(--ssc-line-light)' }}
+    >
+      {service.badge && (
+        <Badge
+          className='absolute -top-2.5 left-5 text-xs text-white'
+          style={{ background: 'var(--ssc-seafoam-deep)' }}
+        >
+          {service.badge}
+        </Badge>
+      )}
+      <div
+        className='mb-6 grid h-[56px] w-[56px] place-items-center rounded-[15px]'
+        style={{ background: 'linear-gradient(140deg,#0e2b38,#14515e)', color: 'var(--ssc-seafoam)' }}
+      >
+        <Icon className='h-7 w-7' />
+      </div>
+      <h3 className='font-space-grotesk mb-3 text-[1.18rem] font-bold leading-[1.04] tracking-[-0.02em]' style={{ color: 'var(--ssc-text-dark)' }}>
+        {service.title}
+      </h3>
+      <p className='text-sm font-medium' style={{ color: 'var(--ssc-seafoam-deep)' }}>Best for: {service.bestFor}</p>
+      <p className='mt-3 flex-1 text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{service.description}</p>
+      <div className='mt-auto border-t pt-4' style={{ borderColor: 'var(--ssc-line-light)' }}>
+        <p className='font-space-grotesk text-base font-bold' style={{ color: 'var(--ssc-text-dark)' }}>{service.price}</p>
+      </div>
+    </article>
+  )
+}
+
 export default function ServicesPage() {
   return (
     <div>
-      {/* Header */}
-      <section className='bg-gradient-to-br from-teal-950 to-slate-900 px-4 py-20 text-white sm:px-6'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>Words that move sustainability forward.</h1>
-          <p className='mt-4 text-lg text-teal-100/80'>
-            Salish Sea Consulting writes the copy, reports, and research that help purpose-driven organizations communicate with clarity — and earn the trust they&apos;ve worked hard to deserve.
-          </p>
-          <p className='mt-4 text-teal-100/60'>
-            Whether you&apos;re a brand building sustainability into your identity from day one, an organization ready to report on your impact, or a mission-driven team seeking funding — the right words make the difference. Here&apos;s how we work together.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <SectionHero
+        eyebrow='Services'
+        title='Words that move sustainability forward.'
+        subtitle="Salish Sea Consulting writes the copy, reports, and research that help purpose-driven organizations communicate with clarity — and earn the trust they've worked hard to deserve."
+      >
+        <p className='mt-4' style={{ color: 'var(--ssc-text-mute)', opacity: 0.7 }}>
+          Whether you&apos;re a brand building sustainability into your identity from day one, an organization ready to report on your impact, or a mission-driven team seeking funding — the right words make the difference. Here&apos;s how we work together.
+        </p>
+      </SectionHero>
 
       {/* Sustainable Brand Copywriting */}
-      <section id='brand-copywriting' className='px-4 py-20 sm:px-6 scroll-mt-20'>
+      <section id='brand-copywriting' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='text-2xl font-bold tracking-tight'>Sustainable Brand Copywriting</h2>
-            <p className='mt-2 text-muted-foreground'>
+            <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Sustainable Brand Copywriting</h2>
+            <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
               For brands that lead with purpose — and need copy that holds up to scrutiny.
             </p>
           </div>
-          <p className='mb-10 max-w-3xl text-muted-foreground leading-relaxed'>
+          <p className='mb-10 max-w-3xl leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Sustainability copywriting isn&apos;t greenwashing patrol. It&apos;s building a voice that&apos;s honest, specific, and genuinely compelling — copy that earns attention because it deserves it. I write for brands who&apos;ve done the work and are ready to say so.
           </p>
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {brandCopywriting.map(service => (
-              <Card key={service.title} className='relative border-border/50 flex flex-col'>
-                {service.badge && (
-                  <Badge className='absolute -top-2.5 left-5 bg-teal-600 text-white text-xs'>
-                    {service.badge}
-                  </Badge>
-                )}
-                <CardHeader>
-                  <service.icon className='mb-3 h-7 w-7 text-teal-600' />
-                  <CardTitle className='text-base leading-snug'>{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className='flex flex-col flex-1 space-y-4'>
-                  <p className='text-sm font-medium text-teal-600'>Best for: {service.bestFor}</p>
-                  <p className='text-sm text-muted-foreground leading-relaxed'>{service.description}</p>
-                  <div className='mt-auto border-t border-border pt-4'>
-                    <p className='text-base font-bold text-foreground'>{service.price}</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <ServiceCard key={service.title} service={service} />
             ))}
           </div>
           <div className='mt-10 text-center'>
-            <Button asChild size='lg' className='bg-teal-600 hover:bg-teal-700'>
-              <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
-                Let&apos;s Talk <ArrowRight className='ml-2 h-4 w-4' />
-              </Link>
-            </Button>
+            <Link
+              href='https://cal.com/chester-beard/30min'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='inline-flex items-center gap-2 rounded-full px-[1.6em] py-[0.95em] text-[0.98rem] font-semibold transition-all duration-300 hover:-translate-y-[3px]'
+              style={{
+                background: 'var(--ssc-seafoam)',
+                color: 'var(--ssc-ink)',
+                boxShadow: '0 10px 30px -10px rgba(95,227,201,.6)',
+              }}
+            >
+              Let&apos;s Talk <ArrowRight className='ml-2 h-4 w-4' />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className='border-t border-border' />
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
 
       {/* Sustainability Research Reports */}
-      <section id='research-reports' className='bg-muted/20 px-4 py-20 sm:px-6 scroll-mt-20'>
+      <section id='research-reports' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='text-2xl font-bold tracking-tight'>Sustainability Research Reports</h2>
-            <p className='mt-2 text-muted-foreground'>
+            <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Sustainability Research Reports</h2>
+            <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
               Credibility-building documents for organizations with a story backed by data.
             </p>
           </div>
-          <p className='mb-10 max-w-3xl text-muted-foreground leading-relaxed'>
+          <p className='mb-10 max-w-3xl leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Impact doesn&apos;t speak for itself — it needs a translator. I research, write, and shape sustainability reports that meet stakeholders where they are: clear enough for a general audience, rigorous enough for the room that matters.
           </p>
           <div className='grid gap-8 md:grid-cols-2'>
             {researchReports.map(service => (
-              <Card key={service.title} className='relative border-border/50 flex flex-col'>
-                {service.badge && (
-                  <Badge className='absolute -top-2.5 left-5 bg-teal-600 text-white text-xs'>
-                    {service.badge}
-                  </Badge>
-                )}
-                <CardHeader>
-                  <service.icon className='mb-3 h-7 w-7 text-teal-600' />
-                  <CardTitle className='text-base leading-snug'>{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className='flex flex-col flex-1 space-y-4'>
-                  <p className='text-sm font-medium text-teal-600'>Best for: {service.bestFor}</p>
-                  <p className='text-sm text-muted-foreground leading-relaxed'>{service.description}</p>
-                  <div className='mt-auto border-t border-border pt-4'>
-                    <p className='text-base font-bold text-foreground'>{service.price}</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <ServiceCard key={service.title} service={service} />
             ))}
           </div>
           <div className='mt-10 text-center'>
-            <Button asChild size='lg' className='bg-teal-600 hover:bg-teal-700'>
-              <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
-                Start a Project <ArrowRight className='ml-2 h-4 w-4' />
-              </Link>
-            </Button>
+            <Link
+              href='https://cal.com/chester-beard/30min'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='inline-flex items-center gap-2 rounded-full px-[1.6em] py-[0.95em] text-[0.98rem] font-semibold transition-all duration-300 hover:-translate-y-[3px]'
+              style={{
+                background: 'var(--ssc-seafoam)',
+                color: 'var(--ssc-ink)',
+                boxShadow: '0 10px 30px -10px rgba(95,227,201,.6)',
+              }}
+            >
+              Start a Project <ArrowRight className='ml-2 h-4 w-4' />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className='border-t border-border' />
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
 
-      {/* Grant Writing — Minimal */}
-      <section id='grant-writing' className='px-4 py-20 sm:px-6 scroll-mt-20'>
+      {/* Grant Writing */}
+      <section id='grant-writing' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-2xl font-bold tracking-tight'>Grant Writing</h2>
-          <p className='mt-2 text-muted-foreground'>
+          <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Grant Writing</h2>
+          <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             A retained specialty — for the right partnership.
           </p>
-          <p className='mt-6 text-muted-foreground leading-relaxed'>
+          <p className='mt-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Grant writing is among the most specialized work I do, and I approach it selectively. I bring grant writing expertise to long-term client relationships — particularly for sustainability-focused organizations navigating complex funding landscapes. If you&apos;re exploring grant opportunities and looking for a collaborator who already understands your mission deeply, I&apos;d love to hear where you are in the process.
           </p>
-          <Button asChild size='lg' className='mt-8 bg-teal-600 hover:bg-teal-700'>
-            <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
-              Get in Touch <ArrowRight className='ml-2 h-4 w-4' />
-            </Link>
-          </Button>
+          <Link
+            href='https://cal.com/chester-beard/30min'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='mt-8 inline-flex items-center gap-2 rounded-full px-[1.6em] py-[0.95em] text-[0.98rem] font-semibold transition-all duration-300 hover:-translate-y-[3px]'
+            style={{
+              background: 'var(--ssc-seafoam)',
+              color: 'var(--ssc-ink)',
+              boxShadow: '0 10px 30px -10px rgba(95,227,201,.6)',
+            }}
+          >
+            Get in Touch <ArrowRight className='ml-2 h-4 w-4' />
+          </Link>
         </div>
       </section>
 
       {/* Salish Sea Creatives Callout */}
-      <section className='bg-muted/30 px-4 py-12 sm:px-6'>
+      <section className='px-4 py-12 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-2xl text-center'>
-          <h3 className='text-lg font-semibold tracking-tight'>Writing a book? Building an author platform?</h3>
-          <p className='mt-2 text-sm text-muted-foreground leading-relaxed'>
+          <h3 className='font-space-grotesk text-lg font-semibold tracking-tight'>Writing a book? Building an author platform?</h3>
+          <p className='mt-2 text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Salish Sea Creatives is a sister studio focused exclusively on web design for authors and creative professionals — built for the moment when your writing career needs a home online that&apos;s as intentional as your work.
           </p>
           <Link
             href='https://www.instagram.com/salishseacreatives'
             target='_blank'
             rel='noopener noreferrer'
-            className='mt-4 inline-flex items-center text-sm font-medium text-teal-600 hover:text-teal-700'
+            className='mt-4 inline-flex items-center text-sm font-semibold transition-colors'
+            style={{ color: 'var(--ssc-seafoam-deep)' }}
           >
             Explore Salish Sea Creatives <ArrowRight className='ml-1 h-3.5 w-3.5' />
           </Link>

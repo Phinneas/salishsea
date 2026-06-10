@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { ThemeToggle } from '@/components/site/ThemeToggle'
@@ -14,7 +13,7 @@ const nav = [
   { label: 'Work', href: '/work' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' }
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
@@ -22,7 +21,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+    <header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' style={{ borderColor: 'var(--ssc-line-light)' }}>
       <div className='mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6'>
         {/* Logo */}
         <Link href='/' className='flex items-center gap-2'>
@@ -32,14 +31,13 @@ export function Header() {
             alt='Salish Sea Consulting'
             className='h-9 w-auto'
             onError={(e) => {
-              // Fallback to text if image not found
               const el = e.currentTarget
               el.style.display = 'none'
               el.nextElementSibling?.removeAttribute('hidden')
             }}
           />
-          <span hidden className='text-lg font-semibold tracking-tight text-foreground'>
-            Salish Sea <span className='text-teal-600'>Consulting</span>
+          <span hidden className='text-lg font-semibold tracking-tight' style={{ color: 'var(--ssc-text-dark)' }}>
+            Salish Sea <span style={{ color: 'var(--ssc-seafoam)' }}>Consulting</span>
           </span>
         </Link>
 
@@ -50,8 +48,8 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-foreground',
-                pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                'font-space-mono text-[0.82rem] font-medium uppercase tracking-[0.08em] transition-colors',
+                pathname === item.href ? 'text-[var(--ssc-text-dark)]' : 'text-[var(--ssc-text-dark-mute)] hover:text-[var(--ssc-text-dark)]',
               )}
             >
               {item.label}
@@ -59,25 +57,33 @@ export function Header() {
           ))}
         </nav>
 
-        <div className='hidden md:flex items-center gap-2'>
+        <div className='hidden items-center gap-2 md:flex'>
           <ThemeToggle />
-          <Button asChild size='sm' className='bg-teal-600 hover:bg-teal-700'>
-            <Link href='/contact'>Get in Touch</Link>
-          </Button>
+          <Link
+            href='/contact'
+            className='inline-flex items-center gap-2 rounded-full px-[1.2em] py-[0.6em] text-[0.85rem] font-semibold transition-all duration-300 hover:-translate-y-[2px]'
+            style={{
+              background: 'var(--ssc-seafoam)',
+              color: 'var(--ssc-ink)',
+              boxShadow: '0 6px 18px -8px rgba(95,227,201,.5)',
+            }}
+          >
+            Get in Touch
+          </Link>
         </div>
 
         {/* Mobile menu toggle */}
         <div className='flex items-center gap-2 md:hidden'>
           <ThemeToggle />
-          <button onClick={() => setOpen(!open)} aria-label='Toggle menu'>
-          {open ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
+          <button onClick={() => setOpen(!open)} aria-label='Toggle menu' style={{ color: 'var(--ssc-text-dark)' }}>
+            {open ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className='border-t border-border md:hidden'>
+        <div className='border-t md:hidden' style={{ borderColor: 'var(--ssc-line-light)' }}>
           <nav className='flex flex-col gap-1 px-4 py-3'>
             {nav.map(item => (
               <Link
@@ -85,18 +91,24 @@ export function Header() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted',
-                  pathname === item.href ? 'bg-muted text-foreground' : 'text-muted-foreground'
+                  'rounded-md px-3 py-2 font-space-mono text-[0.82rem] font-medium uppercase tracking-[0.08em] transition-colors',
+                  pathname === item.href ? 'text-[var(--ssc-text-dark)]' : 'text-[var(--ssc-text-dark-mute)]',
                 )}
               >
                 {item.label}
               </Link>
             ))}
-            <Button asChild size='sm' className='mt-2 bg-teal-600 hover:bg-teal-700'>
-              <Link href='/contact' onClick={() => setOpen(false)}>
-                Get in Touch
-              </Link>
-            </Button>
+            <Link
+              href='/contact'
+              onClick={() => setOpen(false)}
+              className='mt-2 inline-flex items-center justify-center gap-2 rounded-full px-[1.2em] py-[0.6em] text-[0.85rem] font-semibold transition-all duration-300'
+              style={{
+                background: 'var(--ssc-seafoam)',
+                color: 'var(--ssc-ink)',
+              }}
+            >
+              Get in Touch
+            </Link>
           </nav>
         </div>
       )}

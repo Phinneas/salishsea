@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Montserrat, Merriweather, Space_Grotesk, Space_Mono } from 'next/font/google'
+import { Montserrat, Merriweather, Space_Grotesk, Space_Mono, Kalam } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from '@/components/ui/sonner'
@@ -10,6 +10,7 @@ const fontSans = Montserrat({ subsets: ['latin'], variable: '--font-sans', weigh
 const fontSerif = Merriweather({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'] })
 const fontSpaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk', weight: ['400', '500', '600', '700'] })
 const fontSpaceMono = Space_Mono({ subsets: ['latin'], variable: '--font-space-mono', weight: ['400', '700'] })
+const fontKalam = Kalam({ subsets: ['latin'], variable: '--font-kalam', weight: ['400', '700'] })
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.salishseaconsulting.com'
 
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' className={cn(fontSans.variable, fontSerif.variable, fontSpaceGrotesk.variable, fontSpaceMono.variable, 'scroll-smooth')}>
+    <html lang='en' className={cn(fontSans.variable, fontSerif.variable, fontSpaceGrotesk.variable, fontSpaceMono.variable, fontKalam.variable, 'scroll-smooth')}>
       <body className='flex min-h-full w-full flex-auto flex-col bg-background text-foreground antialiased'>
         <ThemeProvider attribute='class' defaultTheme='light' disableTransitionOnChange>
           {children}

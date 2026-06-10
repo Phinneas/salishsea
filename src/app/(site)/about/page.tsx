@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { SectionHero } from '@/components/site/SectionHero'
+import { SectionCTA } from '@/components/site/SectionCTA'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -35,25 +34,20 @@ const credentials = [
 export default function AboutPage() {
   return (
     <div>
-      {/* Hero / Opener */}
-      <section className='bg-gradient-to-br from-teal-950 to-slate-900 px-4 py-20 text-white sm:px-6'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h1 className='text-4xl font-bold tracking-tight sm:text-5xl'>
-            Not every writer understands what moves people who actually care.
-          </h1>
-          <p className='mt-4 text-lg text-teal-100/80'>
-            I&apos;ve spent 20 years inside the sustainable business world — not observing it from the outside. That&apos;s the difference.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <SectionHero
+        eyebrow='About'
+        title='Not every writer understands what moves people who actually care.'
+        subtitle="I've spent 20 years inside the sustainable business world — not observing it from the outside. That's the difference."
+      />
 
       {/* Why Sustainable Brands Specifically */}
-      <section className='px-4 py-20 sm:px-6'>
+      <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
             Why sustainable brands, specifically.
           </h2>
-          <div className='space-y-6 text-muted-foreground leading-relaxed'>
+          <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             <p>
               Sustainability communications is harder than conventional marketing.
               Your audience has done the research. They can smell greenwashing from a paragraph away. They know the difference
@@ -73,39 +67,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className='border-t border-border' />
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
 
       {/* Credentials */}
-      <section className='bg-muted/20 px-4 py-16 sm:px-6'>
+      <section className='px-4 py-16 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='mb-4 text-2xl font-bold tracking-tight'>
+          <h2 className='font-space-grotesk mb-4 text-2xl font-bold tracking-tight'>
             The work behind the work.
           </h2>
-          <p className='mb-8 text-muted-foreground'>
+          <p className='mb-8' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Two decades in sustainable business — in the field, in the writing, and at the table where decisions get made.
           </p>
           <div className='space-y-6'>
             {credentials.map(cred => (
-              <div key={cred.label} className='rounded-lg border border-border/50 bg-background p-6'>
-                <h3 className='mb-2 font-semibold text-foreground'>{cred.label}</h3>
-                <p className='text-sm text-muted-foreground leading-relaxed'>{cred.detail}</p>
+              <div key={cred.label} className='rounded-[var(--ssc-r)] border bg-white p-6' style={{ borderColor: 'var(--ssc-line-light)' }}>
+                <h3 className='font-space-grotesk mb-2 font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>{cred.label}</h3>
+                <p className='text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{cred.detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className='border-t border-border' />
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
 
       {/* The Integration Argument */}
-      <section className='px-4 py-20 sm:px-6'>
+      <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
             Why copy and research from the same mind changes everything.
           </h2>
-          <div className='space-y-6 text-muted-foreground leading-relaxed'>
+          <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             <p>
               Most organizations have to hire separately for this: a copywriter who can tell the story, and a researcher or
               consultant who can build the evidence base. The problem is that these two things rarely talk to each other the way
@@ -122,24 +114,23 @@ export default function AboutPage() {
               and your impact report don&apos;t feel like they were made by different teams. They feel like they&apos;re telling the
               same true story, in the same voice, with the same confidence.
             </p>
-            <p className='font-medium text-foreground'>
+            <p className='font-medium' style={{ color: 'var(--ssc-text-dark)' }}>
               That integration is what I offer. It&apos;s harder to find than either skill alone.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className='border-t border-border' />
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
 
       {/* Pacific Northwest Context */}
-      <section className='bg-muted/20 px-4 py-20 sm:px-6'>
+      <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
             Built in the most sustainability-conscious market in North America.
           </h2>
-          <div className='space-y-6 text-muted-foreground leading-relaxed'>
-            <p className='text-lg text-foreground font-medium'>
+          <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
+            <p className='font-space-grotesk text-lg font-medium' style={{ color: 'var(--ssc-text-dark)' }}>
               The Pacific Northwest isn&apos;t just a location. It&apos;s a proving ground.
             </p>
             <p>
@@ -161,21 +152,13 @@ export default function AboutPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className='bg-gradient-to-br from-teal-950 to-slate-900 px-4 py-20 text-white sm:px-6'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-3xl font-bold tracking-tight'>
-            If this sounds like the kind of thinking your brand needs, let&apos;s find out.
-          </h2>
-          <p className='mx-auto mt-4 max-w-xl text-teal-100/80 leading-relaxed'>
-            Book a 30-minute call. No pitch, no pressure — just a conversation about where your communications are and where they could go.
-          </p>
-          <Button asChild size='lg' className='mt-8 bg-teal-500 hover:bg-teal-400 text-white'>
-            <Link href='https://cal.com/chester-beard/30min' target='_blank' rel='noopener noreferrer'>
-              Book a 30-Minute Call <ArrowRight className='ml-2 h-4 w-4' />
-            </Link>
-          </Button>
-        </div>
-      </section>
+      <SectionCTA
+        title="If this sounds like the kind of thinking your brand needs, let's find out."
+        subtitle='Book a 30-minute call. No pitch, no pressure — just a conversation about where your communications are and where they could go.'
+        href='https://cal.com/chester-beard/30min'
+        label='Book a 30-Minute Call'
+        external
+      />
     </div>
   )
 }

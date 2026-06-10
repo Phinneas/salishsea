@@ -353,6 +353,24 @@ body {
   --ssc-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.dark {
+  --ssc-ink: #0c1f28;
+  --ssc-navy: #0f2633;
+  --ssc-navy-2: #142f3d;
+  --ssc-teal: #1a6b6b;
+  --ssc-seafoam: #7cf0d6;
+  --ssc-seafoam-deep: #3cc9b5;
+  --ssc-sand: #d4c4a6;
+  --ssc-fog: #1a2e35;
+  --ssc-paper: #0f2633;
+  --ssc-text-light: #dcecec;
+  --ssc-text-mute: #8faaaf;
+  --ssc-text-dark: #e0eeee;
+  --ssc-text-dark-mute: #8ca0a6;
+  --ssc-line-dark: rgba(95, 227, 201, 0.22);
+  --ssc-line-light: rgba(220, 236, 236, 0.10);
+}
+
 /* Font helpers */
 .font-space-grotesk { font-family: var(--font-space-grotesk), sans-serif; }
 .font-space-mono { font-family: var(--font-space-mono), monospace; }
@@ -443,4 +461,256 @@ body {
   .ssc-wave-1, .ssc-wave-2 { animation: none !important; }
   .ssc-reveal, .ssc-stagger { opacity: 1 !important; transform: none !important; transition: none !important; }
   .ssc-reveal-word > span { transform: none !important; transition: none !important; }
+  .stamp-card { transition: opacity .4s ease !important; }
+  .stamp-card, .stamp-card.in { transform: rotate(var(--rot)) !important; }
+}
+
+/* ── Stamp Collection ── */
+.stamp-airmail {
+  height: 7px;
+  background: repeating-linear-gradient(-45deg, var(--ssc-ink) 0 13px, var(--ssc-fog) 13px 19px, var(--ssc-teal) 19px 32px, var(--ssc-fog) 32px 38px);
+}
+
+.stamp-chapter-num {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ssc-seafoam-deep);
+  color: var(--ssc-seafoam-deep);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.stamp-chapter-route {
+  flex: 1 1 auto;
+  height: 0;
+  border-top: 2px dotted var(--ssc-line-light);
+  -webkit-mask: linear-gradient(90deg, #000, #000 70%, transparent);
+  mask: linear-gradient(90deg, #000, #000 70%, transparent);
+}
+
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
+  grid-auto-rows: 6px;
+  column-gap: 26px;
+  row-gap: 0;
+  align-items: start;
+}
+
+.stamp-card {
+  --rot: 0deg;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: var(--ssc-ink);
+  margin-bottom: 30px;
+  transform: rotate(var(--rot)) translateY(18px);
+  opacity: 0;
+  transition: transform .65s cubic-bezier(.2,.85,.25,1), opacity .65s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+.stamp-card.in {
+  transform: rotate(var(--rot)) translateY(0);
+  opacity: 1;
+}
+.stamp-card.wide { grid-column: span 2; }
+
+.stamp-card:hover {
+  transform: rotate(0deg) translateY(-12px) scale(1.04);
+  z-index: 8;
+}
+
+.stamp-paper {
+  display: block;
+  position: relative;
+  background: #fdfaf2;
+  padding: 11px 11px 9px;
+  --hole: 6px;
+  --step: 16.5px;
+  -webkit-mask:
+    radial-gradient(circle var(--hole) at 50% 0, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 0 / var(--step) 100% repeat-x,
+    radial-gradient(circle var(--hole) at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 100% / var(--step) 100% repeat-x,
+    radial-gradient(circle var(--hole) at 0 50%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 0 / 100% var(--step) repeat-y,
+    radial-gradient(circle var(--hole) at 100% 50%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 100% 0 / 100% var(--step) repeat-y;
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--hole) at 50% 0, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 0 / var(--step) 100% repeat-x,
+    radial-gradient(circle var(--hole) at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 100% / var(--step) 100% repeat-x,
+    radial-gradient(circle var(--hole) at 0 50%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 0 0 / 100% var(--step) repeat-y,
+    radial-gradient(circle var(--hole) at 100% 50%, #0000 var(--hole), #000 calc(var(--hole) + .7px)) 100% 0 / 100% var(--step) repeat-y;
+  mask-composite: intersect;
+  filter: drop-shadow(0 8px 16px rgba(40,52,38,.16));
+  transition: filter .5s ease;
+}
+.stamp-card:hover .stamp-paper {
+  filter: drop-shadow(0 20px 30px rgba(40,52,38,.30));
+}
+
+.stamp-matte {
+  display: block;
+  background: #f6efe1;
+  padding: 6px;
+  border: 1px solid rgba(10,30,41,.16);
+}
+
+.stamp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1px 3px 5px;
+}
+
+.stamp-issuer {
+  font-family: var(--font-space-mono), monospace;
+  font-weight: 700;
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ssc-teal);
+}
+
+.stamp-denom {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ssc-teal);
+  line-height: 1;
+}
+
+.stamp-art {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(10,30,41,.25);
+  background: #0b1a1e;
+}
+.stamp-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(.97) contrast(1.02);
+  transition: transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.stamp-card:hover .stamp-art img { transform: scale(1.05); }
+
+.stamp-foot {
+  display: block;
+  padding: 6px 3px 2px;
+  text-align: center;
+}
+
+.stamp-pname {
+  display: block;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -.01em;
+  color: var(--ssc-ink);
+  line-height: 1.12;
+}
+.wide .stamp-pname { font-size: 15px; }
+
+.stamp-pcat {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 7.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #586a60;
+}
+
+.stamp-visit {
+  margin-left: 8px;
+  color: var(--ssc-teal);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.stamp-card:hover .stamp-visit { opacity: 1; }
+
+/* Postmark */
+.stamp-pm {
+  position: absolute;
+  top: -7%;
+  right: -5%;
+  width: 52%;
+  height: auto;
+  pointer-events: none;
+  transform: rotate(-13deg);
+  opacity: .32;
+  transition: opacity .45s ease, transform .45s ease;
+}
+.wide .stamp-pm { width: 34%; }
+.stamp-card:hover .stamp-pm {
+  opacity: .72;
+  transform: rotate(-13deg) scale(1.05);
+}
+.stamp-pm.soon { opacity: .5; }
+.stamp-pm.soon .pm-ring,
+.stamp-pm.soon .pm-arc,
+.stamp-pm.soon .pm-ctr,
+.stamp-pm.soon .pm-bar { stroke: #8a5a3f; fill: #8a5a3f; }
+
+.pm-ring { fill: none; stroke: var(--ssc-ink); stroke-width: 2.4; }
+.pm-ring.thin { stroke-width: 1.2; }
+.pm-arc { fill: var(--ssc-ink); font-family: var(--font-space-mono), monospace; font-size: 8px; font-weight: 700; letter-spacing: .04em; text-anchor: middle; }
+.pm-ctr { fill: var(--ssc-ink); font-family: var(--font-space-mono), monospace; font-size: 10px; font-weight: 700; text-anchor: middle; }
+.pm-bar { fill: none; stroke: var(--ssc-ink); stroke-width: 2.6; stroke-linecap: round; }
+
+/* Coming soon */
+.stamp-card.coming { cursor: default; }
+.stamp-card.coming .stamp-art img { filter: grayscale(.55) sepia(.18) brightness(.97); }
+.stamp-card.coming:hover { transform: rotate(var(--rot)) translateY(-5px) scale(1.012); }
+.stamp-card.coming:hover .stamp-art img { transform: none; }
+
+.stamp-ribbon {
+  position: absolute;
+  top: 13px;
+  left: -34px;
+  width: 140px;
+  transform: rotate(-45deg);
+  background: var(--ssc-ink);
+  color: var(--ssc-fog);
+  text-align: center;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}
+
+/* Stamp footer band */
+.stamp-foot-band {
+  margin-top: 60px;
+  padding: 54px 22px 60px;
+  text-align: center;
+  background: radial-gradient(900px 460px at 50% 120%, #1e4633, var(--ssc-ink) 55%, var(--ssc-navy));
+  color: var(--ssc-text-light);
+}
+
+.stamp-colophon {
+  margin-top: 28px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ssc-text-mute);
+  opacity: .75;
+}
+
+@media (max-width: 680px) {
+  .stamp-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); column-gap: 18px; row-gap: 0; }
+  .stamp-card { margin-bottom: 22px; }
+  .stamp-pm { width: 56%; }
+  .wide .stamp-pm { width: 42%; }
+}
+@media (max-width: 430px) {
+  .stamp-grid { grid-template-columns: repeat(2, 1fr); }
 }
