@@ -18,7 +18,7 @@ export function SectionCTA({ title, subtitle, href, label, external }: SectionCT
       }}
     >
       <div className='mx-auto max-w-3xl'>
-        <h2 className='font-space-grotesk text-3xl font-bold tracking-tight text-white'>
+        <h2 className='font-serif text-3xl font-bold tracking-tight text-white'>
           {title}
         </h2>
         {subtitle && (

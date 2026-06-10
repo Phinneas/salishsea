@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
               day: 'numeric',
             })}
           </time>
-          <h1 className='font-space-grotesk text-3xl font-bold tracking-tight sm:text-4xl' style={{ color: 'var(--ssc-text-dark)' }}>{post.title}</h1>
+          <h1 className='font-serif text-3xl font-bold tracking-tight sm:text-4xl' style={{ color: 'var(--ssc-text-dark)' }}>{post.title}</h1>
           {post.excerpt && <p className='text-lg leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{post.excerpt}</p>}
         </div>
       </header>
@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
           className={[
             'prose prose-neutral max-w-none',
             'dark:prose-invert',
-            'prose-headings:font-bold prose-headings:tracking-tight prose-headings:font-space-grotesk',
+            'prose-headings:font-bold prose-headings:tracking-tight prose-headings:font-serif',
             'prose-h2:text-2xl prose-h3:text-xl',
             'prose-a:no-underline hover:prose-a:underline',
             'prose-img:rounded-lg prose-img:shadow-sm',

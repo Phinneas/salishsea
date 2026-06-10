@@ -101,13 +101,13 @@ function ServiceCard({ service }: { service: typeof brandCopywriting[number] | t
       >
         <Icon className='h-7 w-7' />
       </div>
-      <h3 className='font-space-grotesk mb-3 text-[1.18rem] font-bold leading-[1.04] tracking-[-0.02em]' style={{ color: 'var(--ssc-text-dark)' }}>
+      <h3 className='font-serif mb-3 text-[1.18rem] font-bold leading-[1.04] tracking-[-0.02em]' style={{ color: 'var(--ssc-text-dark)' }}>
         {service.title}
       </h3>
       <p className='text-sm font-medium' style={{ color: 'var(--ssc-seafoam-deep)' }}>Best for: {service.bestFor}</p>
       <p className='mt-3 flex-1 text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{service.description}</p>
       <div className='mt-auto border-t pt-4' style={{ borderColor: 'var(--ssc-line-light)' }}>
-        <p className='font-space-grotesk text-base font-bold' style={{ color: 'var(--ssc-text-dark)' }}>{service.price}</p>
+        <p className='font-serif text-base font-bold' style={{ color: 'var(--ssc-text-dark)' }}>{service.price}</p>
       </div>
     </article>
   )
@@ -131,7 +131,7 @@ export default function ServicesPage() {
       <section id='brand-copywriting' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Sustainable Brand Copywriting</h2>
+            <h2 className='font-serif text-2xl font-bold tracking-tight'>Sustainable Brand Copywriting</h2>
             <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
               For brands that lead with purpose — and need copy that holds up to scrutiny.
             </p>
@@ -168,7 +168,7 @@ export default function ServicesPage() {
       <section id='research-reports' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-6xl'>
           <div className='mb-10'>
-            <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Sustainability Research Reports</h2>
+            <h2 className='font-serif text-2xl font-bold tracking-tight'>Sustainability Research Reports</h2>
             <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
               Credibility-building documents for organizations with a story backed by data.
             </p>
@@ -204,7 +204,7 @@ export default function ServicesPage() {
       {/* Grant Writing */}
       <section id='grant-writing' className='px-4 py-20 sm:px-6 scroll-mt-20' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='font-space-grotesk text-2xl font-bold tracking-tight'>Grant Writing</h2>
+          <h2 className='font-serif text-2xl font-bold tracking-tight'>Grant Writing</h2>
           <p className='mt-2' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             A retained specialty — for the right partnership.
           </p>
@@ -230,7 +230,7 @@ export default function ServicesPage() {
       {/* Salish Sea Creatives Callout */}
       <section className='px-4 py-12 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-2xl text-center'>
-          <h3 className='font-space-grotesk text-lg font-semibold tracking-tight'>Writing a book? Building an author platform?</h3>
+          <h3 className='font-serif text-lg font-semibold tracking-tight'>Writing a book? Building an author platform?</h3>
           <p className='mt-2 text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
             Salish Sea Creatives is a sister studio focused exclusively on web design for authors and creative professionals — built for the moment when your writing career needs a home online that&apos;s as intentional as your work.
           </p>

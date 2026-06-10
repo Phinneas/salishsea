@@ -27,7 +27,7 @@ export default function BlogPage() {
         <div className='mx-auto max-w-4xl'>
           {posts.length === 0 ? (
             <div className='py-20 text-center'>
-              <p className='font-space-grotesk text-lg font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>No posts yet.</p>
+              <p className='font-serif text-lg font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>No posts yet.</p>
               <p className='mt-2 text-sm' style={{ color: 'var(--ssc-text-dark-mute)' }}>Check back soon — content is on its way.</p>
             </div>
           ) : (
@@ -49,7 +49,7 @@ export default function BlogPage() {
                         </Badge>
                       ))}
                     </div>
-                    <h2 className='font-space-grotesk text-xl font-semibold tracking-tight transition-colors group-hover:text-[var(--ssc-seafoam-deep)]'>
+                    <h2 className='font-serif text-xl font-semibold tracking-tight transition-colors group-hover:text-[var(--ssc-seafoam-deep)]'>
                       {post.title}
                     </h2>
                     {post.excerpt && (

@@ -23,7 +23,7 @@ export function SectionHero({ eyebrow, title, subtitle, children }: SectionHeroP
           </span>
         )}
         <h1
-          className='font-space-grotesk text-4xl font-bold leading-[1.04] tracking-[-0.02em] text-white sm:text-5xl'
+          className='font-serif text-4xl font-bold leading-[1.04] tracking-[-0.02em] text-white sm:text-5xl'
         >
           {title}
         </h1>

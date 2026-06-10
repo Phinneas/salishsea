@@ -44,7 +44,7 @@ export default function AboutPage() {
       {/* Why Sustainable Brands Specifically */}
       <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-serif mb-8 text-2xl font-bold tracking-tight'>
             Why sustainable brands, specifically.
           </h2>
           <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
@@ -72,7 +72,7 @@ export default function AboutPage() {
       {/* Credentials */}
       <section className='px-4 py-16 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='font-space-grotesk mb-4 text-2xl font-bold tracking-tight'>
+          <h2 className='font-serif mb-4 text-2xl font-bold tracking-tight'>
             The work behind the work.
           </h2>
           <p className='mb-8' style={{ color: 'var(--ssc-text-dark-mute)' }}>
@@ -81,7 +81,7 @@ export default function AboutPage() {
           <div className='space-y-6'>
             {credentials.map(cred => (
               <div key={cred.label} className='rounded-[var(--ssc-r)] border bg-white p-6' style={{ borderColor: 'var(--ssc-line-light)' }}>
-                <h3 className='font-space-grotesk mb-2 font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>{cred.label}</h3>
+                <h3 className='font-serif mb-2 font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>{cred.label}</h3>
                 <p className='text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{cred.detail}</p>
               </div>
             ))}
@@ -94,7 +94,7 @@ export default function AboutPage() {
       {/* The Integration Argument */}
       <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-serif mb-8 text-2xl font-bold tracking-tight'>
             Why copy and research from the same mind changes everything.
           </h2>
           <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
@@ -126,11 +126,11 @@ export default function AboutPage() {
       {/* Pacific Northwest Context */}
       <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-fog)', color: 'var(--ssc-text-dark)' }}>
         <div className='mx-auto max-w-3xl'>
-          <h2 className='font-space-grotesk mb-8 text-2xl font-bold tracking-tight'>
+          <h2 className='font-serif mb-8 text-2xl font-bold tracking-tight'>
             Built in the most sustainability-conscious market in North America.
           </h2>
           <div className='space-y-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
-            <p className='font-space-grotesk text-lg font-medium' style={{ color: 'var(--ssc-text-dark)' }}>
+            <p className='font-serif text-lg font-medium' style={{ color: 'var(--ssc-text-dark)' }}>
               The Pacific Northwest isn&apos;t just a location. It&apos;s a proving ground.
             </p>
             <p>

@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
-import { Montserrat, Merriweather, Space_Grotesk, Space_Mono, Kalam } from 'next/font/google'
+import { IBM_Plex_Sans, Lora, Space_Grotesk, Space_Mono, Kalam } from 'next/font/google'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import './globals.css'
 
-const fontSans = Montserrat({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700'], display: 'swap' })
-const fontSerif = Merriweather({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'], display: 'swap', preload: false })
+const fontSans = IBM_Plex_Sans({ subsets: ['latin'], variable: '--font-sans', weight: ['400', '500', '600', '700'], display: 'swap' })
+const fontSerif = Lora({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '700'], display: 'swap', preload: false })
 const fontSpaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk', weight: ['400', '500', '600', '700'], display: 'swap' })
 const fontSpaceMono = Space_Mono({ subsets: ['latin'], variable: '--font-space-mono', weight: ['400', '700'], display: 'swap' })
 const fontKalam = Kalam({ subsets: ['latin'], variable: '--font-kalam', weight: ['400', '700'], display: 'swap', preload: false })

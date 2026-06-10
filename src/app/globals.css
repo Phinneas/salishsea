@@ -374,6 +374,7 @@ body {
 /* Font helpers */
 .font-space-grotesk { font-family: var(--font-space-grotesk), sans-serif; }
 .font-space-mono { font-family: var(--font-space-mono), monospace; }
+.font-serif { font-family: var(--font-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; }
 
 /* Hero image drift — paused until visible */
 @keyframes ssc-drift {

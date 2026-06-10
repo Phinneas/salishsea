@@ -47,7 +47,7 @@ export default function ContactPage() {
             <div>
               <div className='mb-6 flex items-center gap-2'>
                 <Calendar className='h-5 w-5' style={{ color: 'var(--ssc-seafoam-deep)' }} />
-                <h2 className='font-space-grotesk text-xl font-semibold'>Book a free 30-minute call</h2>
+                <h2 className='font-serif text-xl font-semibold'>Book a free 30-minute call</h2>
               </div>
               <p className='mb-6 text-sm' style={{ color: 'var(--ssc-text-dark-mute)' }}>
                 Pick a time directly from my calendar. No back-and-forth needed.
@@ -90,12 +90,12 @@ export default function ContactPage() {
             <div>
               <div className='mb-6 flex items-center gap-2'>
                 <Mail className='h-5 w-5' style={{ color: 'var(--ssc-seafoam-deep)' }} />
-                <h2 className='font-space-grotesk text-xl font-semibold'>Or send a message</h2>
+                <h2 className='font-serif text-xl font-semibold'>Or send a message</h2>
               </div>
               {sent ? (
                 <div className='flex flex-col items-center gap-4 py-12 text-center'>
                   <CheckCircle className='h-12 w-12' style={{ color: 'var(--ssc-seafoam)' }} />
-                  <h3 className='font-space-grotesk text-xl font-bold' style={{ color: 'var(--ssc-text-dark)' }}>Message sent!</h3>
+                  <h3 className='font-serif text-xl font-bold' style={{ color: 'var(--ssc-text-dark)' }}>Message sent!</h3>
                   <p className='text-sm' style={{ color: 'var(--ssc-text-dark-mute)' }}>
                     I&apos;ll get back to you within one business day.
                   </p>
@@ -103,7 +103,7 @@ export default function ContactPage() {
               ) : (
                 <Card className='border bg-white' style={{ borderColor: 'var(--ssc-line-light)' }}>
                   <CardHeader className='pb-4'>
-                    <CardTitle className='font-space-grotesk text-base' style={{ color: 'var(--ssc-text-dark)' }}>Quick message</CardTitle>
+                    <CardTitle className='font-serif text-base' style={{ color: 'var(--ssc-text-dark)' }}>Quick message</CardTitle>
                     <CardDescription style={{ color: 'var(--ssc-text-dark-mute)' }}>
                       Prefer to write first? Describe your project and I&apos;ll follow up.
                     </CardDescription>

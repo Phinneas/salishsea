@@ -6,7 +6,7 @@ export function Footer() {
       <div className='mx-auto max-w-6xl px-4 py-12 sm:px-6'>
         <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-4'>
           <div className='sm:col-span-2 lg:col-span-2'>
-            <p className='font-space-grotesk text-base font-semibold' style={{ color: 'var(--ssc-text-light)' }}>
+            <p className='font-serif text-base font-semibold' style={{ color: 'var(--ssc-text-light)' }}>
               Salish Sea <span style={{ color: 'var(--ssc-seafoam)' }}>Consulting</span>
             </p>
             <p className='mt-2 max-w-xs text-sm' style={{ color: 'var(--ssc-text-mute)' }}>
@@ -16,7 +16,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className='font-space-grotesk text-sm font-semibold' style={{ color: 'var(--ssc-text-light)' }}>Navigation</p>
+            <p className='font-serif text-sm font-semibold' style={{ color: 'var(--ssc-text-light)' }}>Navigation</p>
             <ul className='mt-3 space-y-2'>
               {[
                 { href: '/', label: 'Home' },
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className='font-space-grotesk text-sm font-semibold' style={{ color: 'var(--ssc-text-light)' }}>Contact</p>
+            <p className='font-serif text-sm font-semibold' style={{ color: 'var(--ssc-text-light)' }}>Contact</p>
             <ul className='mt-3 space-y-2 text-sm' style={{ color: 'var(--ssc-text-mute)' }}>
               <li>Pacific Northwest</li>
               <li>
