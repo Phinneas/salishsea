@@ -65,7 +65,6 @@ function Eyebrow({ children, center }: { children: React.ReactNode; center?: boo
 export function HomePageClient({ posts }: { posts: SlimPost[] }) {
   const [heroLoaded, setHeroLoaded] = useState(false)
   const heroMediaRef  = useRef<HTMLDivElement>(null)
-  const quoteBgRef    = useRef<HTMLDivElement>(null)
   const ctaBgRef      = useRef<HTMLDivElement>(null)
 
   // Hero entrance
@@ -157,7 +156,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
     let cachedRects: Map<HTMLElement, DOMRect> = new Map()
     function cacheRects() {
       cachedRects.clear()
-      ;[quoteBgRef, ctaBgRef].forEach(ref => {
+      ;[ctaBgRef].forEach(ref => {
         if (ref.current?.parentElement) {
           cachedRects.set(ref.current, ref.current.parentElement.getBoundingClientRect())
         }
@@ -172,7 +171,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
       if (heroMediaRef.current) {
         heroMediaRef.current.style.transform = `translate3d(0,${y * 0.2}px,0)`
       }
-      ;[quoteBgRef, ctaBgRef].forEach(ref => {
+      ;[ctaBgRef].forEach(ref => {
         if (!ref.current) return
         const r = cachedRects.get(ref.current)
         if (!r) return
@@ -274,14 +273,10 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
             </Link>
             <Link
               href='/services'
-              className='inline-flex items-center gap-2 rounded-full border px-[1.6em] py-[0.95em] text-[0.98rem] font-semibold transition-all duration-300 hover:-translate-y-[3px] hover:border-[var(--ssc-seafoam)] hover:bg-white/10'
-              style={{
-                background: 'rgba(255,255,255,.04)',
-                color: 'var(--ssc-text-light)',
-                borderColor: 'rgba(220,236,236,.28)',
-              }}
+              className='inline-flex items-center gap-2 text-[0.98rem] font-semibold underline decoration-[var(--ssc-text-light)] underline-offset-[3px] transition-all duration-300 hover:decoration-[var(--ssc-seafoam)] hover:gap-3'
+              style={{ color: 'var(--ssc-text-light)' }}
             >
-              See Services &amp; Pricing
+              See Services &amp; Pricing <span aria-hidden='true'>→</span>
             </Link>
           </div>
         </div>
@@ -378,7 +373,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
                 className='ssc-reveal d1 mt-[22px] leading-[1.7]'
                 style={{ fontSize: 'clamp(1.05rem,1.5vw,1.28rem)', color: 'var(--ssc-text-dark-mute)' }}
               >
-                The work matters. But somewhere between the doing and the telling, the story gets lost: buried in jargon, buried in data, or simply never told with the clarity it deserves.
+                Somewhere between the doing and the telling, the story gets lost.
               </p>
             </div>
             <div
@@ -402,7 +397,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
           </div>
 
           {/* Problem cards */}
-          <div className='mt-[clamp(46px,6vw,72px)] grid gap-[22px] md:grid-cols-3'>
+          <div className='mt-[clamp(46px,6vw,72px)] mx-auto grid max-w-[680px] gap-[22px]'>
             {[
               {
                 n: '01',
@@ -411,18 +406,13 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
               },
               {
                 n: '02',
-                title: 'Your story gets lost in translation.',
-                body: 'Between the doing and the telling, the meaning slips away: diluted by jargon, flattened into data, or never told with the clarity that earns trust.',
-              },
-              {
-                n: '03',
                 title: 'Your report does not build trust.',
                 body: 'You have published the numbers. Stakeholders skim it, investors file it, the public never connects. A report that does not move people does not move the needle.',
               },
             ].map((card, i) => (
               <article
                 key={card.n}
-                className={`ssc-reveal ${['d1','d2','d3'][i]} rounded-[var(--ssc-r)] border bg-white p-[32px_28px] transition-all duration-[400ms] hover:-translate-y-[6px] hover:shadow-[0_30px_60px_-34px_rgba(10,30,41,.3)]`}
+                className={`ssc-reveal ${['d1','d2'][i]} rounded-[var(--ssc-r)] border bg-white p-[32px_28px] transition-all duration-[400ms] hover:-translate-y-[6px] hover:shadow-[0_30px_60px_-34px_rgba(10,30,41,.3)]`}
                 style={{ borderColor: 'var(--ssc-line-light)' }}
               >
                 <div
@@ -495,7 +485,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
               style={{ fontSize: 'clamp(1.05rem,1.5vw,1.28rem)', color: 'var(--ssc-text-mute)' }}
             >
               Copywriters who do not understand your tech. Developers who do not grasp your mission. Fragmented marketing dilutes your impact and drains your budget.{' '}
-              <strong style={{ color: 'var(--ssc-text-light)', fontWeight: 600 }}>I do both</strong>: marketing tools built around your values, copy synchronized with your technology, and funding narratives that actually win.
+              <strong style={{ color: 'var(--ssc-text-light)', fontWeight: 600 }}>I do both</strong>, marketing tools built around your values, copy synchronized with your technology, and funding narratives that actually win.
             </p>
 
             <div className='mt-[38px] flex flex-col gap-1'>
@@ -564,44 +554,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
         </div>
       </section>
 
-      {/* ─── PARALLAX QUOTE ──────────────────────────────────── */}
-      <section
-        aria-label='Approach statement'
-        className='relative flex min-h-[62vh] items-center overflow-hidden'
-        style={{ isolation: 'isolate' }}
-      >
-        <div
-          ref={quoteBgRef}
-          className='absolute inset-0 z-[-2] bg-cover bg-center will-change-transform'
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1625628748830-639e59adbcfc?fm=webp&q=75&w=1200&fit=crop')",
-          }}
-        />
-        <div
-          className='absolute inset-0 z-[-1]'
-          style={{
-            background:
-              'linear-gradient(90deg,rgba(7,21,29,.92),rgba(7,21,29,.55) 60%,rgba(7,21,29,.3))',
-          }}
-        />
-        <div className='mx-auto max-w-[1200px] px-[clamp(20px,5vw,48px)]'>
-          <blockquote className='ssc-reveal max-w-[880px]'>
-            <p
-              className='font-space-grotesk font-semibold leading-[1.22] tracking-[-0.02em] text-white'
-              style={{ fontSize: 'clamp(1.5rem,3.4vw,2.7rem)' }}
-            >
-              I do both: the words <span className='ssc-grad'>and</span> the technology. Nothing about your impact gets lost in translation.
-            </p>
-            <span
-              className='mt-[26px] block font-space-mono text-[0.78rem] uppercase tracking-[0.2em]'
-              style={{ color: 'var(--ssc-seafoam)' }}
-            >
-              The Salish Sea Approach
-            </span>
-          </blockquote>
-        </div>
-      </section>
+      {/* ─── PARALLAX QUOTE (removed) ──────────────────────── */}
 
       {/* ─── SERVICES ─────────────────────────────────────────── */}
       <section
@@ -651,7 +604,7 @@ export function HomePageClient({ posts }: { posts: SlimPost[] }) {
                   </svg>
                 ),
                 title: 'Marketing Strategy',
-                body: 'Audience research, competitive analysis, SEO audits, and roadmaps tailored to sustainable brands. No generic playbooks: everything built for your market.',
+                body: 'Audience research, competitive analysis, SEO audits, and roadmaps tailored to sustainable brands. No generic playbooks, everything built for your market.',
                 href: '/services',
                 delay: 'd3',
               },
