@@ -1,6 +1,38 @@
-User-Agent: *
+# Allow all crawlers by default
+User-agent: *
 Allow: /
 Disallow: /private/
 Disallow: /*?*
+
+# Explicitly allow AI and search bots
+User-agent: AmazonBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Cloudflare
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: GPTBot
+Allow: /
 
 Sitemap: https://www.salishseaconsulting.com/sitemap.xml
