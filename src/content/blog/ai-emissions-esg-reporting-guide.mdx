@@ -1,0 +1,133 @@
+---
+title: "AI Emissions and ESG Reporting: A Practitioner's Guide for Advisors"
+slug: "ai-emissions-esg-reporting-guide"
+excerpt: "A practitioner's guide for ESG consultants and sustainability advisors navigating the new requirement to account for purchased AI services under CSRD Scope 3 Category 1."
+publishedAt: "2026-06-26"
+author: "Buzz, Salish Sea Consulting"
+tags: "CSRD, ESRS E1, AI emissions, ESG reporting, carbon accounting, EcoLogits, SCI for AI, sustainability consultants"
+seoTitle: "AI Emissions ESG Reporting Guide: What Advisors Need to Know for CSRD"
+featured: false
+---
+
+Your clients are going to ask you about AI emissions in their next CSRD cycle. Some are already asking. If you're not yet confident answering — specifically on what ESRS E1-6 requires, what methodology to use, and how to write about uncertain numbers in a disclosure — this is the guide I wish had existed six months ago when I was working through it.
+
+This isn't a piece about whether AI is bad for the environment. It's a working guide for advisors who need to help clients account for their purchased AI services under Scope 3 Category 1, navigate the fragmented methodology landscape, and communicate the results credibly in a CSRD-compliant report.
+
+## Why This Is Landing on Your Desk Now
+
+Two things converged at the same time. AI adoption scaled fast — enterprise AI spend went from a discretionary IT line item to a material operating cost for a lot of companies, often without sustainability teams noticing. And CSRD's Scope 3 reporting requirements are no longer future-tense.
+
+Under ESRS E1 Disclosure Requirement E1-6, companies must report gross Scope 3 greenhouse gas emissions. Scope 3 Category 1 covers purchased goods and services — all of them, including SaaS, cloud, and AI services. The GHG Protocol, which ESRS E1 is built on, is unambiguous: purchased services with material energy intensity belong in Category 1. A company running ChatGPT Enterprise, Azure OpenAI, or Google Gemini API at scale has a Category 1 emissions obligation it likely hasn't built infrastructure to meet.
+
+**The enforcement timeline matters here.** The FY2025 cohort — large EU companies not previously covered by NFRD (>250 employees, or >€40M turnover, or >€20M total assets) — is reporting on data that is being generated right now, with disclosures due in 2026. The FY2026 cohort adds listed SMEs. By the time your clients are sitting down to draft their CSRD reports, the AI services they deployed this year will need to appear somewhere in Category 1 — or be excluded with documented justification.
+
+This is the conversation you need to be able to have.
+
+## The Methodology Landscape
+
+This is where advisors get stuck. There is no single authoritative methodology for calculating AI service emissions, and the tools are not converged. Here's how I think about the current landscape.
+
+**The two approaches: activity-based and spend-based**
+
+Before getting into specific tools, the fundamental split in methodology is between activity-based and spend-based calculation.
+
+*Activity-based* approaches measure at the level of the AI interaction itself — per API call, per token generated, per inference run. These produce more accurate and granular estimates. They require engineering involvement to instrument, and they require model-specific parameters (GPU type, hardware utilization, data center PUE, regional grid intensity) that are not publicly available for all providers.
+
+*Spend-based* approaches use vendor spend data from finance systems and apply industry-average emissions factors per dollar of purchased AI services. These are less precise but more accessible — the data already exists in accounts payable, and the methodology is fully consistent with GHG Protocol Category 1 spend-based calculation guidance. For CSRD's "best available data" standard, spend-based is generally defensible as a starting point, provided you document the methodology and the factor source.
+
+Most clients, at least in their first CSRD cycle, will use spend-based. The argument for building toward activity-based is the same argument for building toward supplier-specific data in any Scope 3 category: it's more accurate and will hold up better as assurance standards tighten.
+
+**EcoLogits**
+
+EcoLogits (developed by GenAI Impact / Boavizta) is the most mature open-source tool for activity-based AI emissions estimation. It wraps the API clients of major LLM providers — OpenAI, Anthropic, Mistral, and others — and calculates estimated energy consumption and carbon emissions per call using hardware utilization models and regional grid intensity data.
+
+Where it's useful: clients with engineering teams who can instrument their AI usage at the API level, and who want defensible, per-call emissions data to support a more precise Category 1 disclosure. EcoLogits is particularly useful for clients whose AI usage is concentrated in one or two providers, where the model-specific parameters are reasonably well-characterized.
+
+Where it's limited: it requires technical implementation, the underlying hardware models involve uncertainty, and it's difficult to apply retroactively to historical spend. It also doesn't produce spend-reconcilable output — you can't easily cross-check the emissions estimate against the invoice.
+
+**SCI for AI (Software Carbon Intensity)**
+
+The Green Software Foundation's Software Carbon Intensity specification defines a rate-based carbon metric: SCI = ((E × I) + M) per R, where E is energy consumed, I is the marginal carbon intensity of the electricity grid, M is embodied carbon from hardware, and R is the functional unit (per API call, per active user, per query).
+
+The SCI for AI guidance extends this framework specifically to AI workloads and is designed to produce a carbon intensity score rather than a total emissions inventory figure. This is an important distinction. SCI is useful for benchmarking efficiency — comparing models, comparing providers, tracking improvement over time. It is not designed to produce the total gross GHG emissions figure that ESRS E1-6 requires.
+
+Where it's useful: clients who want to evaluate AI procurement decisions (is Model A more carbon-efficient than Model B?) or set internal efficiency targets. Also useful for narrative framing — a declining SCI figure is a credible signal of improvement even in the absence of absolute emissions reduction.
+
+Where it's limited: SCI produces an intensity metric, not a gross inventory number. You can't use it as a direct input to your ESRS E1-6 Category 1 line item without converting to total emissions, which requires volume data (total queries, total tokens). Factor this into how you explain it to clients and auditors.
+
+**GreenGate**
+
+GreenGate operates in the spend-mapping layer — it helps organizations connect procurement and accounts payable data to emissions factors, including for cloud and software vendors. For AI services specifically, it maps vendor spend to cloud compute emissions factors using a combination of supplier-reported data, industry databases, and spend-based proxies.
+
+Where it's useful: clients who want spend-based calculation without building the methodology from scratch, and who are already working with finance data exports. GreenGate reduces the manual work of applying Category 1 spend-based factors across a vendor list that may include dozens of AI and cloud providers.
+
+Where it's limited: the precision of the output is constrained by the precision of the underlying factors. For AI services specifically, vendor-reported factors remain sparse, so spend-based proxies dominate. That's fine for a first-cycle disclosure, but clients should understand what they're getting.
+
+**WrangleAI**
+
+WrangleAI focuses on the data extraction and normalization problem that precedes any emissions calculation. AI spend is scattered across invoice types, contract vehicles, and cost centers — an Azure bill that includes OpenAI Service charges looks different from a direct OpenAI invoice, which looks different from a Google Workspace bill that bundles Gemini features. WrangleAI ingests this heterogeneous spend data and produces a clean, categorized AI service spend dataset that can then feed into a spend-based or activity-based emissions calculation.
+
+Where it's useful: clients with complex, multi-vendor AI environments where the first problem is simply knowing what they're spending and with whom. Getting the spend data clean and categorized is a prerequisite for any methodology, and it's often the step that takes the most time.
+
+Where it's limited: WrangleAI is a data preparation tool, not an emissions calculation tool. You still need to bring the emissions methodology — through EcoLogits, GreenGate, or your own spend-based calculation — once the spend data is structured.
+
+**My current recommendation for first-cycle CSRD clients**
+
+Start with spend-based. Use WrangleAI or a manual finance data extraction to get clean AI vendor spend. Apply spend-based emissions factors (GHG Protocol-aligned, cloud compute category or AI services category where available, otherwise IEA data center averages). Document the methodology and factor sources explicitly. If the client has engineering access to API-level data and EcoLogits is feasible, layer that in as supplementary data to support the spend-based figure or flag where the two approaches diverge.
+
+In subsequent cycles, push toward activity-based or hybrid approaches as the data infrastructure matures. The CSRD assurance environment will tighten, and "best available data" will increasingly mean "better than last year."
+
+## What Data to Request from IT and Finance
+
+This is the tactical section. When your client asks what they need to pull together, here's the ask:
+
+**From Finance / Accounts Payable:**
+- All vendor invoices or contract summaries for the reporting period where the vendor is an AI service provider or major cloud provider. This includes: OpenAI, Anthropic, Google (Cloud/Vertex AI/Gemini API), Microsoft (Azure OpenAI Service, Copilot, M365 Copilot), AWS (Bedrock, SageMaker), Cohere, Mistral, and any domain-specific AI vendors.
+- For bundled contracts (e.g., M365 licensing that includes Copilot), request a spend allocation or estimate for the AI component if available. If not, the full contract value is the conservative input.
+- Total spend by vendor, by period. Monthly granularity is ideal; quarterly is workable.
+
+**From IT / Engineering:**
+- List of AI services in use, by team or function, including internal or self-hosted models running on cloud infrastructure.
+- For API-based services: total API call volume or token consumption for the period, if instrumented. Not all organizations have this — if it's not captured, note the gap and use spend-based.
+- Data center regions for any cloud AI workloads (for grid intensity factors).
+- Any existing sustainability reporting IT has done for cloud infrastructure (some teams already track cloud emissions through tools like Azure Carbon Dashboard or Google Carbon Footprint Report — these can be cross-referenced).
+
+The data request conversation often surfaces organizational gaps. If IT doesn't know what AI services are in use, that's a shadow IT problem that the ESG report will inadvertently expose. Flag it for the client as a governance issue, not just a data issue.
+
+## Framing AI Emissions in the Report Narrative
+
+This is where I see advisors make one of two mistakes: either they omit AI emissions entirely (not defensible, increasingly), or they present spend-based estimates with false precision (not credible, equally problematic).
+
+The correct framing is confident about the obligation, transparent about the methodology, and explicit about the uncertainty.
+
+**What to say about the regulatory basis:**
+> "Purchased AI services are included in our Scope 3 Category 1 inventory in accordance with ESRS E1-6 and GHG Protocol Category 1 guidance, which requires reporting of emissions associated with all purchased goods and services."
+
+This sentence establishes the regulatory basis without hedging. Don't bury this or present it as an interpretation. It isn't one.
+
+**What to say about the methodology:**
+> "AI service emissions for [reporting year] were calculated using a spend-based approach, applying [factor source, e.g., IEA average data center emissions intensity] to total vendor spend of [€X]. This methodology is consistent with GHG Protocol Category 1 spend-based calculation guidance and reflects best available data for this category."
+
+Name the factor source. Name the vendor spend figure. Name the methodology. Don't leave auditors to infer what you did.
+
+**What to say about precision:**
+> "Supplier-specific emissions factors for AI services are not yet widely available. The figures reported represent estimates with inherent uncertainty. We expect methodology precision to improve as vendor-reported data and industry standards mature, and intend to migrate toward [activity-based / hybrid] calculation in [year]."
+
+This language does three things: it acknowledges the uncertainty honestly, it signals that the gap is systemic (not just your client's failure), and it commits to improvement. That's what limited assurance auditors want to see — not precision you don't have, but methodology awareness and a credible path to improvement.
+
+**What not to say:**
+Don't present a spend-based figure as if it's an exact measurement. Don't round to a suspiciously clean number without explaining the methodology. Don't use "estimated" as a standalone disclaimer without explaining what methodology produced the estimate and why.
+
+The standard is defensibility, not perfection. A well-documented spend-based calculation with transparent factor sources and acknowledged uncertainty will hold up in a limited assurance review. An undocumented figure — or no figure at all — will not.
+
+## The Advisor's Role Here
+
+The reason this problem is landing on external advisors rather than internal teams is the same reason most Scope 3 problems land there: the data is cross-functional, the methodology is specialized, and internal sustainability teams are already stretched across a full CSRD disclosure.
+
+Your value as an advisor in this space is knowing the methodology landscape well enough to recommend the right approach for each client's context, being able to run the data request conversation with finance and IT without getting lost in the weeds, and being able to write the disclosure language with the confidence that comes from having done this before.
+
+If your clients are asking about AI emissions and you're not sure what to tell them, now you are.
+
+---
+
+*Salish Sea Consulting advises organizations on CSRD-compliant carbon accounting programs, including Scope 3 Category 1 methodology for purchased AI services. For advisor partnerships or client referrals, [get in touch](/contact).*
