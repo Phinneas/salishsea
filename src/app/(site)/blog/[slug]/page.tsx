@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: Props) {
             'prose prose-neutral max-w-none',
             'dark:prose-invert',
             'prose-headings:font-bold prose-headings:tracking-tight prose-headings:font-serif',
-            'prose-h2:text-2xl prose-h3:text-xl',
+            'prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg',
             'prose-a:no-underline hover:prose-a:underline',
             'prose-img:rounded-lg prose-img:shadow-sm',
             'prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none',
@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: Props) {
           ].join(' ')}
           style={{ '--tw-prose-links': 'var(--ssc-seafoam-deep)' } as React.CSSProperties}
         >
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </div>
       </article>
     </div>
