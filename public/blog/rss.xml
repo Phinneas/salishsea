@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Salish Sea Consulting Blog</title>
+    <link>https://salishseaconsulting.com/blog/</link>
+    <description>Latest articles from Salish Sea Consulting</description>
+    <language>en</language>
+    <atom:link href="https://salishseaconsulting.com/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>How to Communicate El Niño–Driven Climate Risk in 2026 (Grant, Report, and Outreach Messaging)</title>
+      <link>https://salishseaconsulting.com/blog/how-to-communicate-el-niodriven-climate-risk-in-2026-grant-report-and-outreach-m.html</link>
+      <description>How to Communicate El Niño–Driven Climate Risk in 2026 (Grant, Report, and Outreach Messaging) In 2026 , you cannot afford climate risk messaging that reads ...</description>
+      <pubDate>Fri, 14 Aug 2026 00:57:38 GMT</pubDate>
+      <guid isPermaLink="true">https://salishseaconsulting.com/blog/how-to-communicate-el-niodriven-climate-risk-in-2026-grant-report-and-outreach-m.html</guid>
+    </item>
+  </channel>
+</rss>
