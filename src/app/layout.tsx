@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     title: 'Salish Sea Consulting',
     description: 'Content and communications for sustainability conscious brands. Conversion copywriting, grant writing, and custom marketing tools.',
   },
+  alternates: {
+    canonical: '/',
+  },
   other: {
     'google-site-verification': 'p02VFLvUK3DMNxL-dHzjEhpdyjl1jzuLC2HhnktqiDA',
   },

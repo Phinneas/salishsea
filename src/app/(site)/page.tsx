@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Salish Sea Consulting | Communications that match your impact',
   description:
     'Brand copywriting and sustainability research reports for sustainability-conscious brands, built to earn trust, drive action, and reflect the depth of your work.',
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function HomePage() {

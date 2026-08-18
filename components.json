@@ -10,12 +10,15 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
-    "hooks": "@/hooks",
-    "lib": "@/lib",
     "utils": "@/lib/utils",
-    "ui": "@/components/ui"
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
   },
-  "iconLibrary": "lucide"
+  "registries": {
+    "@loading-ui": "https://loading-ui.com/r/{name}.json"
+  }
 }

@@ -8,6 +8,9 @@ import { SectionHero } from '@/components/site/SectionHero'
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Insights on environmental consulting, conservation, and Pacific Northwest ecology.',
+  alternates: {
+    canonical: '/blog/',
+  },
 }
 
 export default function BlogPage() {

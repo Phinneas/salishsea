@@ -1,0 +1,29 @@
+# Ghost-specific URLs → /blog/
+/tag/* /blog/ 301
+/author/* /blog/ 301
+/page/* /blog/ 301
+/rss/ /blog/ 301
+/rss /blog/ 301
+/feed/ /blog/ 301
+/feed /blog/ 301
+/ghost/ /blog/ 301
+/wp-admin/* /blog/ 301
+/wp-login* /blog/ 301
+/admin/ /blog/ 301
+
+# Old non-blog Ghost pages → relevant pages
+/what-is-email-marketing/ /blog/ 301
+/green-web-hosting/ /blog/green-cloud/ 301
+/green-web-hosting /blog/green-cloud/ 301
+/sustainability-marketing/ /blog/sustainability-content-writer/ 301
+/sustainability-marketing /blog/sustainability-content-writer/ 301
+/sustainable-websites/ /blog/ 301
+/sustainable-websites /blog/ 301
+/nonprofit-grant-writing/ /blog/nonprofit-copywriting/ 301
+/nonprofit-grant-writing /blog/nonprofit-copywriting/ 301
+/connecting-through-storytelling/ /blog/storytelling-for-copywriting/ 301
+/brand-storytelling-formats/ /blog/storytelling-for-copywriting/ 301
+/heros-journey-copywriting/ /blog/storytelling-copywriter/ 301
+
+# Catch-all: old Ghost root-level blog posts → /blog/:splat/
+/* /blog/:splat/ 301

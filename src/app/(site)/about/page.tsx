@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     'Chester Beard — sustainability copywriter and researcher with 20 years inside the sustainable business world. Brand copywriting, sustainability research reports, and grant writing for purpose-driven organizations.',
+  alternates: {
+    canonical: '/about/',
+  },
 }
 
 const credentials = [

@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Services',
   description:
     'Sustainable brand copywriting, sustainability research reports, and grant writing for purpose-driven organizations. See all services and pricing from Salish Sea Consulting.',
+  alternates: {
+    canonical: '/services/',
+  },
 }
 
 const brandCopywriting = [
