@@ -25,5 +25,33 @@
 /brand-storytelling-formats/ /blog/storytelling-for-copywriting/ 301
 /heros-journey-copywriting/ /blog/storytelling-copywriter/ 301
 
+# --- Real site paths: serve as-is (MUST come before the catch-all) ---
+# A 200 rewrite passes the request through to the static asset without changing
+# the URL, breaking the catch-all out of the loop for live site routes.
+/ /index.html 200
+/index.html /index.html 200
+/blog/ /blog/index.html 200
+/blog/* /blog/:splat 200
+/about/ /about/index.html 200
+/about/* /about/:splat 200
+/services/ /services/index.html 200
+/services/* /services/:splat 200
+/contact/ /contact/index.html 200
+/contact/* /contact/:splat 200
+/work/ /work/index.html 200
+/work/* /work/:splat 200
+/images/* /images/:splat 200
+/stamps/* /stamps/:splat 200
+/_next/* /_next/:splat 200
+/chester-beard.jpg /chester-beard.jpg 200
+/ssc-logo.png /ssc-logo.png 200
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
+/index.txt /index.txt 200
+/404.html /404.html 200
+/404 /404 200
+
 # Catch-all: old Ghost root-level blog posts → /blog/:splat/
+# NOTE: any new top-level route or asset added to the site must also be
+# added to the passthrough block above, or it will be swallowed by this rule.
 /* /blog/:splat/ 301
