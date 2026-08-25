@@ -174,5 +174,62 @@ Track in GA4 (or your analytics of choice) with page paths `/skills*`.
 ## 10. Current status
 
 - Hub, category pages, skill page template, and all 28 entries are built and live.
-- All skills are `status: 'coming-soon'` — content sections get filled in per
-  skill as they are written (flip `status` to `'published'` to unlock full pages).
+- **Phase 1 (content-strategy, 6 skills) is fully documented** — what it does,
+  scenarios, methodology with time estimates and tools, mistakes with impact,
+  output, workflow connections, time & resources, use-in-Claude. Published.
+- Phases 2–3 remain `coming-soon` shells; their documentation ships per the
+  rollout below.
+
+## 11. Rollout phases & content state
+
+| Phase | Categories | Skills | Status |
+|---|---|---|---|
+| 1 | content-strategy | 6 | ✅ documented + published |
+| 2 | grant-writing, esg-sustainability | 12 | shell (coming-soon) |
+| 3 | ai-visibility, small-org-operations, tools | 13 | shell (coming-soon) |
+
+### Keyword targets (per Phase 1 skill page)
+
+| Skill | Keyword targets |
+|---|---|
+| Content Plan | content planning · AI-era SEO · editorial roadmap · content strategy · search visibility |
+| Design What-If | design feedback · design critique · creative direction · design review process · emotional target |
+| Market Research | market research · buyer language · messaging framework · ICP research · voice of customer |
+| SE Ranking + DataForSEO | keyword research · SE Ranking · DataForSEO · AI visibility audit · keyword strategy |
+| SEO Technical Audit | technical SEO audit · crawl issues · site architecture · search visibility · SEO fixes |
+| Design Brief Enforcer | creative brief · design brief · art direction · design specs · creative review process |
+
+### Estimated time budget (Phase 1)
+
+| Skill | First run | Iterations |
+|---|---|---|
+| Content Plan | 6–8 h | 2–3 h / quarter |
+| Design What-If | 3–4 h | 1–2 h |
+| Market Research | 5–7 h | 2–3 h |
+| SE Ranking + DataForSEO | 5–6 h | 2–3 h / month |
+| SEO Technical Audit | 4–6 h | 1–2 h / quarter |
+| Design Brief Enforcer | 2–3 h | 1 h / project |
+
+### Real Example sections
+
+The page template includes a Real Example section (findings, action, result,
+quote, time investment) that renders when `realExample` is set in
+`src/config/skill-content.ts`. It is intentionally driven by production data
+from the user's own properties (BinLocators, Soak Colorado, GaiaVerity,
+Salish Sea Consulting, etc.) — drop the run's findings into the content file
+when documented. No fabricated metrics are shipped.
+
+### GitHub SKILL.md state
+
+No public SKILL.md files exist yet; Phase 1 pages render the note
+"Technical SKILL.md coming soon — this page is the reference until it ships."
+Add `githubUrl` to the content entry when a spec ships, and the button appears.
+
+## 12. Content authoring
+
+Deep documentation lives in `src/config/skill-content.ts`, keyed by skill slug.
+Adding a skill's documentation:
+1. Fill the `SkillContent` entry (sections 1–11 per the template).
+2. Set the skill's `status` to `'published'` in `src/config/skills.ts`.
+3. Optionally add `realExample` from production data.
+4. Pages, metadata, related links, and sitemap update automatically.

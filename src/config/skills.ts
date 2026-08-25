@@ -29,6 +29,23 @@ export type CategorySlug =
 
 export type SkillStatus = 'published' | 'coming-soon'
 
+/**
+ * Rollout phases (see docs/skills-architecture.md):
+ *   Phase 1 — content-strategy (6 skills)
+ *   Phase 2 — grant-writing + esg-sustainability (12 skills)
+ *   Phase 3 — ai-visibility + small-org-operations + tools (13 skills)
+ */
+export type SkillPhase = 1 | 2 | 3
+
+export const skillPhase: Record<CategorySlug, SkillPhase> = {
+  'content-strategy': 1,
+  'grant-writing': 2,
+  'esg-sustainability': 2,
+  'ai-visibility': 3,
+  'small-org-operations': 3,
+  tools: 3,
+}
+
 export interface Skill {
   /** URL slug: /skills/[category]/[slug]/ */
   slug: string
@@ -288,7 +305,7 @@ export const categories: SkillCategory[] = [
         name: 'SEO Technical Audit',
         tagline: 'Catch the technical issues quietly capping your rankings.',
         whenToUse: 'When traffic plateaus and the content is good but something is off.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['can-ai-find-you', 'seranking-dataforseo', 'answer-page-rebuilder'],
       },
       {
@@ -296,7 +313,7 @@ export const categories: SkillCategory[] = [
         name: 'SE Ranking + DataForSEO',
         tagline: 'Run keyword research with SE Ranking and DataForSEO like a pro.',
         whenToUse: 'When you need search demand data you can actually act on.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['seo-technical-audit', 'market-research', 'content-plan-reasoning-lift'],
       },
       {
@@ -304,7 +321,7 @@ export const categories: SkillCategory[] = [
         name: 'Content Plan Reasoning Lift',
         tagline: 'Rewrite content plans so every piece has a reason to exist.',
         whenToUse: 'When the content calendar is full but the logic behind it is thin.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['market-research', 'seranking-dataforseo', 'design-brief-enforcer'],
       },
       {
@@ -312,7 +329,7 @@ export const categories: SkillCategory[] = [
         name: 'Market Research',
         tagline: 'Research a market before you write a word of strategy.',
         whenToUse: 'When you are entering a new audience and assumptions are not enough.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['content-plan-reasoning-lift', 'seranking-dataforseo', 'design-what-if'],
       },
       {
@@ -320,7 +337,7 @@ export const categories: SkillCategory[] = [
         name: 'Design What-If',
         tagline: 'Stress-test design decisions against real user scenarios.',
         whenToUse: 'When a design feels right but has not been challenged.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['design-brief-enforcer', 'market-research', 'content-plan-reasoning-lift'],
       },
       {
@@ -328,7 +345,7 @@ export const categories: SkillCategory[] = [
         name: 'Design Brief Enforcer',
         tagline: 'Keep creative work on-brief from kickoff to delivery.',
         whenToUse: 'When briefs drift and revisions multiply.',
-        status: 'coming-soon',
+        status: 'published',
         relatedSlugs: ['design-what-if', 'content-plan-reasoning-lift', 'market-research'],
       },
     ],

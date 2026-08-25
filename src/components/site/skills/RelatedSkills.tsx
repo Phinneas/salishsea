@@ -2,9 +2,12 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { Skill } from '@/config/skills'
 import { getRelatedSkills } from '@/config/skills'
+import { skillContent } from '@/config/skill-content'
 
-/** Skill page sidebar: 2-3 related skills (creates the mesh navigation). */
+/** Skill page sidebar: 2-3 related skills with relationship labels (mesh navigation). */
 export function RelatedSkills({ skill }: { skill: Skill }) {
+  const content = skillContent[skill.slug]
+  const relationships = new Map((content?.related ?? []).map(r => [r.slug, r.relationship]))
   const related = getRelatedSkills(skill)
   if (related.length === 0) return null
 
@@ -28,9 +31,11 @@ export function RelatedSkills({ skill }: { skill: Skill }) {
                 {relatedSkill.name}
                 <ArrowRight className='h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5' style={{ color: 'var(--ssc-seafoam-deep)' }} />
               </span>
-              <span className='mt-1 block text-xs leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
-                {relatedSkill.tagline}
-              </span>
+              {relationships.get(relatedSkill.slug) && (
+                <span className='mt-1 block text-xs leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
+                  {relationships.get(relatedSkill.slug)}
+                </span>
+              )}
             </Link>
           </li>
         ))}
