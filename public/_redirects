@@ -40,6 +40,8 @@
 /contact/* /contact/:splat 200
 /work/ /work/index.html 200
 /work/* /work/:splat 200
+/skills/ /skills/index.html 200
+/skills/* /skills/:splat 200
 /images/* /images/:splat 200
 /stamps/* /stamps/:splat 200
 /_next/* /_next/:splat 200
