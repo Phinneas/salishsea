@@ -154,7 +154,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'answer-page-rebuilder', relationship: 'Often used after — restructures priority pages into the answer format' },
       { slug: 'market-research', relationship: 'Pairs with — supplies the buyer language that makes the question map real' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/content-plan/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the Content Plan methodology to build my editorial roadmap." Provide your buyer questions, current content inventory, and an AI answer audit as inputs.',
   },
@@ -231,7 +231,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'market-research', relationship: 'Pairs with — buyer language grounds the emotional target in reality' },
       { slug: 'content-plan-reasoning-lift', relationship: 'Alternative approach — content-side frameworks for the same "decide, don\u2019t drift" problem' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/design-what-if/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the Design What-If methodology to pressure-test this design." Paste the current direction, the variants, and the intended emotional target.',
   },
@@ -314,7 +314,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'design-what-if', relationship: 'Pairs with — grounds the emotional target in real buyer language' },
       { slug: 'seranking-dataforseo', relationship: 'Often used after — sizes the demand behind each pain and gain' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/market-research/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the Market Research methodology to build a messaging framework." Provide the forum threads, reviews, and support ticket exports as source material.',
   },
@@ -399,7 +399,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'content-plan-reasoning-lift', relationship: 'Often used after — structures the calendar into a roadmap' },
       { slug: 'answer-page-rebuilder', relationship: 'Often used after — formats priority pages for answer engines' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/seranking-dataforseo/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the SE Ranking + DataForSEO methodology to build my content calendar." Provide the visibility audit gaps and your keyword tool exports.',
   },
@@ -483,7 +483,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'seranking-dataforseo', relationship: 'Often used after — builds the calendar on a clean foundation' },
       { slug: 'answer-page-rebuilder', relationship: 'Pairs with — page structure is the other half of visibility' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/seo-technical-audit/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the SEO Technical Audit methodology to triage this crawl." Paste the crawl export and Search Console data; it will return the nine-class triage and a prioritized fix list.',
   },
@@ -566,7 +566,7 @@ export const skillContent: Record<string, SkillContent> = {
       { slug: 'market-research', relationship: 'Pairs with — buyer language grounds the aesthetic vocabulary' },
       { slug: 'content-plan-reasoning-lift', relationship: 'Adjacent — same "decide, don\u2019t drift" discipline applied to content' },
     ],
-    githubNote: 'Technical SKILL.md coming soon — this page is the reference until it ships.',
+    githubUrl: 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/design-brief-enforcer/SKILL.md',
     useInClaude:
       'Ask Claude: "Use the Design Brief Enforcer methodology to audit this brief." Paste the brief and references; it will flag vague terms and return the spec values.',
   },

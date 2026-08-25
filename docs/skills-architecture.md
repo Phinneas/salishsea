@@ -221,9 +221,18 @@ when documented. No fabricated metrics are shipped.
 
 ### GitHub SKILL.md state
 
-No public SKILL.md files exist yet; Phase 1 pages render the note
-"Technical SKILL.md coming soon — this page is the reference until it ships."
-Add `githubUrl` to the content entry when a spec ships, and the button appears.
+The `salish-sea-skills` monorepo lives in this repo at `skills/salish-sea-skills/`
+(README, LICENSE, GITHUB_SETUP, and one folder per skill). Phase 1 skills have
+real `SKILL.md` + `README.md` files; the 22 Phase 2-3 skill folders are empty
+(kept with `.gitkeep`).
+
+Phase 1 pages link to the GitHub spec:
+`github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/<dir>/SKILL.md`.
+Note the directory-name differences: repo `content-plan` == site slug
+`content-plan-reasoning-lift`; repo `portage` == site slug `portage-ghost2astro`.
+
+Push `skills/salish-sea-skills` to GitHub (see its GITHUB_SETUP.md) to make the
+links resolve; until then the buttons 404.
 
 ## 12. Content authoring
 
