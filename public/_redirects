@@ -28,8 +28,8 @@
 # --- Real site paths: serve as-is (MUST come before the catch-all) ---
 # A 200 rewrite passes the request through to the static asset without changing
 # the URL, breaking the catch-all out of the loop for live site routes.
-/ /index.html 200
-/index.html /index.html 200
+# NOTE: / and /index.html are intentionally NOT listed here — Cloudflare Pages
+# serves the root from index.html natively and 308s /index.html -> / itself.
 /blog/ /blog/index.html 200
 /blog/* /blog/:splat 200
 /about/ /about/index.html 200
@@ -52,6 +52,8 @@
 /404 /404 200
 
 # Catch-all: old Ghost root-level blog posts → /blog/:splat/
-# NOTE: any new top-level route or asset added to the site must also be
-# added to the passthrough block above, or it will be swallowed by this rule.
-/* /blog/:splat/ 301
+# Uses /*/ so it matches /old-post/ but NOT the bare root / (which Cloudflare
+# serves natively from index.html). Any new top-level route or asset added to
+# the site must also be added to the passthrough block above, or it will be
+# swallowed by this rule.
+/*/ /blog/:splat/ 301
