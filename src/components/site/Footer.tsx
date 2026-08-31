@@ -23,6 +23,7 @@ export function Footer() {
                 { href: '/services', label: 'Services' },
                 { href: '/work', label: 'Work' },
                 { href: '/skills', label: 'Skills' },
+                { href: '/templates', label: 'Templates' },
                 { href: '/about', label: 'About' },
                 { href: '/blog', label: 'Blog' },
                 { href: '/contact', label: 'Contact' },

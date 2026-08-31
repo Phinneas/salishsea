@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Breadcrumb } from '@/components/site/skills/Breadcrumb'
 import { RelatedSkills } from '@/components/site/skills/RelatedSkills'
+import { SkillSpecLink } from '@/components/site/skills/SkillSpecLink'
 import { getSkill, categories } from '@/config/skills'
 import { skillContent } from '@/config/skill-content'
 
@@ -329,7 +330,8 @@ export default async function SkillPage({ params }: Props) {
         <div className='mx-auto max-w-6xl px-4 pb-20 sm:px-6'>
           <div className='grid gap-10 lg:grid-cols-[1fr_300px]'>
             <div className='min-w-0'>{body}</div>
-            <div className='lg:pt-2'>
+            <div className='space-y-6 lg:pt-2'>
+              <SkillSpecLink categorySlug={category.slug} skillSlug={skill.slug} skillName={skill.name} />
               <RelatedSkills skill={skill} />
             </div>
           </div>
@@ -350,6 +352,9 @@ export default async function SkillPage({ params }: Props) {
                 When to use this
               </p>
               <p className='text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{skill.whenToUse}</p>
+            </div>
+            <div className='mt-6 text-left'>
+              <SkillSpecLink categorySlug={category.slug} skillSlug={skill.slug} skillName={skill.name} />
             </div>
           </div>
 

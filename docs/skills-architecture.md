@@ -222,17 +222,25 @@ when documented. No fabricated metrics are shipped.
 ### GitHub SKILL.md state
 
 The `salish-sea-skills` monorepo lives in this repo at `skills/salish-sea-skills/`
-(README, LICENSE, GITHUB_SETUP, and one folder per skill). Phase 1 skills have
-real `SKILL.md` + `README.md` files; the 22 Phase 2-3 skill folders are empty
-(kept with `.gitkeep`).
+(README, LICENSE, GITHUB_SETUP, and one folder per skill). On GitHub, 13 skills
+have published `SKILL.md` specs: all 6 content-strategy skills and all 7
+grant-writing skills. The remaining 15 skill folders are empty (kept with
+`.gitkeep`). The local copy under `skills/salish-sea-skills/` only carries the
+6 content-strategy specs — pull the public repo for the latest.
 
-Phase 1 pages link to the GitHub spec:
-`github.com/Phinneas/salish-sea-skills/blob/main/skills/content-strategy/<dir>/SKILL.md`.
+Pages link to the GitHub spec:
+`github.com/Phinneas/salish-sea-skills/blob/main/skills/<category>/<dir>/SKILL.md`.
 Note the directory-name differences: repo `content-plan` == site slug
 `content-plan-reasoning-lift`; repo `portage` == site slug `portage-ghost2astro`.
 
-Push `skills/salish-sea-skills` to GitHub (see its GITHUB_SETUP.md) to make the
-links resolve; until then the buttons 404.
+Which skills have a shipped spec is declared in `SKILL_SPEC_DIRS` in
+`src/config/skills.ts` (keyed by `<category>/<site slug>`). `getSkillSpecUrl()`
+resolves the public URL and `getPublishedSpecs()` lists them all. The
+`SkillSpecLink` component (`src/components/site/skills/SkillSpecLink.tsx`)
+renders the spec card on every skill page — in the sidebar on published pages
+and inside the coming-soon shell — and the /skills hub shows a "The actual
+files" reference section listing every published SKILL.md. When a new spec
+ships on GitHub, add one line to `SKILL_SPEC_DIRS` and every page updates.
 
 ## 12. Content authoring
 

@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { ArrowRight, ArrowDown } from 'lucide-react'
+import { ArrowRight, ArrowDown, ExternalLink, Github } from 'lucide-react'
 import type { Metadata } from 'next'
 import { SectionHero } from '@/components/site/SectionHero'
-import { categories, getSkill } from '@/config/skills'
+import { categories, getSkill, getPublishedSpecs } from '@/config/skills'
 
 export const metadata: Metadata = {
   title: 'Skills Library',
@@ -164,6 +164,72 @@ export default function SkillsPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <div style={{ borderTop: '1px solid var(--ssc-line-light)' }} />
+
+      {/* Published SKILL.md specifications */}
+      <section className='px-4 py-20 sm:px-6' style={{ background: 'var(--ssc-paper)', color: 'var(--ssc-text-dark)' }}>
+        <div className='mx-auto max-w-3xl'>
+          <h2 className='font-serif mb-2 text-2xl font-bold tracking-tight'>The actual files</h2>
+          <p className='mb-10' style={{ color: 'var(--ssc-text-dark-mute)' }}>
+            These are not prompts. Each one is a formalized framework shipped as a SKILL.md specification — staged
+            methodology, failure modes, and output contracts — versioned in the public repo and built for production
+            use. Import one into Claude and run it.
+          </p>
+
+          <div className='space-y-8'>
+            {categories
+              .map(category => ({
+                category,
+                specs: getPublishedSpecs().filter(s => s.category.slug === category.slug),
+              }))
+              .filter(({ specs }) => specs.length > 0)
+              .map(({ category, specs }) => (
+                <div key={category.slug}>
+                  <p className='font-space-mono mb-3 text-[0.7rem] font-bold uppercase tracking-[0.16em]' style={{ color: 'var(--ssc-seafoam-deep)' }}>
+                    {category.name}
+                  </p>
+                  <ul className='space-y-2'>
+                    {specs.map(({ skill, url }) => (
+                      <li key={skill.slug}>
+                        <a
+                          href={url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='group flex items-center gap-3 rounded-[var(--ssc-r)] border bg-white px-4 py-3 transition-all duration-300 hover:-translate-y-[1px] hover:shadow-md'
+                          style={{ borderColor: 'var(--ssc-line-light)' }}
+                        >
+                          <Github className='h-4 w-4 shrink-0' style={{ color: 'var(--ssc-seafoam-deep)' }} />
+                          <span className='font-serif font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>
+                            {skill.name}
+                          </span>
+                          <span className='hidden font-space-mono text-xs sm:inline' style={{ color: 'var(--ssc-text-dark-mute)' }}>
+                            SKILL.md
+                          </span>
+                          <ExternalLink className='ml-auto h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5' style={{ color: 'var(--ssc-seafoam-deep)' }} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+          </div>
+
+          <p className='mt-8 text-sm leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
+            The full library lives at{' '}
+            <a
+              href='https://github.com/Phinneas/salish-sea-skills'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='font-semibold hover:underline'
+              style={{ color: 'var(--ssc-seafoam-deep)' }}
+            >
+              github.com/Phinneas/salish-sea-skills
+            </a>
+            . More specs ship as the remaining skills are documented.
+          </p>
         </div>
       </section>
 

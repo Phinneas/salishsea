@@ -12,6 +12,7 @@ const nav = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'Skills', href: '/skills' },
+  { label: 'Templates', href: '/templates' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
@@ -43,7 +44,7 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className='hidden items-center gap-6 md:flex'>
+        <nav className='hidden items-center gap-5 lg:flex'>
           {nav.map(item => (
             <Link
               key={item.href}
@@ -58,7 +59,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className='hidden items-center gap-2 md:flex'>
+        <div className='hidden items-center gap-2 lg:flex'>
           <ThemeToggle />
           <Link
             href='/contact'
@@ -74,7 +75,7 @@ export function Header() {
         </div>
 
         {/* Mobile menu toggle */}
-        <div className='flex items-center gap-2 md:hidden'>
+        <div className='flex items-center gap-2 lg:hidden'>
           <ThemeToggle />
           <button onClick={() => setOpen(!open)} aria-label='Toggle menu' style={{ color: 'var(--ssc-text-dark)' }}>
             {open ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
@@ -84,7 +85,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {open && (
-        <div className='border-t md:hidden' style={{ borderColor: 'var(--ssc-line-light)' }}>
+        <div className='border-t lg:hidden' style={{ borderColor: 'var(--ssc-line-light)' }}>
           <nav className='flex flex-col gap-1 px-4 py-3'>
             {nav.map(item => (
               <Link

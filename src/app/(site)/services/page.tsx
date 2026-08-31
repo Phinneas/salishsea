@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { ArrowRight, Globe, Rocket, Calendar, FileText, BarChart3, BookOpen, Scroll } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -22,7 +21,6 @@ const brandCopywriting = [
     bestFor: 'brands launching, rebranding, or finally getting their story straight online.',
     description:
       "Full website copywriting — typically 5–7 pages including Home, About, Services, and Contact. Includes a discovery call, one round of revisions, and a brand voice guide so your copy stays consistent long after we're done working together.",
-    badge: 'Most Popular',
   },
   {
     icon: Rocket,
@@ -31,7 +29,6 @@ const brandCopywriting = [
     bestFor: 'product launches, rebrands, and campaign moments that need to land.',
     description:
       "Copy for a specific launch or campaign: landing pages, launch emails, social captions, and supporting materials. Everything you need to make your moment count — written in a voice that's unmistakably yours.",
-    badge: null,
   },
   {
     icon: Calendar,
@@ -40,7 +37,6 @@ const brandCopywriting = [
     bestFor: 'brands that need a consistent, sustainability-fluent voice on an ongoing basis.',
     description:
       'A monthly partnership for brands that are always communicating — website updates, blog content, email newsletters, campaign copy, and more. Priority scheduling, no project minimums, and a collaborator who knows your brand as well as you do.',
-    badge: 'Retainer',
   },
 ]
 
@@ -52,7 +48,6 @@ const researchReports = [
     bestFor: 'annual or milestone impact reports for organizations ready to account for their progress publicly.',
     description:
       "Research, narrative development, and full copy for your impact report — structured to tell your sustainability story with honesty and intention. Includes data synthesis, stakeholder-appropriate framing, and a document that you're genuinely proud to put your name on.",
-    badge: null,
   },
   {
     icon: BarChart3,
@@ -61,7 +56,6 @@ const researchReports = [
     bestFor: 'organizations communicating ESG performance to investors and key stakeholders.',
     description:
       'Copy and communications strategy for ESG-related content: investor letters, sustainability disclosures, stakeholder briefings, and supporting materials. Written to meet the expectations of sophisticated audiences without losing the human behind the data.',
-    badge: null,
   },
   {
     icon: BookOpen,
@@ -70,7 +64,6 @@ const researchReports = [
     bestFor: 'research-backed thought leadership for organizations with a point of view worth publishing.',
     description:
       'A fully researched and written white paper positioned to establish authority in your space. Includes secondary research, argument development, and final copy — ready for download, distribution, or press.',
-    badge: null,
   },
   {
     icon: Scroll,
@@ -79,7 +72,6 @@ const researchReports = [
     bestFor: 'funding conversations, partnership pitches, or stakeholder introductions.',
     description:
       "One tight, high-impact document — 4–8 pages — that says everything essential and nothing extra. Perfect for grant applications, investor decks, or first-impression moments.",
-    badge: 'Quick Win',
   },
 ]
 
@@ -90,14 +82,6 @@ function ServiceCard({ service }: { service: typeof brandCopywriting[number] | t
       className='group relative flex flex-col overflow-hidden rounded-[var(--ssc-r)] border bg-white p-[38px_32px_34px] transition-all duration-[450ms] hover:-translate-y-[8px] hover:shadow-[0_40px_70px_-38px_rgba(10,30,41,.4)] hover:border-transparent'
       style={{ borderColor: 'var(--ssc-line-light)' }}
     >
-      {service.badge && (
-        <Badge
-          className='absolute -top-2.5 left-5 text-xs text-white'
-          style={{ background: 'var(--ssc-seafoam-deep)' }}
-        >
-          {service.badge}
-        </Badge>
-      )}
       <div
         className='mb-6 grid h-[56px] w-[56px] place-items-center rounded-[15px]'
         style={{ background: 'linear-gradient(140deg,#0e2b38,#14515e)', color: 'var(--ssc-seafoam)' }}

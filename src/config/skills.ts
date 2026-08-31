@@ -387,6 +387,50 @@ export const categories: SkillCategory[] = [
   },
 ]
 
+// --- Published SKILL.md specs ------------------------------------------------
+
+/**
+ * Skills with a published SKILL.md specification in the public repo
+ * (github.com/Phinneas/salish-sea-skills). Keyed by "<category>/<skill slug>";
+ * the value is the repo directory, which only differs from the key when the
+ * site slug and the repo directory name diverge (e.g. content-plan).
+ */
+const SKILL_SPEC_DIRS: Record<string, string> = {
+  'grant-writing/nofo-decoder': 'grant-writing/nofo-decoder',
+  'grant-writing/grant-fit-scorer': 'grant-writing/grant-fit-scorer',
+  'grant-writing/logic-model-builder': 'grant-writing/logic-model-builder',
+  'grant-writing/budget-narrative-writer': 'grant-writing/budget-narrative-writer',
+  'grant-writing/letter-of-support-kit': 'grant-writing/letter-of-support-kit',
+  'grant-writing/post-award-reporting': 'grant-writing/post-award-reporting',
+  'grant-writing/grant-deadline-scout': 'grant-writing/grant-deadline-scout',
+  'content-strategy/seo-technical-audit': 'content-strategy/seo-technical-audit',
+  'content-strategy/seranking-dataforseo': 'content-strategy/seranking-dataforseo',
+  'content-strategy/content-plan-reasoning-lift': 'content-strategy/content-plan',
+  'content-strategy/market-research': 'content-strategy/market-research',
+  'content-strategy/design-what-if': 'content-strategy/design-what-if',
+  'content-strategy/design-brief-enforcer': 'content-strategy/design-brief-enforcer',
+}
+
+const SKILL_REPO_BASE = 'https://github.com/Phinneas/salish-sea-skills/blob/main/skills'
+
+/** Public URL of a skill's SKILL.md spec, or undefined if it has not shipped. */
+export function getSkillSpecUrl(categorySlug: string, skillSlug: string): string | undefined {
+  const dir = SKILL_SPEC_DIRS[`${categorySlug}/${skillSlug}`]
+  return dir ? `${SKILL_REPO_BASE}/${dir}/SKILL.md` : undefined
+}
+
+/** Every skill with a published SKILL.md spec, for reference listings. */
+export function getPublishedSpecs(): { category: SkillCategory; skill: Skill; url: string }[] {
+  const specs: { category: SkillCategory; skill: Skill; url: string }[] = []
+  for (const category of categories) {
+    for (const skill of category.skills) {
+      const url = getSkillSpecUrl(category.slug, skill.slug)
+      if (url) specs.push({ category, skill, url })
+    }
+  }
+  return specs
+}
+
 // --- Lookup helpers ---------------------------------------------------------
 
 export function getCategory(slug: string): SkillCategory | undefined {
