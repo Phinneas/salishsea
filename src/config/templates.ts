@@ -272,18 +272,6 @@ export const templates: Template[] = [
     files: [{ name: 'ssc-business-continuity-plan-template-v1-0.docx', format: 'Word' }],
   },
   {
-    slug: 'sop-etsy',
-    name: 'SOP Template (Etsy)',
-    bestUse: 'Document repeatable shop operations, ownership, evidence, and review, with a product-business layout.',
-    status: 'free',
-    files: [{ name: 'ssc-sop-etsy-template-v1-0.docx', format: 'Word' }],
-    relatedSkill: {
-      category: 'small-org-operations',
-      slug: 'rfp-response',
-      label: 'Pairs with Small-Org Operations skills',
-    },
-  },
-  {
     slug: 'donation-acknowledgment-letter',
     name: 'Donation Acknowledgment Letter',
     bestUse: 'Issue compliant, donor-ready acknowledgment letters that document gifts for tax purposes.',
