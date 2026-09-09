@@ -290,7 +290,7 @@ export const chapters: Chapter[] = [
       {
         name: 'Brain Scriblr',
         slug: 'brain-scriblr',
-        url: 'https://www.brainscriblr.world',
+        url: 'https://www.mymcpshelf.com/blog?track=ai-field-notes',
         category: 'Newsletter',
         denom: '15¢',
         year: '’25',
