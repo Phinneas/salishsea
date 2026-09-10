@@ -44,3 +44,6 @@ next-env.d.ts
 public/r/
 public/r/
 public/r/
+
+# session transcripts (may contain secrets)
+.recall/

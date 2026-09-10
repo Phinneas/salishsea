@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { chapters, type Stamp } from '@/lib/stamp-data'
+import { chapters, stampCounts, type Stamp } from '@/lib/stamp-data'
 
 export function StampCollection() {
   const gridRefs = useRef<Map<string, HTMLDivElement | null>>(new Map())
@@ -99,11 +99,11 @@ export function StampCollection() {
           </p>
 
           <div className='mt-[26px] flex flex-wrap items-center justify-center gap-4 font-space-mono text-[11px] font-normal uppercase tracking-[0.16em]' style={{ color: 'var(--ssc-text-mute)' }}>
-            <span><b className='font-bold text-white'>20</b> Destinations</span>
+            <span><b className='font-bold text-white'>{stampCounts.total}</b> Destinations</span>
             <span style={{ color: 'var(--ssc-seafoam)' }}>&bull;</span>
-            <span><b className='font-bold text-white'>16</b> Now Open</span>
+            <span><b className='font-bold text-white'>{stampCounts.open}</b> Now Open</span>
             <span style={{ color: 'var(--ssc-seafoam)' }}>&bull;</span>
-            <span><b className='font-bold text-white'>4</b> Forthcoming</span>
+            <span><b className='font-bold text-white'>{stampCounts.forthcoming}</b> Forthcoming</span>
           </div>
 
           <p className='mt-[30px] font-space-mono text-[10px] uppercase tracking-[0.3em]' style={{ color: 'var(--ssc-text-mute)', opacity: 0.7 }}>
