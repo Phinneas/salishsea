@@ -9,13 +9,13 @@ export const dynamic = 'force-static'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE, priority: 1.0, changeFrequency: 'monthly' },
-    { url: `${BASE}/services`, priority: 0.9, changeFrequency: 'monthly' },
-    { url: `${BASE}/work`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${BASE}/skills`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${BASE}/templates`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${BASE}/about`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${BASE}/blog`, priority: 0.8, changeFrequency: 'weekly' },
-    { url: `${BASE}/contact`, priority: 0.7, changeFrequency: 'yearly' },
+    { url: `${BASE}/services/`, priority: 0.9, changeFrequency: 'monthly' },
+    { url: `${BASE}/work/`, priority: 0.8, changeFrequency: 'monthly' },
+    { url: `${BASE}/skills/`, priority: 0.8, changeFrequency: 'monthly' },
+    { url: `${BASE}/templates/`, priority: 0.7, changeFrequency: 'monthly' },
+    { url: `${BASE}/about/`, priority: 0.8, changeFrequency: 'monthly' },
+    { url: `${BASE}/blog/`, priority: 0.8, changeFrequency: 'weekly' },
+    { url: `${BASE}/contact/`, priority: 0.7, changeFrequency: 'yearly' },
   ]
 
   const skillRoutes: MetadataRoute.Sitemap = categories.flatMap(category => [
