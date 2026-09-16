@@ -25,6 +25,32 @@
 /brand-storytelling-formats/ /blog/storytelling-for-copywriting/ 301
 /heros-journey-copywriting/ /blog/storytelling-copywriter/ 301
 
+# Retired off-brand posts → /blog/
+/resolving-cascading-git-failures-multi-agent-macos/ /blog/ 301
+/seranking-seo-tool/ /blog/ 301
+/carrd-website-builder/ /blog/ 301
+/best-ai-note-taking-apps/ /blog/ 301
+
+# Grant-writing posts consolidated → /blog/grant-writing-resources/
+/grant-writing-vs-proposal-writing/ /blog/grant-writing-resources/ 301
+/developing-logic-models/ /blog/grant-writing-resources/ 301
+/grant-funding-logic-models/ /blog/grant-writing-resources/ 301
+/nonprofit-funding-models/ /blog/grant-writing-resources/ 301
+/grant-writing-challenges/ /blog/grant-writing-resources/ 301
+/grant-research-tools/ /blog/grant-writing-resources/ 301
+/grant-funding-letter-of-inquiry/ /blog/grant-writing-resources/ 301
+/how-to-pay-a-grant-writer/ /blog/grant-writing-resources/ 301
+/nonprofit-copywriting/ /blog/grant-writing-resources/ 301
+/nonprofit-copywriter/ /blog/grant-writing-resources/ 301
+/nonprofit-registration-guide/ /blog/grant-writing-resources/ 301
+/starting-an-oregon-nonprofit/ /blog/grant-writing-resources/ 301
+/nsf-sbir-grants/ /blog/grant-writing-resources/ 301
+/common-nonprofit-grants-in-2025/ /blog/grant-writing-resources/ 301
+/sample-letter-of-support/ /blog/grant-writing-resources/ 301
+/startup-funding-grants/ /blog/grant-writing-resources/ 301
+/sustainable-grant-proposal/ /blog/grant-writing-resources/ 301
+/artificial-intelligence-for-nonprofits/ /blog/grant-writing-resources/ 301
+
 # --- Real site paths: serve as-is (MUST come before the catch-all) ---
 # A 200 rewrite passes the request through to the static asset without changing
 # the URL, breaking the catch-all out of the loop for live site routes.

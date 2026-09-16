@@ -196,7 +196,7 @@ export default function ServicesPage() {
             A retained specialty — for the right partnership.
           </p>
           <p className='mt-6 leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
-            Grant writing is among the most specialized work I do, and I approach it selectively. I bring grant writing expertise to long-term client relationships — particularly for sustainability-focused organizations navigating complex funding landscapes. If you&apos;re exploring grant opportunities and looking for a collaborator who already understands your mission deeply, I&apos;d love to hear where you are in the process.
+            Grant writing is among the most specialized work I do, and I approach it selectively. I bring grant writing expertise to long-term client relationships — particularly for sustainability-focused organizations navigating complex funding landscapes. If you&apos;re exploring grant opportunities and looking for a collaborator who already understands your mission deeply, I&apos;d love to hear where you are in the process. For a comprehensive overview of grant writing topics — from logic models and LOIs to SBIR grants and nonprofit formation — see the <Link href='/blog/grant-writing-resources/' style={{ color: 'var(--ssc-seafoam-deep)' }}>Grant Writing Resource Guide</Link>.
           </p>
           <Link
             href='https://cal.com/chester-beard/30min'
