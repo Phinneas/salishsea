@@ -33,9 +33,11 @@ export interface BlogPost {
   published_at: string
   updated_at?: string
   author?: string
+  author_title?: string
   reading_time?: number
   featured?: boolean
   tags?: string[]
+  faq?: { q: string; a: string }[]
 }
 
 function estimateReadTime(content: string): number {
@@ -68,11 +70,13 @@ export function getAllPosts(): BlogPost[] {
         : '1970-01-01T00:00:00.000Z',
       updated_at: data.updatedAt ?? undefined,
       author: data.author ?? undefined,
+      author_title: data.authorTitle ?? undefined,
       reading_time: data.readTime ?? estimateReadTime(content),
       featured: data.featured ?? false,
       tags: data.tags
         ? String(data.tags).split(',').map((t: string) => t.trim()).filter(Boolean)
         : [],
+      faq: Array.isArray(data.faq) ? data.faq : undefined,
     } satisfies BlogPost
   })
 
@@ -100,11 +104,13 @@ export function getPost(slug: string): BlogPost | null {
     published_at: data.publishedAt ?? new Date().toISOString(),
     updated_at: data.updatedAt ?? undefined,
     author: data.author ?? undefined,
+    author_title: data.authorTitle ?? undefined,
     reading_time: data.readTime ?? estimateReadTime(content),
     featured: data.featured ?? false,
     tags: data.tags
       ? String(data.tags).split(',').map((t: string) => t.trim()).filter(Boolean)
       : [],
+    faq: Array.isArray(data.faq) ? data.faq : undefined,
   }
 }
 
