@@ -1,62 +1,69 @@
 ---
 title: "Your AI Stack Is a Scope 3 Problem. Your ESG Team Doesn't Know It Yet."
 slug: "csrd-ai-emissions-scope-3-reporting"
-excerpt: "Your organization is spending real money on purchased AI services. That spend is in finance. Under CSRD's ESRS E1-6, it should be in your Scope 3 inventory — and most sustainability teams have no way to get there."
+excerpt: "The EU cut 61% of mandatory ESRS datapoints in July 2026. Scope 3 survived. Purchased AI services still belong in your Category 1 inventory, and most sustainability teams can't see the spend."
 publishedAt: "2026-06-26"
+updatedAt: "2026-09-18"
 author: "Salish Sea Consulting"
 tags: "CSRD, ESRS E1, Scope 3, AI emissions, carbon accounting, ESG compliance"
 seoTitle: "CSRD AI Emissions Reporting: AI Services Are a Scope 3 Category 1 Problem"
 featured: false
 ---
 
-Most sustainability teams working through CSRD compliance are focused on the usual friction points: incomplete supplier data, inconsistent emissions factors, the gap between what ESRS E1 requires and what ERP systems actually track. These are real problems. But there's a newer one compounding quietly in the background, and it's structural in a way that's harder to fix.
+**The short version:** Purchased AI services are Scope 3 Category 1 emissions under ESRS E1. That includes OpenAI, Microsoft Copilot, Azure OpenAI, Anthropic, and the Google Gemini API. The July 2026 ESRS rewrite cut mandatory datapoints from about 1,073 to 320. It kept E1's full Scope 1, 2, and 3 structure. The new value-chain data cap doesn't cover gross GHG emissions either. The spend sits in finance. The reporting obligation sits with ESG. Nothing connects them.
 
-Your organization is almost certainly spending material money on purchased AI services — OpenAI, Microsoft Copilot, Azure OpenAI, Anthropic, Google Gemini API, or some combination. That spend is sitting in a finance or IT procurement system. It is not sitting in your ESG data infrastructure. And under CSRD, it needs to be.
+**What Category 1 measures:** Scope 3 Category 1 (purchased goods and services) covers the upstream emissions from producing everything a company buys. That includes the compute behind cloud and AI services.
 
-## What ESRS E1 Actually Requires
+**Where the requirement lives:**
 
-ESRS E1 is the climate standard under CSRD. Disclosure requirement E1-6 requires companies to report gross Scope 1, Scope 2, and Scope 3 greenhouse gas emissions. Scope 3 is comprehensive — it covers emissions in a company's value chain that the company does not directly control but is responsible for through its purchasing decisions.
+- FY2025 and FY2026 reports (2023 ESRS): disclosure requirement E1-6
+- FY2027 onward (revised ESRS): disclosure requirement E1-8
 
-**Scope 3 Category 1 is purchased goods and services.** It is, by definition, where AI services belong. When your organization pays OpenAI for API access, pays Microsoft for Copilot seats, or runs inference workloads on a third-party cloud, you are purchasing a service that requires significant compute infrastructure to deliver. That infrastructure has an emissions footprint. That footprint is your Category 1 liability under ESRS E1-6.
+## Why AI services belong in Category 1
 
-This isn't an interpretation question or an edge case. It follows directly from how Scope 3 Category 1 is defined under both the GHG Protocol (which ESRS E1 is built on) and the standard itself. Purchased services with material energy intensity are in scope. AI services are purchased services with material energy intensity. The inclusion is logical and — as CSRD enforcement matures — will be expected.
+When you pay OpenAI for API access or Microsoft for Copilot seats, you're buying a service that runs on energy-intensive compute. That compute has an emissions footprint. Under the GHG Protocol, which ESRS E1 is built on, that footprint is your Category 1 emissions.
 
-## The Enforcement Timeline
+This isn't an edge case or an interpretation question. Purchased services with material energy intensity are in scope. AI services are purchased services with material energy intensity.
 
-CSRD is phased. If your organization is a large EU company that was already subject to the Non-Financial Reporting Directive (NFRD) — generally, more than 500 employees — you were in scope for FY2024 reporting. Your first CSRD-compliant report, covering FY2024, was due in 2025.
+## Why the blind spot exists
 
-If you're a large company not previously covered by NFRD — over 250 employees, or over €40M in turnover, or over €20M in total assets — FY2025 is your first reporting year, with reports due in 2026.
+AI spend gets tracked where spend gets tracked, which is finance. The OpenAI enterprise agreement lives in procurement. Azure OpenAI charges are itemized in accounts payable. Copilot licensing is bundled into an M365 contract.
 
-Listed SMEs follow in FY2026. Non-EU companies with more than €150M in EU net turnover and at least one large EU subsidiary or listed branch come in at FY2028.
+None of this flows to ESG by default. ESG teams get emissions data through purpose-built channels. Utility bills cover Scope 2. Expense systems cover travel. Supplier questionnaires cover upstream Scope 3. AI services fit none of these pipelines. They arrived faster than reporting infrastructure adapted.
 
-The phasing creates a false sense of distance. Companies in the FY2025 cohort are reporting on emissions that are occurring right now. The data you need for your 2026 report is being generated today — every API call, every Copilot prompt, every inference run. If you don't have a system for capturing it, you can't retroactively reconstruct it from memory.
+Emissions factors are a second problem. OpenAI doesn't publish per-token emissions data. Microsoft publishes sustainability commitments, not compute-to-emissions factors. Most teams end up applying industry-average factors to cloud spend. That's a defensible "best available data" approach, but only if you have the spend data to apply it to.
 
-## Why the Blind Spot Exists
+## What "no data" looks like in an audit
 
-The structural problem is simple: AI spend is tracked where spend gets tracked, which is finance. The purchase order for an OpenAI enterprise agreement lives in procurement. The Azure invoice that includes OpenAI Service charges is itemized in accounts payable. The Copilot licensing is bundled into an M365 contract.
+CSRD reports go through limited assurance. Auditors don't just check that a Category 1 number exists. They check whether the boundary is appropriate.
 
-None of this flows to the ESG function by default. ESG teams typically receive emissions-related data through purpose-built processes — utility bills for Scope 2, travel data from HR and expense systems, supplier questionnaires for upstream Scope 3. AI services don't fit neatly into any of those existing pipelines. They've arrived faster than the reporting infrastructure has adapted.
+If your Category 1 disclosure covers materials and professional services but skips AI services, expect questions. The revised ESRS does let you exclude activities that aren't significant drivers of emissions. But you have to disclose that you used the relief. You also can't show AI spend is insignificant without knowing what the spend is.
 
-The result is that sustainability managers who are doing their jobs correctly — following the GHG Protocol, applying spend-based emissions factors to Category 1 — may genuinely not know what AI services their organization is using, at what volume, or at what cost. That data gap isn't negligence. It's a structural failure in how organizations have wired together their finance and ESG functions.
+So "no data" isn't a safe position. It has to be defended. And defending it takes the same data you'd need to report it.
 
-What makes this harder: even if the spend data were accessible, the emissions factors for AI services are not standardized in the way that, say, electricity grid emission factors are. OpenAI does not publish per-token or per-API-call emissions data. Microsoft publishes sustainability commitments but not the granular compute-to-emissions factors that a Scope 3 Category 1 calculation requires. You're often left applying industry-average emissions factors to cloud compute spend — a methodology that satisfies the "best available data" standard under ESRS E1-6, but only if you actually have the spend data to apply it to.
+## Who reports when, after the Omnibus
 
-## What "No Data" Looks Like in an Audit
+The Omnibus I Directive (EU) 2026/470 narrowed CSRD scope in March 2026.
 
-CSRD reports are subject to third-party limited assurance now, with reasonable assurance requirements phasing in. Auditors reviewing Scope 3 Category 1 disclosures are not simply checking whether a number is present. They are checking whether the boundary of what's been included is appropriate.
+- **Wave 1 companies above the new thresholds** keep reporting for FY2025 and FY2026. Member states may exempt those below the thresholds.
+- **EU companies with more than 1,000 employees and more than €450M turnover** apply the revised ESRS from FY2027, with first reports in 2028.
+- **Non-EU parents** with more than €450M EU turnover and an EU subsidiary or branch above €200M report from FY2028.
+- **Listed SMEs** are out of mandatory scope.
 
-If your Category 1 disclosure covers supplier materials and professional services but excludes purchased software and AI services, an auditor is going to ask why. If the answer is "we didn't track it," that's a gap. If the answer is "we assessed materiality and determined AI services are not material to our Scope 3 inventory," that requires documentation of the materiality assessment — which requires knowing what the spend actually is, which requires access to data that, in most organizations, hasn't been pulled into the ESG function.
+Fewer companies are in scope. The ones still in scope face the same Scope 3 requirement. FY2027 data starts generating on January 1, 2027. Every API call from that date is in the reporting period.
 
-The risk isn't just a qualified audit opinion. It's reputational. A company that reports confidently on climate performance while having a blind spot on one of the fastest-growing categories of enterprise technology spend will look, at best, behind the curve. At worst, it will look like a company that shaped its disclosure boundary to exclude inconvenient data.
+## What comes next
 
-The "no data" position is not safe. It is a position that needs to be actively defended — and defending it requires having done the work to know whether the gap is material.
+CSRD isn't asking too much. AI services entered companies through procurement and IT without triggering ESG data capture. The spend is real. The emissions are real. The infrastructure to connect them hasn't been built.
 
-## The Real Question
+My next piece covers the method: how to apply the spend-based approach to purchased AI services under the GHG Protocol.
 
-The problem isn't that CSRD is asking too much. The problem is that AI services have entered enterprise operations through procurement and IT channels without triggering the usual ESG data capture processes. The spend is real, the emissions are real, and the reporting obligation is real. The infrastructure to connect them hasn't been built yet.
+*If your CSRD Scope 3 inventory doesn't account for AI services yet, [get in touch](https://www.salishseaconsulting.com/contact).*
 
-That's a solvable problem — but it requires understanding what ESRS E1-6 actually demands, where the data currently lives, and what methodology is defensible when supplier-specific emissions factors aren't available.
+## Sources
 
-In the next piece, we'll go into what a credible AI emissions methodology looks like under ESRS E1-6: spend-based versus activity-based approaches, what disclosure-quality documentation requires, and how organizations are beginning to build the data infrastructure to close this gap.
-
-*Salish Sea Consulting helps organizations build defensible, audit-ready carbon accounting programs. If your CSRD Scope 3 inventory doesn't yet account for AI services, [get in touch](/contact).*
+- [Cooley: European Commission Adopts Revised EU CSRD Reporting Standards](https://www.cooley.com/news/insight/2026/2026-07-21-european-commission-adopts-revised-eu-csrd-reporting-standards)
+- [Zevero: The Revised ESRS: Key Changes to EU Sustainability Standards](https://www.zevero.earth/blog/simplified-european-reporting-standards-esrs)
+- [DLA Piper: EU Council Approves Omnibus I Directive](https://knowledge.dlapiper.com/dlapiperknowledge/globalemploymentlatestdevelopments/2026/eu-council-approves-omnibus-i-directive)
+- [Generation Impact Global: Omnibus I Explained](https://generationimpact.global/blog/omnibus-i-double-materiality/)
+- [PwC Viewpoint: ESRS (2026), a Deep Dive into the Revised Standards](https://viewpoint.pwc.com/us/en/pwc/in-depth/2026/id_int202603.html)
