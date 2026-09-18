@@ -35,4 +35,13 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: https://www.salishseaconsulting.com/sitemap.xml
