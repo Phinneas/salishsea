@@ -124,7 +124,10 @@ export default function ServicesPage() {
             </p>
           </div>
           <p className='mb-10 max-w-3xl leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
-            Sustainability copywriting isn&apos;t greenwashing patrol. It&apos;s building a voice that&apos;s honest, specific, and genuinely compelling — copy that earns attention because it deserves it. I write for brands who&apos;ve done the work and are ready to say so.
+            Sustainability copywriting isn&apos;t greenwashing patrol. It&apos;s building a voice that&apos;s honest, specific, and genuinely compelling — copy that earns attention because it deserves it. I write for brands who&apos;ve done the work and are ready to say so.{' '}
+            <Link href='/services/sustainability-copywriter/' style={{ color: 'var(--ssc-seafoam-deep)' }}>
+              Learn more about sustainability copywriting
+            </Link>
           </p>
           <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {brandCopywriting.map(service => (
@@ -161,7 +164,10 @@ export default function ServicesPage() {
             </p>
           </div>
           <p className='mb-10 max-w-3xl leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>
-            Impact doesn&apos;t speak for itself — it needs a translator. I research, write, and shape sustainability reports that meet stakeholders where they are: clear enough for a general audience, rigorous enough for the room that matters.
+            Impact doesn&apos;t speak for itself — it needs a translator. I research, write, and shape sustainability reports that meet stakeholders where they are: clear enough for a general audience, rigorous enough for the room that matters. For stakeholder-specific ESG communications, see the{' '}
+            <Link href='/services/esg-communications/' style={{ color: 'var(--ssc-seafoam-deep)' }}>
+              ESG communications service
+            </Link>
           </p>
           <div className='grid gap-8 md:grid-cols-2'>
             {researchReports.map(service => (
