@@ -8,6 +8,9 @@
 /blog/how-conscious-consumers-actually-decide-stage1/ /blog/conscious-consumer/ 301
 /blog/how-conscious-consumers-actually-decide-stage1 /blog/conscious-consumer/ 301
 /how-conscious-consumers-actually-decide-stage1/ /blog/conscious-consumer/ 301
+/blog/esg-reporting-requirements-for-small-sustainable-brands/ /blog/b-corp-certification-cost/ 301
+/blog/esg-reporting-requirements-for-small-sustainable-brands /blog/b-corp-certification-cost/ 301
+/esg-reporting-requirements-for-small-sustainable-brands/ /blog/b-corp-certification-cost/ 301
 
 # Ghost-specific URLs → /blog/
 /tag/* /blog/ 301
