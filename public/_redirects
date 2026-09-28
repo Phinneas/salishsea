@@ -1,3 +1,14 @@
+# Sep 2026 slug changes: exact-match keyword slugs
+/blog/what-greenwashing-actually-is/ /blog/greenwashing-examples/ 301
+/blog/what-greenwashing-actually-is /blog/greenwashing-examples/ 301
+/what-greenwashing-actually-is/ /blog/greenwashing-examples/ 301
+/blog/the-sustainable-brand-voice/ /blog/brand-voice-examples/ 301
+/blog/the-sustainable-brand-voice /blog/brand-voice-examples/ 301
+/the-sustainable-brand-voice/ /blog/brand-voice-examples/ 301
+/blog/how-conscious-consumers-actually-decide-stage1/ /blog/conscious-consumer/ 301
+/blog/how-conscious-consumers-actually-decide-stage1 /blog/conscious-consumer/ 301
+/how-conscious-consumers-actually-decide-stage1/ /blog/conscious-consumer/ 301
+
 # Ghost-specific URLs → /blog/
 /tag/* /blog/ 301
 /author/* /blog/ 301
