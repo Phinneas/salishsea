@@ -53,6 +53,9 @@ export default function AboutPage() {
             alt='Chester Beard, sustainability copywriter'
             className='mx-auto h-auto max-w-sm rounded-[var(--ssc-r)] object-cover'
           />
+          <p className='mt-6 text-center font-serif text-lg' style={{ color: 'var(--ssc-text-dark)' }}>
+            I&apos;m <strong>Chester Beard</strong>, founder of Salish Sea Consulting.
+          </p>
         </div>
       </section>
 

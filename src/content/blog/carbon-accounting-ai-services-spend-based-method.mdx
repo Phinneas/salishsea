@@ -1,0 +1,204 @@
+---
+title: "Carbon Accounting for AI Services: The Spend-Based Method"
+seoTitle: "Carbon Accounting for AI Services: The Spend-Based Method (2026)"
+excerpt: "How to do carbon accounting for AI and cloud services with the spend-based method. EPA emission factors compared across three versions, with a worked example."
+publishedAt: "2026-09-22"
+author: "Chester Beard"
+authorTitle: "Sustainability Copywriter & ESG Communications Consultant"
+tags: "carbon accounting, AI emissions, Scope 3, GHG Protocol, spend-based method, EPA emission factors, NAICS, CSRD, ESRS, sustainability reporting"
+faq:
+  - q: "What is carbon accounting?"
+    a: "Carbon accounting measures the greenhouse gas emissions an organization causes, across its own operations (Scope 1), purchased energy (Scope 2) and its value chain (Scope 3). It's also called GHG accounting."
+  - q: "What is the spend-based method?"
+    a: "It estimates emissions by multiplying the money spent on a good or service by an industry-average emission factor per unit of currency. It's GHG Protocol Formula 1.5 for Scope 3 Category 1."
+  - q: "Which EPA emission factor should I use for AI and cloud services?"
+    a: "For model APIs and cloud compute, NAICS 518210 (data processing, hosting and related services) is the closest match. The v1.3 factor is 0.093 kg CO2e per 2022 USD, with margins. For AI software seats, 511210 (software publishers) at 0.080 is a reasonable alternative. Document whichever you choose."
+  - q: "Why did the EPA factor for data hosting drop?"
+    a: "v1.3 uses 2022 GHG data and 2022 dollars, where v1.2 used 2019 data and 2021 dollars. It also switched from AR4 to AR5 GWPs. Part of the drop reflects lower emissions intensity, and part reflects the change in price level and method. It isn't all real decarbonization."
+  - q: "Does the spend-based method overstate AI emissions?"
+    a: "The evidence says yes. The MIT CTL study found spend-based estimates 5 to 9 times higher than AWS's usage-based figures. A separate working paper found 10 to 40 times for AI inference. Invoices include margin and R&D costs that don't consume electricity."
+  - q: "Is the spend-based method accepted under CSRD?"
+    a: "Yes. ESRS follows the GHG Protocol, and the GHG Protocol accepts spend-based data. You disclose the share of Scope 3 that comes from primary data, and assurance providers will expect you to improve it over time."
+featured: false
+---
+
+**Carbon accounting** measures the greenhouse gas emissions an organization causes. For AI services you buy, such as model APIs, cloud GPUs and AI copilots, those emissions fall under **Scope 3, Category 1 (purchased goods and services)**. The **spend-based method** estimates them by multiplying what you spent by an industry-average emission factor per dollar. It's defined in the GHG Protocol's *Technical Guidance for Calculating Scope 3 Emissions*, Chapter 1, Formula 1.5:
+
+> **Emissions (kg CO2e) = Σ (spend on the good or service ($) × emission factor (kg CO2e per $))**
+
+**The headline number:** across three releases, the EPA's spend-based factor for data processing and hosting, the code most AI spend maps to, fell **46%**, from 0.172 to 0.148 to 0.093 kg CO2e per dollar. That puts $1 million of AI spend at **172, 148 or 93 tonnes of CO2e** depending only on which version you use.
+
+---
+
+> **Methodology**
+> - **Source:** US EPA Supply Chain GHG Emission Factors. v1.3 (2022 GHG data, 2022 USD, AR5 GWPs), v1.2 (2019 GHG data, 2021 USD, AR4 GWPs), and v1.1.1 (commodity-level USEEIO factors, 2018 data)
+> - **Factor type:** supply chain emissions *with margins*, at purchaser price, as EPA recommends for spend data
+> - **Codes compared:** nine NAICS-6 codes that AI, cloud and IT spend usually maps to
+> - **How I pulled it:** directly from EPA's published CSV files, September 2026. The v1.1.1 value comes from Climatiq's record of that dataset.
+> - **Caveat:** each version uses a different dollar year and GHG year, so some of the change comes from price levels and not only from cleaner hosting. v1.1.1 uses a commodity classification, not NAICS-6.
+
+---
+
+## Four findings you should know before you file a number
+
+### 1. The factor version changes your result by up to 46%
+
+| EPA version | Data processing and hosting factor | $1M of AI spend |
+|---|---|---|
+| v1.1.1 | 0.172 kg CO2e/$ | 172 t CO2e |
+| v1.2 | 0.148 kg CO2e/$ | 148 t CO2e |
+| v1.3 | 0.093 kg CO2e/$ | 93 t CO2e |
+
+If your team set up the calculation a few years ago and never updated the factor, your AI emissions could be overstated by almost half. The reverse applies too. If you switch to v1.3 without explaining it, the drop will look like progress you didn't make.
+
+### 2. The NAICS code you pick moves the result by about 16%
+
+No NAICS code covers "AI." Spend gets mapped to the closest one, and the closest ones don't agree.
+
+| AI purchase | Likely NAICS code | v1.3 factor |
+|---|---|---|
+| Model API calls, hosted inference | 518210 Data processing, hosting | 0.093 |
+| Cloud GPU compute | 518210 Data processing, hosting | 0.093 |
+| AI implementation or integration work | 541512 Computer systems design | 0.089 |
+| Custom model development | 541511 Custom programming | 0.084 |
+| AI copilot or SaaS seats | 511210 Software publishers | 0.080 |
+| Other AI-related IT services | 541519 Other computer services | 0.080 |
+
+Put the same invoice under 511210 or 518210 and the result differs by 16%. Both choices are defensible. The mapping is a judgment call, so write it down.
+
+### 3. Emission factor databases can lag the source
+
+On Climatiq, one of the most widely used factor databases, the v1.2 hosting factor (0.148) is correctly marked as replaced. The older v1.1.1 factor (0.172) is still labeled **"Current."** That's almost twice the v1.3 value.
+
+If your carbon accounting software pulls factors from a third-party database, check the version string on each factor you use. Don't assume "current" means latest.
+
+### 4. Spend-based overshoots measured cloud emissions by 5 to 9 times
+
+A May 2026 capstone from MIT's Center for Transportation & Logistics compared spend-based estimates with AWS's own usage-based emissions reporting for MIT's AWS account. Using spend-based:
+
+- Emissions came out about **5x higher** than AWS's location-based figures
+- Emissions came out about **9x higher** than AWS's market-based figures
+- Monthly spikes tracked billing cycles, not actual compute use
+
+That backs up a separate working paper by Guillermo Llopis, cited by Stanton Chase, which found spend-based AI estimates running 10 to 40 times higher than electricity-based calculations. The Llopis paper hasn't been peer-reviewed, and the MIT study comes from real invoices. Both point the same direction.
+
+The reason is structural. An AI or cloud invoice includes the vendor's margin, R&D and model development costs. None of that burns electricity when your query runs.
+
+---
+
+## Full factor comparison: EPA v1.2 vs v1.3
+
+| NAICS code | Description | v1.2 | v1.3 | Change |
+|---|---|---|---|---|
+| 334111 | Electronic computer manufacturing | 0.112 | 0.058 | −48.2% |
+| 518210 | Data processing, hosting and related services | 0.148 | 0.093 | −37.2% |
+| 541330 | Engineering services | 0.125 | 0.103 | −17.6% |
+| 511210 | Software publishers | 0.097 | 0.080 | −17.5% |
+| 541511 | Custom computer programming | 0.097 | 0.084 | −13.4% |
+| 517311 | Wired telecommunications carriers | 0.082 | 0.075 | −8.5% |
+| 541519 | Other computer related services | 0.087 | 0.080 | −8.0% |
+| 541611 | Management consulting | 0.084 | 0.078 | −7.1% |
+| 541512 | Computer systems design services | 0.077 | 0.089 | **+15.6%** |
+
+*kg CO2e per USD, purchaser price, with margins. v1.2 is in 2021 USD and v1.3 is in 2022 USD.*
+
+Most factors went down. Computer systems design went **up** by 16%. If you model a trend over time, check each code on its own. You can't assume they all moved the same way.
+
+---
+
+## Worked example: the spend-based method, step by step
+
+*This is an illustrative company. The inflation adjustment is an assumption for demonstration. Use the published price index for your own calculation.*
+
+A company spent **$500,000 on AI services in 2026**:
+
+| Purchase | 2026 spend |
+|---|---|
+| LLM API calls | $200,000 |
+| Cloud GPU compute | $180,000 |
+| AI copilot seats | $120,000 |
+
+**Step 1. Map each line to a NAICS code.**
+API calls and GPU compute go to 518210. Copilot seats go to 511210.
+
+**Step 2. Convert spend to the factor's dollar year.**
+v1.3 factors are in 2022 USD. The GHG Protocol and EPA both recommend adjusting for inflation. This example assumes a 12% cumulative price change from 2022 to 2026, so divide 2026 spend by 1.12.
+
+**Step 3. Multiply by the factor.**
+
+| Purchase | 2022 USD | Factor (v1.3) | Emissions |
+|---|---|---|---|
+| LLM API calls | $178,571 | 0.093 | 16.6 t CO2e |
+| Cloud GPU compute | $160,714 | 0.093 | 14.9 t CO2e |
+| AI copilot seats | $107,143 | 0.080 | 8.6 t CO2e |
+| **Total** | | | **40.1 t CO2e** |
+
+**Step 4. Check what the old factors would have given.**
+The same spend under v1.2 factors comes to **58.0 t CO2e**. That uses 2021 USD and an assumed 17% cumulative price change from 2021 to 2026. It's about **45% higher**, for the same purchases.
+
+**For EUR reporters:** convert euro spend to USD at the average exchange rate for the reporting year, then deflate. For a European factor set, look at EXIOBASE. Whichever set you use, record the version and region.
+
+---
+
+## When the spend-based method is still the right call
+
+Spend-based carbon accounting isn't wrong. It's a starting point, and the GHG Protocol treats it that way. The Category 1 hierarchy runs:
+
+1. Supplier-specific method
+2. Hybrid method
+3. Average-data method
+4. Spend-based method
+
+Spend-based makes sense for:
+
+- **Screening.** Finding out whether AI spend is material at all.
+- **The long tail.** Small SaaS tools and vendors that publish no emissions data.
+- **Categories that aren't material,** where a more precise figure wouldn't change a decision.
+
+It falls short when AI spend is large, when you want to show that emissions are falling, or when an auditor asks why your number moved.
+
+---
+
+## How to make a spend-based AI figure defensible
+
+1. **Pin the factor version.** Write "EPA Supply Chain GHG Emission Factors v1.3, 2022 USD, with margins" in your methodology note.
+2. **Document the NAICS mapping** for each AI purchase type, and keep it consistent from year to year.
+3. **Adjust for inflation** to the factor's dollar year.
+4. **Flag the data quality as low** in your inventory.
+5. **Move your largest vendors to supplier data.** AWS, Microsoft Azure and Google Cloud all publish customer carbon dashboards. Use spend-based only for vendors that don't.
+6. **Restate when you change versions.** If you move from v1.2 to v1.3, recalculate your base year or disclose the effect.
+
+---
+
+## How this fits CSRD and ESRS E1-8
+
+Under the revised ESRS, purchased AI emissions appear in your gross Scope 3 figures under **E1-8**. That's the disclosure previously labeled E1-6. [See my guide to the E1-6 to E1-8 change.](/blog/esrs-e1-6-e1-8-ghg-emissions/)
+
+Three points matter for spend-based AI figures:
+
+- **Primary data share.** You disclose what percentage of Scope 3 comes from supplier or value chain data. Spend-based estimates count against that percentage.
+- **GWP values.** EPA v1.3 uses AR5 GWPs. ESRS asks for the most recent IPCC values but allows older ones if you explain it. Note the basis in your methodology.
+- **Refresh cycle.** Significant Scope 3 categories are updated every year. The full inventory is refreshed at least every three years.
+
+If you want to go beyond spend-based to token-level or compute-level calculations, my guide to [calculating AI emissions for CSRD](/blog/calculating-ai-emissions-csrd/) walks through the activity-based method.
+
+---
+
+## The bottom line
+
+The spend-based method is the fastest way to do carbon accounting for AI services, but the result depends on choices most teams never record: the factor version, the NAICS code and the dollar year. Pin all three, flag the figure as an estimate, and move your largest AI vendors to supplier data as soon as they offer it.
+
+## Sources
+
+- [GHG Protocol: Technical Guidance for Calculating Scope 3 Emissions, Category 1](https://ghgprotocol.org/sites/default/files/2022-12/Chapter1.pdf)
+- [US EPA: Supply Chain GHG Emission Factors v1.3 by NAICS-6](http://catalog.data.gov/dataset/supply-chain-greenhouse-gas-emission-factors-v1-3-by-naics-6)
+- [US EPA: Supply Chain GHG Emission Factors v1.2 by NAICS-6](https://cfpub.epa.gov/si/si_public_record_Report.cfm?Lab=CESER&dirEntryId=358530)
+- [US EPA: About the v1.2 Supply Chain GHG Emission Factors](https://pasteur.epa.gov/uploads/10.23719/1528686/documents/Aboutthe2019v1.2SupplyChainGHGEmissionFactors.pdf)
+- [Climatiq: Data processing and hosting (v1.1.1)](https://www.climatiq.io/data/emission-factor/8c30a168-e604-4c72-86d3-db866cda70e2)
+- [Climatiq: Data processing/hosting (v1.2)](https://www.climatiq.io/data/emission-factor/ce86fee2-f3d7-4978-b127-ff49a92e0759)
+- [MIT CTL: Enhancing Scope 3 Emissions Estimations for Cloud Computing (2026)](https://ctl.mit.edu/sites/default/files/documents/enhancing-scope-3-emissions-estimations-for-cloud-computing-capstone.pdf)
+- [Stanton Chase: What Are the Scope 3 Emissions of AI?](https://www.stantonchase.com/insights/white-papers/what-are-the-scope-3-emissions-of-ai-and-how-should-you-estimate-them)
+
+---
+
+*I help organizations build emissions figures that survive assurance, and write the methodology notes that make them defensible. If your AI spend is sitting in Scope 3 unmeasured, [let's talk](https://www.salishseaconsulting.com/contact).*

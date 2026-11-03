@@ -26,6 +26,7 @@ function markdownToHtml(markdown: string): string {
 export interface BlogPost {
   slug: string
   title: string
+  seo_title?: string
   excerpt?: string
   content: string
   html: string
@@ -59,6 +60,7 @@ export function getAllPosts(): BlogPost[] {
     return {
       slug,
       title: data.title ?? slug,
+      seo_title: data.seoTitle ? String(data.seoTitle) : undefined,
       excerpt: data.excerpt ?? undefined,
       content,
       html: markdownToHtml(content),
@@ -95,6 +97,7 @@ export function getPost(slug: string): BlogPost | null {
   return {
     slug,
     title: data.title ?? slug,
+    seo_title: data.seoTitle ? String(data.seoTitle) : undefined,
     excerpt: data.excerpt ?? undefined,
     content,
     html: markdownToHtml(content),

@@ -20,14 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug)
   if (!post) return { title: 'Post not found' }
 
+  const metaTitle = post.seo_title ?? post.title
+
   return {
-    title: post.title,
+    title: metaTitle,
     description: post.excerpt ?? undefined,
     alternates: {
       canonical: `/blog/${slug}/`,
     },
     openGraph: {
-      title: post.title,
+      title: metaTitle,
       description: post.excerpt ?? undefined,
       type: 'article',
       publishedTime: post.published_at,

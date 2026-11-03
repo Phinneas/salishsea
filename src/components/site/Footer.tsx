@@ -44,6 +44,26 @@ export function Footer() {
           <div>
             <p className='font-serif text-sm font-semibold' style={{ color: 'var(--ssc-text-light)' }}>Contact</p>
             <ul className='mt-3 space-y-2 text-sm' style={{ color: 'var(--ssc-text-mute)' }}>
+              <li>
+                <Link
+                  href='https://linkedin.com/in/chesterbeard'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='transition-colors hover:text-[var(--ssc-seafoam)]'
+                >
+                  Chester Beard, Principal
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='https://pinterest.com/chesterbeard'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='transition-colors hover:text-[var(--ssc-seafoam)]'
+                >
+                  Pinterest
+                </Link>
+              </li>
               <li>Pacific Northwest</li>
               <li>
                 <Link href='/contact' className='transition-colors hover:text-[var(--ssc-seafoam)]'>

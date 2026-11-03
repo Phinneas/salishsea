@@ -141,7 +141,7 @@ export function StampCollection() {
               These aren&apos;t client projects. They&apos;re mine.
             </h3>
             <p className='mx-auto mb-6 max-w-[540px] text-[15px] leading-[1.65]' style={{ color: 'var(--ssc-text-mute)' }}>
-              Every destination here was built by me, for an audience I wanted to serve &mdash; the research, the content strategy, the SEO thinking, and the writing all from the same place: genuine interest in the subject, and genuine commitment to the reader.
+              Every destination here was built by <strong>Chester Beard</strong>, for an audience I wanted to serve &mdash; the research, the content strategy, the SEO thinking, and the writing all from the same place: genuine interest in the subject, and genuine commitment to the reader.
             </p>
             <Link
               href='/'
