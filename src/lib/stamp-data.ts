@@ -239,7 +239,7 @@ export const chapters: Chapter[] = [
         wide: true,
         comingSoon: false,
         image: '/stamps/gaia-verity.jpg',
-        description: 'Sustainable gardening and lawn care for Pacific Northwest yards. Lawn alternatives, native plants, and low-input care, with the tradeoffs spelled out.',
+        description: 'A sustainable gardening and lawn care site for Pacific Northwest yards.',
       },
     ],
   },
