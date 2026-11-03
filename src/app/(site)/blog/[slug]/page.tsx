@@ -136,10 +136,25 @@ export default async function BlogPostPage({ params }: Props) {
           <h1 className='font-serif text-3xl font-bold tracking-tight sm:text-4xl' style={{ color: 'var(--ssc-text-dark)' }}>{post.title}</h1>
           {post.excerpt && <p className='text-lg leading-relaxed' style={{ color: 'var(--ssc-text-dark-mute)' }}>{post.excerpt}</p>}
           {post.author && (
-            <div className='flex items-center gap-2 pt-2'>
-              <div className='h-8 w-8 rounded-full' style={{ background: 'linear-gradient(140deg,#0e2b38,#14515e)' }} />
+            <div className='flex items-center gap-3 pt-2'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src='/chester-beard.jpg'
+                alt='Chester Beard'
+                className='h-8 w-8 rounded-full object-cover'
+                width={32}
+                height={32}
+              />
               <div>
-                <p className='text-sm font-semibold' style={{ color: 'var(--ssc-text-dark)' }}>{post.author}</p>
+                <Link
+                  href='https://linkedin.com/in/chesterbeard'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-sm font-semibold transition-colors hover:text-[var(--ssc-seafoam)]'
+                  style={{ color: 'var(--ssc-text-dark)' }}
+                >
+                  {post.author}
+                </Link>
                 {post.author_title && (
                   <p className='text-xs' style={{ color: 'var(--ssc-text-dark-mute)' }}>{post.author_title}</p>
                 )}
