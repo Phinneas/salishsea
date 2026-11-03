@@ -1,0 +1,97 @@
+---
+title: "The Finance-to-ESG Data Pipeline Your Sustainability Team Is Missing"
+seoTitle: "Finance-to-ESG Data Pipeline: Getting AI and Cloud Spend Into Scope 3 Category 1"
+excerpt: "ChatGPT is now the most expensed software app in Zylo's data, and business units control 81% of SaaS spend. Here's where AI spend actually lives, where ESG teams look for it, and what a connected pipeline looks like."
+publishedAt: "2026-11-02"
+author: "Chester Beard"
+authorTitle: "Sustainability Copywriter & ESG Communications Consultant"
+tags: "Scope 3, Category 1, spend-based method, ESG data, AI emissions, finance data, sustainability reporting, CSRD"
+faq:
+  - q: "Where does AI spend show up in a company's books?"
+    a: "In several places at once: cloud provider invoices, SaaS contracts paid through accounts payable, employee expense reports and corporate cards, and professional services for AI implementation. Much of it sits outside IT. In Zylo's 2026 data, business units control 81% of SaaS spend and IT directly manages 15%."
+  - q: "What is a finance-to-ESG data pipeline?"
+    a: "It's a repeatable process that pulls spend from accounts payable, expense and card systems and cloud billing, tags each vendor to a spend category and emission factor, and hands the result to the sustainability team on a schedule. It replaces a once-a-year spreadsheet request."
+  - q: "Which emission factor applies to AI and cloud spend?"
+    a: "For model APIs and cloud compute, the closest US EPA spend-based factor is NAICS 518210, data processing and hosting, at 0.093 kg CO2e per 2022 USD in v1.3. AI software seats fit 511210, software publishers, at 0.080."
+  - q: "Why do ESG teams miss AI spend?"
+    a: "They usually ask finance for spend by supplier or by general ledger account. AI tools are spread across IT, cloud, software, marketing and expense accounts, and many are bought on cards. A vendor-level tag is the only reliable way to find them all."
+featured: false
+---
+
+**ChatGPT is now the single most expensed software app in Zylo's data.** The OpenAI API is fifth. Both sit in employee expense reports, not in the IT contracts most ESG teams ask about.
+
+Expensed spend here means software bought on personal or corporate cards and reimbursed, outside a central contract. In Zylo's 2026 index, expensed apps were 45% of all applications but 3.7% of total SaaS spend. They're small dollars spread across many vendors, which is exactly what a Scope 3 inventory misses.
+
+Three more findings, strongest first:
+
+1. **IT directly manages only 15% of SaaS spend.** Business units control 81%.
+2. **AI-native app spend rose 108% in 2025.** For companies with over 10,000 employees, it rose 393%.
+3. **Your emission factor choice moves the result by up to 46%.** The EPA hosting factor fell from 0.172 to 0.093 kg CO2e per dollar across three versions.
+
+> **What this page covers:** how to get AI and cloud spend from finance systems into a Scope 3 Category 1 inventory.
+> **Who it's for:** sustainability, finance and FP&A teams preparing CSRD, SB 253 or customer emissions data.
+> **Key sources:** Zylo 2026 SaaS Management Index (40M+ licenses, $75B spend under management, released January 29, 2026), US EPA Supply Chain GHG Emission Factors v1.3, GHG Protocol Scope 3 Technical Guidance (Category 1, Formula 1.5).
+> **Last checked:** November 2, 2026.
+
+---
+
+## Where AI Spend Lives vs Where ESG Looks
+
+| AI spend type | Where it lives today | Where ESG teams usually look | What a connected pipeline does |
+|---|---|---|---|
+| Model API calls (OpenAI, Anthropic, Google) | Cloud bills, direct vendor invoices, developer cards | Top-supplier list from accounts payable | Pulls vendor invoices and card lines. Tags each as AI API. Maps to NAICS 518210. |
+| Cloud GPU and inference compute | Hyperscaler invoices, often bundled with other cloud services | "IT hosting" total, if at all | Splits cloud bills by service using the provider's billing export. Uses supplier-specific data where available. |
+| AI copilot and SaaS seats | SaaS contracts paid through accounts payable, owned by business units | Software ledger account, mixed with every other tool | Tags vendors at the contract level. Maps to NAICS 511210. |
+| Expensed AI subscriptions | Expense reports and corporate cards across every department | Usually nowhere. Not in the top-supplier list. | Pulls card and expense data monthly. Flags AI vendors by merchant name. |
+| AI built into other software | The host product's invoice, unchanged | Not separable | Tracks under the host vendor. Notes the AI feature for disclosure. |
+| AI implementation and consulting | Professional services ledger accounts | Consulting total, if Category 1 covers services | Tags AI projects. Maps to NAICS 541512 or 541511. |
+
+The gap is the third column. ESG teams ask finance for spend "by supplier" or "by ledger account" once a year. AI tools don't sit in one account or with one supplier. A vendor-level tag, refreshed monthly, is the only way to catch them all.
+
+---
+
+## The Pipeline in Five Steps
+
+1. **Pull three sources, not one.** Accounts payable invoices, expense and corporate card data, and cloud billing exports. Missing any one of them misses a whole category of AI spend.
+2. **Keep one vendor list with an AI tag.** Each vendor gets a spend category and a NAICS code. Update it when procurement or the expense system sees a new vendor.
+3. **Map each category to a dated emission factor.** For AI, that's usually 518210 (0.093), 511210 (0.080), 541512 (0.089) or 541511 (0.084), in kg CO2e per 2022 USD from EPA v1.3. Record the version. See [the spend-based method](/blog/carbon-accounting-ai-services-spend-based-method/) for the full factor table.
+4. **Refresh monthly, report yearly.** A monthly pull catches new tools as they appear. Year-end becomes a sum instead of a scramble.
+5. **Document every choice.** Which sources, which factor version, which NAICS code and why. That file is what an assurance provider will ask for.
+
+---
+
+## Who Owns What
+
+| Step | Finance owns | Sustainability owns |
+|---|---|---|
+| Data pull | AP, expense and card exports. Cloud billing access. | The schedule and the request format |
+| Vendor tagging | The vendor master list | The AI tag and NAICS mapping |
+| Emission factors | Nothing | Factor choice, version and documentation |
+| Review | Spend totals reconcile to the ledger | Emissions are reasonable year over year |
+
+The split matters because neither team can do it alone. Finance has the data but no reason to tag AI. Sustainability knows what to tag but can't see the card data.
+
+---
+
+## Why This Matters Now
+
+- **California SB 253** requires Scope 1 and 2 reports from companies above $1 billion in revenue starting November 10, 2026. Scope 3 follows later. See the [ESG Regulatory Status Tracker](/blog/esg-regulatory-status-tracker/).
+- **CSRD** reporters under the revised ESRS still report significant Scope 3 categories. See [ESRS E1-6 Is Now E1-8](/blog/esrs-e1-6-e1-8-ghg-emissions/).
+- **Customers** keep asking suppliers for emissions data, and AI is the fastest-growing line in most software budgets.
+
+This piece follows on from [Your AI Stack Is a Scope 3 Problem](/blog/csrd-ai-emissions-scope-3-reporting/), which explains why AI spend falls through the gap. If you want to test your readiness, use the [CSRD AI emissions readiness checklist](/blog/csrd-ai-emissions-readiness-checklist/).
+
+---
+
+## Need Help Building It?
+
+I help sustainability and finance teams set up this handoff and write up the method so it holds up to review. See [ESG communications services](/services/esg-communications).
+
+---
+
+## Sources
+
+1. [Zylo: 2026 SaaS Management Index announcement (January 29, 2026)](https://zylo.com/news/2026-saas-management-index)
+2. [Zylo: Expensed SaaS and AI are driving shadow IT risk (updated February 2026)](https://zylo.com/blog/top-expensed-saas-applications)
+3. [Salish Sea: Carbon Accounting for AI Services, the spend-based method](/blog/carbon-accounting-ai-services-spend-based-method/) (EPA v1.1.1, v1.2 and v1.3 factor comparison)
+4. GHG Protocol: *Technical Guidance for Calculating Scope 3 Emissions*, Category 1, Formula 1.5
